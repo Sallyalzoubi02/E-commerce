@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/1.0.1738743">
+  <PropertyGroup>
+    <StartupCommand>npm start</StartupCommand>
+    <JavaScriptTestFramework>Jasmine</JavaScriptTestFramework>
+    <!-- Allows the build (or compile) script located on package.json to run on Build -->
+    <ShouldRunBuildScript>false</ShouldRunBuildScript>
+    <!-- Folder where production build objects will be placed -->
+    <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\e-commerce.client\browser\</BuildOutputFolder>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="src\app\Hazem\" />
+    <Folder Include="src\app\Habeeb\" />
+    <Folder Include="src\app\Jana\" />
+    <Folder Include="src\app\Farah\" />
+    <Folder Include="src\app\Firas\" />
+    <Folder Include="src\app\Sally\" />
+  </ItemGroup>
+</Project>

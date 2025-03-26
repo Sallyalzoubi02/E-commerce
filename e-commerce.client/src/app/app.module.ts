@@ -11,6 +11,8 @@ import { HomeComponent } from './Hazem/home/home.component';
 import { ProductDetailsComponent } from './Jana/product-details/product-details.component';
 import { ProfileComponent } from './Sally/profile/profile.component';
 import { ShopComponent } from './Sondos/shop/shop.component';
+import { NavbarComponent } from './Sally/navbar/navbar.component';
+import { FooterComponent } from './Sally/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { ShopComponent } from './Sondos/shop/shop.component';
     HomeComponent,
     ProductDetailsComponent,
     ProfileComponent,
-    ShopComponent
+    ShopComponent,
+    NavbarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

@@ -31,15 +31,37 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
+              "src/assets/css/vendor/bootstrap.min.css",
+              "src/assets/css/vendor/font-awesome.css",
+              "src/assets/css/vendor/jquery-ui.min.css",
+              "src/assets/css/vendor/magnific-popup.css",
+              "src/assets/css/vendor/sal.css",
+              "src/assets/css/vendor/slick.css",
+              "src/assets/css/vendor/slick-theme.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/vendor/jquery.js",
+              "src/assets/js/vendor/popper.min.js",
+              "src/assets/js/vendor/bootstrap.min.js",
+              "src/assets/js/vendor/slick.min.js",
+              "src/assets/js/vendor/jquery.magnific-popup.min.js",
+              "src/assets/js/vendor/jquery.ui.touch-punch.min.js",
+              "src/assets/js/vendor/jquery-ui.min.js",
+              "src/assets/js/vendor/js.cookie.js",
+              "src/assets/js/vendor/modernizr.min.js",
+              "src/assets/js/vendor/imagesloaded.pkgd.min.js",
+              "src/assets/js/vendor/isotope.pkgd.min.js",
+              "src/assets/js/vendor/jquery.countdown.min.js",
+              "src/assets/js/vendor/counterup.js",
+              "src/assets/js/vendor/waypoints.min.js",
+              "src/assets/js/vendor/sal.js",
+              "src/assets/js/main.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -93,15 +115,38 @@
             ],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
+              "src/assets/css/vendor/bootstrap.min.css",
+              "src/assets/css/vendor/font-awesome.css",
+              "src/assets/css/vendor/jquery-ui.min.css",
+              "src/assets/css/vendor/magnific-popup.css",
+              "src/assets/css/vendor/sal.css",
+              "src/assets/css/vendor/slick.css",
+              "src/assets/css/vendor/slick-theme.css",
               "src/styles.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "src/assets/js/vendor/jquery.js",
+              "src/assets/js/vendor/popper.min.js",
+              "src/assets/js/vendor/bootstrap.min.js",
+              "src/assets/js/vendor/slick.min.js",
+              "src/assets/js/vendor/jquery.magnific-popup.min.js",
+              "src/assets/js/vendor/jquery.ui.touch-punch.min.js",
+              "src/assets/js/vendor/jquery-ui.min.js",
+              "src/assets/js/vendor/js.cookie.js",
+              "src/assets/js/vendor/modernizr.min.js",
+              "src/assets/js/vendor/imagesloaded.pkgd.min.js",
+              "src/assets/js/vendor/isotope.pkgd.min.js",
+              "src/assets/js/vendor/jquery.countdown.min.js",
+              "src/assets/js/vendor/counterup.js",
+              "src/assets/js/vendor/waypoints.min.js",
+              "src/assets/js/vendor/sal.js",
+              "src/assets/js/main.js"
+
+            ],
             "karmaConfig": "karma.conf.js"
           }
         }

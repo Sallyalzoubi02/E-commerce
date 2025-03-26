@@ -9,7 +9,12 @@ import { EditProductComponent } from './Farah/product/edit-product/edit-product.
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: '', pathMatch: 'full', redirectTo: '/home' }
+  { path: '', pathMatch: 'full', redirectTo: '/home' },
+
+  {
+    path: "dashboard", component: DashboardComponent, children: [
+
+  ] }
 ];
 
 @NgModule({

@@ -1,4 +1,4 @@
-$(document).ready(function () {
+window.initSlider = $(document).ready(function () {
     'use strict';
 
     var axilInit = {

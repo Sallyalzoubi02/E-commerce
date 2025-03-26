@@ -13,6 +13,13 @@ import { ProfileComponent } from './Sally/profile/profile.component';
 import { ShopComponent } from './Sondos/shop/shop.component';
 import { NavbarComponent } from './Sally/navbar/navbar.component';
 import { FooterComponent } from './Sally/footer/footer.component';
+import { DashboardComponent } from './Farah/dashboard/dashboard.component';
+import { ProductComponent } from './Farah/product/product/product.component';
+import { AddProductComponent } from './Farah/product/add-product/add-product.component';
+import { EditProductComponent } from './Farah/product/edit-product/edit-product.component';
+import { CategoryComponent } from './Farah/category/category/category.component';
+import { AddCategoryComponent } from './Farah/category/add-category/add-category.component';
+import { EditCategoryComponent } from './Farah/category/edit-category/edit-category.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +32,14 @@ import { FooterComponent } from './Sally/footer/footer.component';
     ProfileComponent,
     ShopComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    DashboardComponent,
+    ProductComponent,
+    AddProductComponent,
+    EditProductComponent,
+    CategoryComponent,
+    AddCategoryComponent,
+    EditCategoryComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

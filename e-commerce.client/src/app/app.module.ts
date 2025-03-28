@@ -20,6 +20,12 @@ import { EditProductComponent } from './Farah/product/edit-product/edit-product.
 import { CategoryComponent } from './Farah/category/category/category.component';
 import { AddCategoryComponent } from './Farah/category/add-category/add-category.component';
 import { EditCategoryComponent } from './Farah/category/edit-category/edit-category.component';
+import { FormsModule } from '@angular/forms';
+import { VoucherComponent } from './Firas/voucher/voucher.component';
+import { GetAllVoucherComponent } from './Firas/get-all-voucher/get-all-voucher.component';
+import { EditVoucherComponent } from './Firas/edit-voucher/edit-voucher.component';
+
+
 
 @NgModule({
   declarations: [
@@ -39,11 +45,14 @@ import { EditCategoryComponent } from './Farah/category/edit-category/edit-categ
     EditProductComponent,
     CategoryComponent,
     AddCategoryComponent,
-    EditCategoryComponent
+    EditCategoryComponent,
+    VoucherComponent,
+    GetAllVoucherComponent,
+    EditVoucherComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule,
-    AppRoutingModule
+    BrowserModule, HttpClientModule, FormsModule,
+    AppRoutingModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

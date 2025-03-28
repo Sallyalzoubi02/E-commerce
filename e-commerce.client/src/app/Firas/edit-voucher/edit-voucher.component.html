@@ -1,0 +1,21 @@
+<p>edit-voucher works!</p>
+<div class="container">
+  <h2>Edit Voucher</h2>
+  <form (ngSubmit)="updateVoucher()">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" [(ngModel)]="voucher.name" required>
+
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description" [(ngModel)]="voucher.description" required>
+
+    <label for="states">States:</label>
+    <select id="states" name="states" [(ngModel)]="voucher.states" required>
+      <option *ngFor="let state of states" [value]="state">{{ state }}</option>
+    </select>
+
+    <label for="discount">Discount:</label>
+    <input type="text" id="discount" name="discount" [(ngModel)]="voucher.discount" required>
+
+    <button type="submit">Update</button>
+  </form>
+</div>

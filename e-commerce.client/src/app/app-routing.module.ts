@@ -20,11 +20,21 @@ import { CartComponent } from './Firas/cart/cart.component';
 import { VoucherComponent } from './Firas/voucher/voucher.component';
 import { GetAllVoucherComponent } from './Firas/get-all-voucher/get-all-voucher.component';
 import { EditVoucherComponent } from './Firas/edit-voucher/edit-voucher.component';
+import { ContactUsComponent } from './Sally/contact-us/contact-us.component';
+import { LoginComponent } from './Sally/login/login.component';
+import { RegisterComponent } from './Sally/register/register.component';
+import { ResetpasswordComponent } from './Sally/resetpassword/resetpassword.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'cart', component: CartComponent },
  
+  { path: 'profile', component: ProfileComponent },
+  { path: 'contactUs', component: ContactUsComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'resetPassword', component: ResetpasswordComponent },
+
   { path: '', pathMatch: 'full', redirectTo: '/home' },
 
   { path: "about", component: AboutComponent },
@@ -35,12 +45,9 @@ const routes: Routes = [
 
       { path: "homeDash", component: HomeDashboardComponent },
       { path: '', pathMatch: 'full', redirectTo: '/dashboard/homeDash' },
-
       { path: 'addVoucher', component: VoucherComponent },
       { path: 'voucher', component: GetAllVoucherComponent },
       { path: 'editVoucher/:id', component: EditVoucherComponent },
-
-
       { path: "category", component: CategoryComponent },
       { path: "addCategory", component: AddCategoryComponent },
       { path: "editCategory/:id", component: EditCategoryComponent },
@@ -62,7 +69,8 @@ const routes: Routes = [
   { path: 'productDetails/:id', component: ProductDetailsComponent },
   
    
-   
+     
+
  
 ];
 

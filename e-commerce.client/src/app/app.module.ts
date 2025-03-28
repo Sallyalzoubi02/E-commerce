@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AboutComponent } from './Farah/about/about.component';
@@ -20,7 +21,6 @@ import { EditProductComponent } from './Farah/product/edit-product/edit-product.
 import { CategoryComponent } from './Farah/category/category/category.component';
 import { AddCategoryComponent } from './Farah/category/add-category/add-category.component';
 import { EditCategoryComponent } from './Farah/category/edit-category/edit-category.component';
-import { FormsModule } from '@angular/forms';
 import { VoucherComponent } from './Firas/voucher/voucher.component';
 import { GetAllVoucherComponent } from './Firas/get-all-voucher/get-all-voucher.component';
 import { EditVoucherComponent } from './Firas/edit-voucher/edit-voucher.component';
@@ -33,6 +33,13 @@ import { HomeDashboardComponent } from './Farah/home-dashboard/home-dashboard.co
 import { NgChartsModule } from 'ng2-charts';
 
 
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ContactUsComponent } from './Sally/contact-us/contact-us.component';
+import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './Sally/login/login.component';
+import { RegisterComponent } from './Sally/register/register.component';
+import { ResetpasswordComponent } from './Sally/resetpassword/resetpassword.component'; 
 
 
 
@@ -58,18 +65,23 @@ import { NgChartsModule } from 'ng2-charts';
     UsersComponent,
     FeedbackComponent,
     AddVoucherUserComponent,
-    HomeDashboardComponent,
+    HomeDashboardComponent
+    ,
     VoucherComponent,
     GetAllVoucherComponent,
     EditVoucherComponent
+    ,
+    ContactUsComponent,
+    LoginComponent,
+    RegisterComponent,
+    ResetpasswordComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
-    AppRoutingModule, FormsModule,
-    NgChartsModule,
-    
- 
-     
+    AppRoutingModule, FormsModule
+   , NgChartsModule,
+    AppRoutingModule,
+         ReactiveFormsModule, NgbModule, 
   ],
   providers: [],
   bootstrap: [AppComponent]

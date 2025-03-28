@@ -80,6 +80,14 @@
   box-sizing: border-box;
 }
 
+.goog-te-banner-frame { 
+    display: none !important; 
+}
+
+.goog-te-menu-frame {
+    display: none !important;
+}
+
 article,
 aside,
 details,
@@ -119,12 +127,11 @@ a {
   a:active {
     text-decoration: none;
     outline: none;
-    color: var(--color-primary);
+    color: var(--color-heading);
+    cursor:pointer;
   }
 
-  a:focus {
-    outline: none;
-  }
+ 
 
 address {
   margin: 0 0 24px;
@@ -784,7 +791,8 @@ ul li {
   }
 
     ul li a:hover {
-      color: var(--color-primary);
+      text-decoration: none !important;
+      color: var(--color-heading) !important;
     }
 
   ul li::marker {
@@ -1186,7 +1194,8 @@ ol li a {
 }
 
 .bg_image--9 {
-  background-image: url(../images/bg/bg-image-9.jpg);
+  background-image: url(https://i.pinimg.com/736x/f4/6b/92/f46b924c93829734af158a2328d3568b.jpg);
+  height: 700px !important;
 }
 
 .bg_image--10 {
@@ -3342,6 +3351,35 @@ button.axil-btn.btn-size-md {
     font-size: var(--font-size-b2);
   }
 }
+body.modal-open {
+  padding-right: 0 !important;
+  overflow: hidden; /* Optional: Lock scrolling when modal is open */
+}
+/* إضافة هذه القواعد لتوسيط الـ modal */
+.modal-dialog-centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+/* حل عام لجميع حقول الإدخال */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+  border: 1px solid #ced4da !important;
+  border-radius: 0.25rem;
+  padding: 0.375rem 0.75rem;
+}
+
+.modal-dialog {
+  box-shadow: none !important;
+}
+
+.modal-content {
+  font-size: 16px !important;
+}
 
 .countdown {
   display: flex;
@@ -3838,6 +3876,17 @@ button.axil-btn.btn-size-md {
     transform: scale(1.25);
   }
 }
+
+.modal-body .thumbnail{
+    width:30%;
+    
+}
+
+  .modal-body .thumbnail img {
+    border-radius: 50% !important;
+    height: 180px !important;
+    width: 100% !important;
+  }
 
 .single-poster:hover .poster-content .sub-title {
   color: var(--color-white);
@@ -14393,8 +14442,7 @@ p {
     }
 
 .axil-signin-banner {
-  min-height: 900px;
-  height: 100vh;
+  height: 60vh !important;
   padding: 200px 50px 0 100px;
 }
 
@@ -14412,10 +14460,10 @@ p {
 
 .axil-signin-form-wrap {
   width: 100%;
-  height: calc(100vh - 180px);
   overflow-y: auto;
   display: flex;
   margin: 180px -30px -30px;
+  height: 430px !IMPORTANT;
 }
 
 @media only screen and (max-width: 991px) {
@@ -14490,10 +14538,13 @@ p {
 
   .axil-dashboard-warp .axil-dashboard-author .thumbnail {
     margin-bottom: 10px;
+    width:15%
   }
 
     .axil-dashboard-warp .axil-dashboard-author .thumbnail img {
       border-radius: 50%;
+      height: 180px;
+      width: 100%;
     }
 
   .axil-dashboard-warp .axil-dashboard-author .joining-date {

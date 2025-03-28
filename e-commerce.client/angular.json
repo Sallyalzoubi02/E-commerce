@@ -31,15 +31,22 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
+              "src/assets/css/vendor/bootstrap.min.css",
+              "src/assets/css/vendor/font-awesome.css",
+              "src/assets/css/vendor/jquery-ui.min.css",
+              "src/assets/css/vendor/magnific-popup.css",
+              "src/assets/css/vendor/sal.css",
+              "src/assets/css/vendor/slick.css",
+              "src/assets/css/vendor/slick-theme.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+             
+            ]
           },
           "configurations": {
             "production": {
@@ -93,15 +100,23 @@
             ],
             "tsConfig": "tsconfig.spec.json",
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "public"
-              }
+              "src/favicon.ico",
+              "src/assets"
             ],
             "styles": [
+              "src/assets/css/vendor/bootstrap.min.css",
+              "src/assets/css/vendor/font-awesome.css",
+              "src/assets/css/vendor/jquery-ui.min.css",
+              "src/assets/css/vendor/magnific-popup.css",
+              "src/assets/css/vendor/sal.css",
+              "src/assets/css/vendor/slick.css",
+              "src/assets/css/vendor/slick-theme.css",
               "src/styles.css"
             ],
-            "scripts": [],
+            "scripts": [
+          
+
+            ],
             "karmaConfig": "karma.conf.js"
           }
         }
@@ -109,6 +124,6 @@
     }
   },
   "cli": {
-    "analytics": "e52a5e10-a1f4-40d1-a029-57017d0f6686"
+    "analytics": "17317798-151c-4668-a762-74c604343de9"
   }
 }

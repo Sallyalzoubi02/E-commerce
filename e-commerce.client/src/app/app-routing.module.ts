@@ -9,6 +9,7 @@ import { EditCategoryComponent } from './Farah/category/edit-category/edit-categ
 import { ProductComponent } from './Farah/product/product/product.component';
 import { AddProductComponent } from './Farah/product/add-product/add-product.component';
 import { EditProductComponent } from './Farah/product/edit-product/edit-product.component';
+import { ShopComponent } from './Sondos/shop/shop.component';
 import { UsersComponent } from './Farah/Users/users/users.component';
 import { AboutComponent } from './Farah/about/about.component';
 import { FeedbackComponent } from './Farah/Feedback/feedback/feedback.component';
@@ -38,7 +39,9 @@ const routes: Routes = [
       { path: "feedback", component: FeedbackComponent },
       { path: "userVoucher/:id", component: AddVoucherUserComponent },
 
-  ] }
+  ] },
+  { path: '', pathMatch: 'full', redirectTo: '/home' },
+  {path:"shop" , component:ShopComponent},
 ];
 
 @NgModule({

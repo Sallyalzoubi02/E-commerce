@@ -11,7 +11,7 @@ import { ContactComponent } from './Habeeb/contact/contact.component';
 import { HomeComponent } from './Hazem/home/home.component';
 import { ProductDetailsComponent } from './Jana/product-details/product-details.component';
 import { ProfileComponent } from './Sally/profile/profile.component';
-import { ShopComponent } from './Sondos/shop/shop.component';
+
 import { NavbarComponent } from './Sally/navbar/navbar.component';
 import { FooterComponent } from './Sally/footer/footer.component';
 import { DashboardComponent } from './Farah/dashboard/dashboard.component';
@@ -21,6 +21,8 @@ import { EditProductComponent } from './Farah/product/edit-product/edit-product.
 import { CategoryComponent } from './Farah/category/category/category.component';
 import { AddCategoryComponent } from './Farah/category/add-category/add-category.component';
 import { EditCategoryComponent } from './Farah/category/edit-category/edit-category.component';
+import { FormsModule } from '@angular/forms';
+import { ShopComponent } from './Sondos/shop/shop.component';
 import { UsersComponent } from './Farah/Users/users/users.component';
 import { FeedbackComponent } from './Farah/Feedback/feedback/feedback.component';
 import { AddVoucherUserComponent } from './Farah/Users/add-voucher-user/add-voucher-user.component';
@@ -54,6 +56,8 @@ import { NgChartsModule } from 'ng2-charts';
     HomeDashboardComponent
   ],
   imports: [
+    BrowserModule, HttpClientModule,
+    AppRoutingModule, FormsModule        
     BrowserModule, HttpClientModule, FormsModule, NgChartsModule,
     AppRoutingModule
   ],

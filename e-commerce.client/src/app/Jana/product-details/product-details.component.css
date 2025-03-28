@@ -1,0 +1,19 @@
+.comment-box {
+  background-color: #f9f9f9; /* لون خلفية خفيف */
+  padding: 15px; /* مسافة داخلية */
+  border-radius: 10px; /* حواف دائرية */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* ظل خفيف */
+  margin-bottom: 15px; /* مسافة بين التعليقات */
+  border: 1px solid #ddd; /* حدود خفيفة */
+}
+
+
+.reating-inner .fa-star {
+  color: black; /* لون النجوم الافتراضي */
+  font-size: 20px; /* حجم النجوم */
+  transition: color 0.3s ease-in-out; /* تأثير سلس */
+}
+
+.reating-inner .fas {
+  color: orange !important; /* ✅ عند التحديد، يصبح اللون برتقالي */
+}

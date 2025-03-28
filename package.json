@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "jquery": "^3.7.1",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "sweetalert2": "^11.17.2"
   },
   "devDependencies": {
     "@types/jquery": "^3.5.32",

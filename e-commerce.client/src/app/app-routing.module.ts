@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './Hazem/home/home.component';
+import { ProductDetailsComponent } from './Jana/product-details/product-details.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: '', pathMatch: 'full', redirectTo: '/home' }
+  { path: 'productDetails/:id', component: ProductDetailsComponent },
+  
+   
 ];
 
 @NgModule({

@@ -3,7 +3,8 @@
     "chart.js": "^4.4.8",
     "jquery": "^3.7.1",
     "ng2-charts": "^8.0.0",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "sweetalert2": "^11.17.2"
   },
   "devDependencies": {
     "@types/jquery": "^3.5.32",

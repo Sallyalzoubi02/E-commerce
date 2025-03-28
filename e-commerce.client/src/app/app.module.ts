@@ -21,7 +21,7 @@ import { EditProductComponent } from './Farah/product/edit-product/edit-product.
 import { CategoryComponent } from './Farah/category/category/category.component';
 import { AddCategoryComponent } from './Farah/category/add-category/add-category.component';
 import { EditCategoryComponent } from './Farah/category/edit-category/edit-category.component';
-import { FormsModule } from '@angular/forms';
+
 import { ShopComponent } from './Sondos/shop/shop.component';
 import { UsersComponent } from './Farah/Users/users/users.component';
 import { FeedbackComponent } from './Farah/Feedback/feedback/feedback.component';
@@ -57,8 +57,8 @@ import { NgChartsModule } from 'ng2-charts';
   ],
   imports: [
     BrowserModule, HttpClientModule,
-    AppRoutingModule, FormsModule        
-    BrowserModule, HttpClientModule, FormsModule, NgChartsModule,
+    AppRoutingModule, FormsModule  ,      
+    HttpClientModule, FormsModule, NgChartsModule,
     AppRoutingModule
   ],
   providers: [],

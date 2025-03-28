@@ -9,13 +9,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="src\app\Farah\category\" />
+    <Folder Include="src\app\Farah\Feedback\" />
+    <Folder Include="src\app\Farah\Users\" />
     <Folder Include="src\app\Farah\serviceFarah\" />
     <Folder Include="src\app\Farah\product\" />
     <Folder Include="src\app\Habeeb\" />
     <Folder Include="src\app\Hazem\service\" />
     <Folder Include="src\app\Jana\" />
     <Folder Include="src\app\Firas\" />
-    <Folder Include="src\app\Sondos\" />
     <Folder Include="src\app\Sally\" />
+    <Folder Include="src\app\Sondos\api\" />
   </ItemGroup>
 </Project>

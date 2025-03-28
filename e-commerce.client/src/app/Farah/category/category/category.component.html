@@ -1,8 +1,7 @@
-<p>category works!</p>
 
 <div class="card mb-3">
   <div class="card-header">
-    <i class="fa fa-table"></i> Data Table Example
+    <i class="fa fa-table" style="margin-right:10px;"> </i> <p> Data Of Category</p>
   </div>
   <div class="card-body">
     <div class="table-responsive">
@@ -14,6 +13,7 @@
             <th>Image</th>
             <th>Edit</th>
             <th>Delete</th>
+            <th></th>
           </tr>
         </thead>   
         <tbody>
@@ -21,14 +21,14 @@
             <td>{{item.name}}</td>
             <td>{{item.description}}</td>
             <td>{{item.img}}</td>
-            <td>61</td>
-            <td>2011/04/25</td>
-
+            <td><a routerLink="/dashboard/editCategory/{{item.id}}" class="btn btn-primary" >Edit Category</a></td>
+            <td><button class="btn btn-danger btn-sm" (click)="DeletedCategory(item.id)">delete</button></td>
+            <td><a routerLink="/dashboard/product/{{item.id}}" class="btn btn-info">See The Products</a></td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-  <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+  <div class="card-footer small text-muted"><a routerLink="/dashboard/addCategory" class="btn btn-success">Add Category</a></div>
 </div>
    

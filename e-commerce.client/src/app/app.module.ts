@@ -20,6 +20,13 @@ import { EditProductComponent } from './Farah/product/edit-product/edit-product.
 import { CategoryComponent } from './Farah/category/category/category.component';
 import { AddCategoryComponent } from './Farah/category/add-category/add-category.component';
 import { EditCategoryComponent } from './Farah/category/edit-category/edit-category.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ContactUsComponent } from './Sally/contact-us/contact-us.component';
+import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './Sally/login/login.component';
+import { RegisterComponent } from './Sally/register/register.component';
+import { ResetpasswordComponent } from './Sally/resetpassword/resetpassword.component'; 
 
 @NgModule({
   declarations: [
@@ -39,11 +46,15 @@ import { EditCategoryComponent } from './Farah/category/edit-category/edit-categ
     EditProductComponent,
     CategoryComponent,
     AddCategoryComponent,
-    EditCategoryComponent
+    EditCategoryComponent,
+    ContactUsComponent,
+    LoginComponent,
+    RegisterComponent,
+    ResetpasswordComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule, ReactiveFormsModule, NgbModule, FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

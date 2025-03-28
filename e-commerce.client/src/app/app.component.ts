@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MyServiceService } from './Sally/my-service.service';
 
 interface WeatherForecast {
   date: string;
@@ -15,10 +16,14 @@ interface WeatherForecast {
 })
 export class AppComponent implements OnInit {
   public forecasts: WeatherForecast[] = [];
+  isAdmin: boolean = false; // ✅ تأكد من تعريف المتغير هنا
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private _serv: MyServiceService) {}
 
   ngOnInit() {
+    this._serv.currentUserRole.subscribe(role => {
+      this.isAdmin = role === "admin"; // ✅ تحقق مما إذا كان المستخدم Admin
+    });
     this.getForecasts();
   }
 

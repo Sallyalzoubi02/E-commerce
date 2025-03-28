@@ -63,6 +63,33 @@
 
   <!-- Main JS -->
   <script src="assets/js/main.js"></script>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      // إنشاء TranslateElement في البداية
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,ar',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+
+    // وظيفة لتغيير اللغة
+    function changeLanguage(lang) {
+      var element = document.getElementById('google_translate_element');
+      var googleTranslate = new google.translate.TranslateElement(
+        { pageLanguage: 'en', includedLanguages: 'en,ar' },
+        'google_translate_element'
+      );
+
+      // تغيير اللغة عند الضغط على الخيار في الـ dropdown
+      var selectLang = lang === 'ar' ? 'ar' : 'en';
+      googleTranslate.setLanguage(selectLang);  // تغيير اللغة
+    }
+  </script>
+
+
+
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   <!--<script src="assets/js/test.js"></script>-->
   <script type="text/javascript" src="https://demo.dashboardpack.com/architectui-html-free/assets/scripts/main.js"></script>
 </body>

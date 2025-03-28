@@ -24,10 +24,12 @@
         <div class="axil-dashboard-author">
           <div class="media">
             <div class="thumbnail">
-              <img [src]="user.image" >
+              <img  *ngIf="!addressForm.value.image" [src]="user.image">
+              <img *ngIf="addressForm.value.image" [src]="addressForm.value.image" >
+
             </div>
             <div class="media-body">
-              <h5 class="title mb-0 ms-2">{{user.username}}</h5>
+              <h5 class="title mb-0 ms-2">{{user.name}}</h5>
               <span class="joining-date">{{user.email}}</span>
             </div>
           </div>
@@ -39,9 +41,10 @@
                 <div class="nav nav-tabs" role="tablist">
                   <a class="nav-item nav-link active" data-bs-toggle="tab" href="#nav-dashboard" role="tab" aria-selected="true"><i class="fas fa-th-large"></i>Dashboard</a>
                   <a class="nav-item nav-link" data-bs-toggle="tab" href="#nav-orders" role="tab" aria-selected="false"><i class="fas fa-shopping-basket"></i>Orders</a>
-                  <a class="nav-item nav-link" data-bs-toggle="tab" href="#nav-address" role="tab" aria-selected="false"><i class="fas fa-home"></i>Addresses</a>
-                  <a class="nav-item nav-link" data-bs-toggle="tab" href="#nav-account" role="tab" aria-selected="false"><i class="fas fa-user"></i>Account Details</a>
-                  <a class="nav-item nav-link" href="sign-in.html"><i class="fal fa-sign-out"></i>Logout</a>
+                  <a class="nav-item nav-link" data-bs-toggle="tab" href="#nav-voucher" role="tab" aria-selected="false"><i class="fas fa-ticket-alt"></i>Vouchers</a>
+                  <a class="nav-item nav-link" data-bs-toggle="tab" href="#nav-address" role="tab" aria-selected="false"><i class="fas fa-user"></i>Account Details</a>
+                  <a class="nav-item nav-link" data-bs-toggle="tab" href="#nav-account" role="tab" aria-selected="false"><i class="fas fa-lock"></i>Change Password</a>
+                  <a class="nav-item nav-link" (click)="logout()"><i class="fal fa-sign-out"></i>Logout</a>
                 </div>
               </nav>
             </aside>
@@ -50,7 +53,7 @@
             <div class="tab-content">
               <div class="tab-pane fade show active" id="nav-dashboard" role="tabpanel">
                 <div class="axil-dashboard-overview">
-                  <div class="welcome-text">Hello Annie</div>
+                  <div class="welcome-text">Hello {{user.name}}</div>
                   <p>From your account dashboard you can view your recent orders, manage your billing and addresses, and edit your password and account details.</p>
                 </div>
               </div>
@@ -67,141 +70,233 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <!--<tr>
+                        <tr *ngFor="let order of orders">
                           <th scope="row">#{{order.id}}</th>
                           <td>{{order.date}}</td>
                           <td>{{order.amount}}</td>
-                          <td><a href="#" class="axil-btn view-btn">View items</a></td>
-                        </tr>-->
-                        
-                      
+                          <td><button (click)="openModal(order.id)" data-bs-toggle="modal" data-bs-target="#itemsModal" class="axil-btn view-btn">View items</button></td>
+                        </tr>
+
+
                       </tbody>
                     </table>
                   </div>
                 </div>
               </div>
-              <div class="tab-pane fade" id="nav-downloads" role="tabpanel">
+
+              <div class="tab-pane fade" id="nav-voucher" role="tabpanel">
                 <div class="axil-dashboard-order">
-                  <p>You don't have any download</p>
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">voucher</th>
+                          <th scope="col">description</th>
+                          <th scope="col">status</th>
+                          <th scope="col">Discount</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let voucher of vouchers">
+                          <th scope="row">{{voucher.name}}</th>
+                          <td>{{voucher.description}}</td>
+                          <td>{{voucher.states}}</td>
+                          <td>{{voucher.discount}}</td>
+                        </tr>
+
+
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-              </div>
-              <div class="tab-pane fade" id="nav-address" role="tabpanel">
-                <div class="axil-dashboard-address">
-                  <p class="notice-text">The following addresses will be used on the checkout page by default.</p>
-                  <div class="row row--30">
-                    <div class="col-lg-6">
-                      <div class="address-info mb--40">
-                        <div class="addrss-header d-flex align-items-center justify-content-between">
-                          <h4 class="title mb-0">Shipping Address</h4>
-                          <a href="#" class="address-edit"><i class="far fa-edit"></i></a>
-                        </div>
-                        <ul class="address-details">
-                          <li>Name: Annie Mario</li>
-                          <li>Email: annieexample.com</li>
-                          <li>Phone: 1234 567890</li>
-                          <li class="mt--30">
-                            7398 Smoke Ranch Road <br>
-                            Las Vegas, Nevada 89128
-                          </li>
-                        </ul>
+                </div>
+
+                <div class="modal fade" id="itemsModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="itemsModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <!-- إضافة class modal-dialog-centered -->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="itemsModalLabel">Order Items</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="address-info">
-                        <div class="addrss-header d-flex align-items-center justify-content-between">
-                          <h4 class="title mb-0">Billing Address</h4>
-                          <a href="#" class="address-edit"><i class="far fa-edit"></i></a>
-                        </div>
-                        <ul class="address-details">
-                          <li>Name: Annie Mario</li>
-                          <li>Email: annieexample.com</li>
-                          <li>Phone: 1234 567890</li>
-                          <li class="mt--30">
-                            7398 Smoke Ranch Road <br>
-                            Las Vegas, Nevada 89128
-                          </li>
-                        </ul>
+                      <div class="modal-body">
+                        <p *ngIf="items.length === 0">No items found for this order.</p>
+                        <table class="table" *ngIf="items.length>0 ">
+                          <thead>
+                            <tr>
+                              <th scope="col">Product</th>
+                              <th scope="col">Price</th>
+                              <th scope="col">Quantity</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let item of items">
+                              <th scope="row">#{{item.product_name}}</th>
+                              <td>{{item.product_price}}</td>
+                              <td>{{item.product_quantity}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="tab-pane fade" id="nav-account" role="tabpanel">
-                <div class="col-lg-9">
-                  <div class="axil-dashboard-account">
-                    <form class="account-details-form">
-                      <div class="row">
-                        <div class="col-lg-6">
-                          <div class="form-group">
-                            <label>First Name</label>
-                            <input type="text" class="form-control" value="Annie">
+
+                <div class="tab-pane fade show " id="nav-account" role="tabpanel">
+                  <div class="col-lg-9">
+                    <div class="axil-dashboard-account">
+                      <form [formGroup]="changePasswordForm" (ngSubmit)="changePassword()" class="account-details-form">
+                        <div class="row">
+                          <div class="col-12">
+                            <h5 class="title m-5">Password Change</h5>
+
+                            <!-- رسائل التنبيه -->
+                            <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+                            <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+                            <div class="form-group">
+                              <label>Password</label>
+                              <input type="password" class="form-control" formControlName="currentPassword">
+                            </div>
+                            <div class="form-group">
+                              <label>New Password</label>
+                              <input type="password" class="form-control" formControlName="newPassword">
+                            </div>
+                            <div class="form-group">
+                              <label>Confirm New Password</label>
+                              <input type="password" class="form-control" formControlName="confirmNewPassword">
+                            </div>
+                            <div class="form-group mb--0">
+                              <button type="submit" class="axil-btn" [disabled]="changePasswordForm.invalid">Save Changes</button>
+                            </div>
                           </div>
                         </div>
-                        <div class="col-lg-6">
-                          <div class="form-group">
-                            <label>Last Name</label>
-                            <input type="text" class="form-control" value="Mario">
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="tab-pane fade" id="nav-address" role="tabpanel">
+                  <div class="axil-dashboard-address">
+                    <p class="notice-text">You can edit your information from here.</p>
+                    <div class="row row--30">
+                      <div class="col-lg-6">
+                        <div class="address-info mb--40">
+                          <div class="addrss-header d-flex align-items-center justify-content-between">
+                            <h4 class="title mb-0">Personal Details</h4>
+                            <a href="#" class="address-edit" (click)="openAddressModal(addressModal)">
+                              <i class="far fa-edit"></i>
+                            </a>
                           </div>
+                          <ul class="address-details">
+                            <li><b>Name:</b> {{user.name}}</li>
+                            <li><b>Email:</b> {{user.email}}</li>
+                            <li><b>Phone</b> {{user.phone}}</li>
+                            <li><b>Payment:</b> {{user.payment}}</li>
+                            <li class="mt--30">
+                              <p class="notice-text">The following addresses will be used on the checkout page by default.</p>
+                              <b>Address:</b> {{user.address}}
+                            </li>
+                          </ul>
                         </div>
-                        <div class="col-12">
-                          <div class="form-group mb--40">
-                            <label>Country/ Region</label>
-                            <select class="select2">
-                              <option value="1">United Kindom (UK)</option>
-                              <option value="1">United States (USA)</option>
-                              <option value="1">United Arab Emirates (UAE)</option>
-                              <option value="1">Australia</option>
-                            </select>
-                            <p class="b3 mt--10">This will be how your name will be displayed in the account section and in reviews</p>
-                          </div>
-                        </div>
-                        <div class="col-12">
-                          <h5 class="title">Password Change</h5>
-                          <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" class="form-control" value="123456789101112131415">
-                          </div>
-                          <div class="form-group">
-                            <label>New Password</label>
-                            <input type="password" class="form-control">
-                          </div>
-                          <div class="form-group">
-                            <label>Confirm New Password</label>
-                            <input type="password" class="form-control">
-                          </div>
-                          <div class="form-group mb--0">
-                            <input type="submit" class="axil-btn" value="Save Changes">
-                          </div>
-                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+                <!-- المودال باستخدام ng-template -->
+                <ng-template #addressModal let-modal>
+                  <div class="modal-header">
+                    <h5 class="modal-title">Edit Profile</h5>
+                    <button type="button" class="btn-close" (click)="modal.dismiss()" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="thumbnail">
+                      <img [src]="user.image">
+                    </div>
+                    <form [formGroup]="addressForm">
+                      <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" formControlName="name">
+                      </div>
+                      <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" formControlName="email">
+                      </div>
+                      <div class="mb-3">
+                        <label for="phone" class="form-label">Phone</label>
+                        <input type="tel" class="form-control" id="phone" formControlName="phone">
+                      </div>
+                      <div class="mb-3">
+                        <label for="payment" class="form-label">Payment</label>
+
+                        <!-- ✅ تحويل input إلى select مع خيارات -->
+                        <select class="form-control" id="payment" formControlName="payment">
+                          <option value="orangeMoney">Orange Money</option>
+                          <option value="credit">Credit</option>
+                        </select>
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="image" class="form-label">Image</label>
+                        <input type="file" class="form-control" id="image" formControlName="image" (change)="onFileSelected($event)">
+                      </div>
+                      <div class="mb-3">
+                        <label for="address" class="form-label">Address</label>
+                        <textarea class="form-control" id="address" rows="3" formControlName="address"></textarea>
                       </div>
                     </form>
                   </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="modal.dismiss()" style="font-size:16px">cancel</button>
+                    <button type="button" class="btn btn-primary" (click)="saveAddress(); modal.close()" style="font-size:16px">save</button>
+                  </div>
+                </ng-template>
+
+
+                <div class="tab-pane fade show " id="nav-account" role="tabpanel">
+                  <div class="col-lg-9">
+                    <div class="axil-dashboard-account">
+                      <form [formGroup]="changePasswordForm" (ngSubmit)="changePassword()" class="account-details-form">
+                        <div class="row">
+                          <div class="col-12">
+                            <h5 class="title m-5">Password Change</h5>
+
+                            <!-- رسائل التنبيه -->
+                            <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+                            <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+                            <div class="form-group">
+                              <label>Password</label>
+                              <input type="password" class="form-control" formControlName="currentPassword">
+                            </div>
+                            <div class="form-group">
+                              <label>New Password</label>
+                              <input type="password" class="form-control" formControlName="newPassword">
+                            </div>
+                            <div class="form-group">
+                              <label>Confirm New Password</label>
+                              <input type="password" class="form-control" formControlName="confirmNewPassword">
+                            </div>
+                            <div class="form-group mb--0">
+                              <button type="submit" class="axil-btn" [disabled]="changePasswordForm.invalid">Save Changes</button>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
                 </div>
+
+
+
               </div>
             </div>
-          </div>
         </div>
       </div>
     </div>
   </div>
-  <!-- End My Account Area  -->
-  <!-- Start Axil Newsletter Area  -->
-  <div class="axil-newsletter-area axil-section-gap pt--0">
-    <div class="container">
-      <div class="etrade-newsletter-wrapper bg_image bg_image--5">
-        <div class="newsletter-content">
-          <span class="title-highlighter highlighter-primary2"><i class="fas fa-envelope-open"></i>Newsletter</span>
-          <h2 class="title mb--40 mb_sm--30">Get weekly update</h2>
-          <div class="input-group newsletter-form">
-            <div class="position-relative newsletter-inner mb--15">
-              <input placeholder="examplegmail.com" type="text">
-            </div>
-            <button type="submit" class="axil-btn mb--15">Subscribe</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- End .container -->
-  </div>
-  <!-- End Axil Newsletter Area  -->
+ 
 </main>

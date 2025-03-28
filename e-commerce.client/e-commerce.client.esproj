@@ -16,6 +16,5 @@
     <Folder Include="src\app\Jana\" />
     <Folder Include="src\app\Firas\" />
     <Folder Include="src\app\Sondos\" />
-    <Folder Include="src\app\Sally\" />
   </ItemGroup>
 </Project>

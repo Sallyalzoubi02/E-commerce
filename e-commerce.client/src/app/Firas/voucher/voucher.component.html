@@ -1,0 +1,24 @@
+<div class="body">
+  <div class="container">
+    <form #Voucher="ngForm" (ngSubmit)="addVoucher(Voucher.value)">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" ngModel required>
+
+      <label for="description">Description:</label>
+      <input type="text" id="description" name="description" ngModel required>
+
+      <label for="states">States:</label>
+      <select id="states" name="states" [(ngModel)]="selectedState" required>
+        <option value="Availabel" selected>Availabel</option>
+        <option value="not Availabel">not Availabel</option>
+      </select>
+
+      <input type="text" id="userId" name="userId" ngModel value="0" hidden>
+
+      <label for="discount">Discount:</label>
+      <input type="text" id="discount" name="discount" ngModel required>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>

@@ -40,7 +40,7 @@
           </div>
           <button class="close"></button>
         </div>
-        <ul class="header-menu nav">
+        <!--<ul class="header-menu nav">
           <li class="nav-item">
             <a href="javascript:void(0);" class="nav-link">
               <i class="nav-link-icon fa fa-database"> </i>
@@ -59,7 +59,7 @@
               Settings
             </a>
           </li>
-        </ul>
+        </ul>-->
       </div>
       <div class="app-header-right">
         <div class="header-btn-lg pr-0">
@@ -72,12 +72,16 @@
                     <i class="fa fa-angle-down ml-2 opacity-8"></i>
                   </a>
                   <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
-                    <button type="button" tabindex="0" class="dropdown-item">User Account</button>
-                    <button type="button" tabindex="0" class="dropdown-item">Settings</button>
+                    <!--<button type="button" tabindex="0" class="dropdown-item">User Account</button>-->
+                    <!--<button type="button" tabindex="0" class="dropdown-item">Settings</button>
                     <h6 tabindex="-1" class="dropdown-header">Header</h6>
                     <button type="button" tabindex="0" class="dropdown-item">Actions</button>
-                    <div tabindex="-1" class="dropdown-divider"></div>
-                    <button type="button" tabindex="0" class="dropdown-item">Dividers</button>
+                    <div tabindex="-1" class="dropdown-divider"></div>-->
+
+
+                    <button type="button" tabindex="0" class="dropdown-item">Logout</button>
+
+
                   </div>
                 </div>
               </div>
@@ -85,24 +89,24 @@
                 <div class="widget-heading">
                   Alina Mclourd
                 </div>
-                <div class="widget-subheading">
+                <!--<div class="widget-subheading">
                   VP People Manager
-                </div>
+                </div>-->
               </div>
-              <div class="widget-content-right header-user-info ml-3">
+              <!--<div class="widget-content-right header-user-info ml-3">
                 <button type="button" class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example">
                   <i class="fa text-white fa-calendar pr-1 pl-1"></i>
                 </button>
-              </div>
+              </div>-->
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>        <div class="ui-theme-settings">
-    <button type="button" id="TooltipDemo" class="btn-open-options btn btn-warning">
-      <i class="fa fa-cog fa-w-16 fa-spin fa-2x"></i>
-    </button>
+                  <button type="button" id="TooltipDemo" class="btn-open-options btn btn-warning"  style=" margin-bottom: -48px; border: none; color: white; background-color: #000000;">
+                    <i class="fa fa-cog fa-w-16 fa-spin fa-2x"></i>
+                  </button>
     <div class="theme-settings__inner">
       <div class="scrollbar-container">
         <div class="theme-settings__options-wrapper">
@@ -422,23 +426,39 @@
       </div>    <div class="scrollbar-sidebar">
         <div class="app-sidebar__inner">
           <ul class="vertical-nav-menu">
-            <li class="app-sidebar__heading">Dashboards</li>
+      
             <li>
-              <a href="index.html" class="mm-active">
-                <i class="metismenu-icon pe-7s-rocket"></i>
-                Dashboard Example 1
+              <a routerLink="/dashboard/category" class="mm-active">
+                <i class="fa-solid fa-list pe-7s-rocket" style="margin-right: 10px;"></i>
+                Category
               </a>
             </li>
 
 
-            <li class="app-sidebar__heading">Widgets</li>
             <li>
-              <a href="dashboard-boxes.html">
-                <i class="metismenu-icon pe-7s-display2"></i>
-                Dashboard Boxes
+              <a routerLink="/dashboard/users">
+                <i class="fa-solid fa-users" style="margin-right: 10px;"></i>
+                Users
               </a>
             </li>
 
+            
+            <li>
+              <a routerLink="/dashboard/feedback">
+                <i class="fa-solid fa-comments" style="margin-right: 10px;"></i>
+                Feedback
+              </a>
+            </li>
+
+
+            <li>
+              <a routerLink="/dashboard/">
+                <i class="fa-solid fa-ticket" style="margin-right: 10px;"></i>
+                Voucher
+              </a>
+            </li>
+
+         
 
 
 

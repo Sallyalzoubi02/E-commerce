@@ -1,1 +1,181 @@
-<p>product-details works!</p>
+ <!-- Start Shop Area  -->
+<div class="axil-single-product-area axil-section-gap pb--0 bg-color-white">
+  <div class="single-product-thumb mb--40">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-7 mb--40">
+          <div class="row">
+            <div class="col-lg-10 order-lg-2">
+              <div class="single-product-thumbnail-wrap zoom-gallery">
+                <div class="single-product-thumbnail product-large-thumbnail-3 axil-product">
+                  <div class="thumbnail">
+                    <a href="assets/images/product/product-big-01.png" class="popup-zoom">
+                      <img [src]="selectedproduct.img" alt="Product Images">
+                    </a>
+                  </div>
+                  
+                </div>
+                
+              </div>
+            </div>
+            
+          </div>
+        </div>
+        <div class="col-lg-5 mb--40" style="margin-top: 5%;">
+          <div class="single-product-content">
+            <div class="inner">
+              <h2 class="product-title">{{selectedproduct.name}}</h2>
+              <span class="price-amount">{{selectedproduct.price}} JD </span>
+              <div class="product-rating">
+                <!--<div class="star-rating">
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="far fa-star"></i>
+    </div>-->
+                <div class="star-rating">
+                  <ng-container *ngFor="let star of getStarsArray(selectedproduct.rating)">
+                    <i class="{{ star }}"></i>
+                  </ng-container>
+                </div>
+              </div>
+
+              <p class="description">{{selectedproduct.description}}</p>
+
+
+              <br />
+              <!-- Start Product Action Wrapper  -->
+              <div class="product-action-wrapper d-flex-center">
+                <!-- Start Quentity Action  -->
+                <!--<div class="pro-qty"><input type="text" value="1"></div>-->
+                <div class="quantity-controls" style="display:flex;">
+                  <button (click)="decreaseQuantity()">-</button>
+                  <span>{{ quantity }}</span>
+                  <button (click)="increaseQuantity()">+</button>
+                </div>
+                <!-- End Quentity Action  -->
+                <!-- Start Product Action  -->
+                <ul class="product-action d-flex-center mb--0">
+                  <button (click)="addToCart()" class="btn btn-primary" style="height:100%;width:100%">Add to Cart</button>
+                 
+                </ul>
+                <!-- End Product Action  -->
+
+              </div>
+              <!-- End Product Action Wrapper  -->
+              <br />
+              <br />
+              <br />
+              <h4>Share On Facebook:</h4>
+              <br />
+              <div class="product-variations-wrapper">
+                <i class="fa-brands fa-facebook fa-4x text-primary cursor-pointer" (click)="shareOnFacebook()"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End .single-product-thumb -->
+
+  <div class="woocommerce-tabs wc-tabs-wrapper bg-vista-white">
+    <div class="container">
+      <ul class="nav tabs" id="myTab" role="tablist">
+        
+        <li class="nav-item" role="presentation">
+          <a id="reviews-tab" data-bs-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="myTabContent">
+        
+        <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+          <div class="reviews-wrapper">
+            <div class="row">
+              <div class="col-lg-6 mb--40">
+                <div class="axil-comment-area pro-desc-commnet-area">
+                  <h3 class="title"> Review for this product</h3>
+                  <ul class="comment-list">
+                    <!-- Start Single Comment  -->
+                    <li class="comment" *ngFor="let comment of comments">
+                      <div class="comment-box">
+                        <div class="comment-body">
+                          <div class="single-comment">
+                            <div class="comment-img">
+                              <!--<img src="assets/images/blog/author-image-4.png" alt="Author Images">-->
+                            </div>
+                            <div class="comment-inner">
+                              <h6 class="commenter">
+                                <a class="hover-flip-item-wrapper" href="#">
+                                  <span class="hover-flip-item">
+                                    <span data-text="Cameron Williamson">{{comment.userName}}</span>
+                                  </span>
+                                </a>
+                                <span class="commenter-rating">
+                                  <ng-container *ngFor="let i of [1, 2, 3, 4, 5]">
+                                    <i class="fa-star" [ngClass]="{'fas': comment.rating >= i, 'far': comment.rating < i}"
+                                       [style.color]="comment.rating >= i ? 'orange' : 'black'"></i>
+                                  </ng-container>
+                                </span>
+                              </h6>
+                              <div class="comment-text">
+                                <p>{{ comment.message }}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <!-- End Single Comment  -->
+                   
+                    
+                  </ul>
+                </div>
+                <!-- End .axil-commnet-area -->
+              </div>
+              <!-- End .col -->
+              <div class="col-lg-6 mb--40">
+                <!-- Start Comment Respond  -->
+                <div class="comment-respond pro-des-commend-respond mt--0">
+                  <h3 class="title mb--30">Add a Review</h3>
+
+                  
+                  <form (submit)="submitComment($event)">
+                    <div class="rating-wrapper">
+                      Your Rating
+                      <div class="reating-inner">
+                        <span *ngFor="let i of [1, 2, 3, 4, 5]" (click)="setRating(i)">
+                          <i [ngClass]="{'fas': rating >= i, 'far': rating < i}" class="fa-star"
+                             [style.color]="rating >= i ? 'orange' : 'black'"></i>
+                        </span>
+                      </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="col-lg-6 col-md-6 col-12">
+                      <div class="form-group">
+                        <label>Name <span class="require">*</span></label>
+                        <input id="name" [(ngModel)]="userName" name="userName" type="text">
+                      </div>
+                    </div>
+                    <br />
+                    <textarea [(ngModel)]="newComment" name="comment" placeholder="Your Comment" required rows="10"></textarea>
+
+                    <button type="submit" class="axil-btn btn-bg-primary">Submit Comment</button>
+                  </form>
+                 
+                </div>
+                <!-- End Comment Respond  -->
+              </div>
+              <!-- End .col -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- woocommerce-tabs -->
+
+</div>
+<!-- End Shop Area  -->

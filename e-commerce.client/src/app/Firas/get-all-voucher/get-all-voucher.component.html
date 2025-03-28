@@ -1,0 +1,36 @@
+<p>get-all-voucher works!</p>
+<a routerLink="/dashboard/addVoucher" class="btn btn-primary">Add new Voucher</a>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">description</th>
+      <th scope="col">states</th>
+      <th scope="col">userId</th>
+      <th scope="col">discount %</th>
+      <th scope="col">Action</th>
+
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of allVoucher, let i = index">
+      <th scope="row">{{i+1}}</th>
+      <td>{{item.name}}</td>
+      <td>{{item.description}}</td>
+      <td>{{item.states}}</td>
+      <td>{{item.userId}}</td>
+      <td>{{item.discount}}%</td>
+      <td>
+
+        <button (click)="editVoucher(item.id)" class="btn btn-primary">Edit</button>
+        <button (click)="deleteVoucher(item.id)" class="btn btn-danger">Delete</button>
+      </td>
+
+
+    </tr>
+
+  </tbody>
+</table>

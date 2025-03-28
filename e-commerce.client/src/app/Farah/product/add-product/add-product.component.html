@@ -1,1 +1,51 @@
-<p>add-product works!</p>
+
+<div class="row justify-content-center">
+  <div class="col-md-6">
+
+    <form #product="ngForm" (ngSubmit)="addProduct(product.value)" class="bg-dark text-white p-4 rounded">
+      <h2 class="text-center mb-4" style="color:white">Add Product</h2><br />
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Name Of Product</label>
+        <input type="text" class="form-control" name="name" ngModel>
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Price Of Product</label>
+        <input type="number" class="form-control" name="price" ngModel>
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Rating Of Product</label>
+        <input type="number" class="form-control" name="rating" ngModel>
+      </div>
+
+      <div cclass="mb-3">
+        <label for="categoryID" class="form-label" name="categoryID">Category</label>
+        <select class="form-select " aria-label="Default select example" name="categoryID" id="categoryID" ngModel>
+          <option *ngFor="let item of categories" value="{{item.id}}">{{item.name}}</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Description Of Product</label>
+        <input type="text" class="form-control" name="description" ngModel>
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Image Of Product</label>
+        <input type="text" class="form-control" name="img" ngModel>
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Discount Product</label>
+        <input type="number" class="form-control" name="discount" ngModel>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+
+  </div>
+</div>
+
+

@@ -1,0 +1,82 @@
+<!--<div class="container mt-5">
+  <h2 class="text-center mb-4">Dashboard Overview</h2>
+
+  <div class="row">-->
+    <!-- Category Card -->
+    <!--<div class="col-md-4">
+      <div class="card text-white bg-primary mb-3 shadow-lg">
+        <div class="card-body text-center">
+          <h4 class="card-title">Categories</h4>
+          <h2>{{ categoryCount }}</h2>
+        </div>
+      </div>
+    </div>-->
+
+    <!-- Product Card -->
+    <!--<div class="col-md-4">
+      <div class="card text-white bg-primary mb-3 shadow-lg">
+        <div class="card-body text-center">
+          <h4 class="card-title">Products</h4>
+          <h2>{{ productCount }}</h2>
+        </div>
+      </div>
+    </div>-->
+
+    <!-- Users Card -->
+    <!--<div class="col-md-4">
+      <div class="card text-white bg-primary mb-3 shadow-lg">
+        <div class="card-body text-center">
+          <h4 class="card-title">Users</h4>
+          <h2>{{ userCount }}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>-->
+
+<div class="container mt-5">
+  <h2 class="text-center mb-4">Dashboard Overview</h2>
+
+  <div class="row">
+    <!-- كروت الإحصائيات -->
+    <div class="col-md-4">
+      <div class="card text-white bg-primary mb-3 shadow-lg">
+        <div class="card-body text-center">
+          <h4 class="card-title">Categories</h4>
+          <h2>{{ categoryCount }}</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card text-white bg-success mb-3 shadow-lg">
+        <div class="card-body text-center">
+          <h4 class="card-title">Products</h4>
+          <h2>{{ productCount }}</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card text-white bg-danger mb-3 shadow-lg">
+        <div class="card-body text-center">
+          <h4 class="card-title">Users</h4>
+          <h2>{{ userCount }}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <h2 class="text-center my-4">User Registrations (Last Month)</h2>
+    <div class="chart-container">
+      <canvas baseChart
+              [data]="lineChartData"
+              [options]="lineChartOptions"
+              chartType="line">
+      </canvas>
+    </div>
+  </div>
+
+

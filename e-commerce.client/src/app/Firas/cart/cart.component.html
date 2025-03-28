@@ -1,1 +1,146 @@
-<p>cart works!</p>
+
+
+
+<main class="main-wrapper">
+  <a routerLink="/Voucher">vbnm,./.</a>
+  <!-- Start Cart Area  -->
+  <div class="axil-product-cart-area axil-section-gap">
+    <div class="container">
+      <div class="axil-product-cart-wrap">
+        <div class="product-table-heading">
+          <h4 class="title">Your Cart</h4>
+          <a href="#" class="cart-clear">Clear Shoping Cart</a>
+        </div>
+        <div class="table-responsive">
+          <table class="table axil-product-table axil-cart-table mb--40">
+            <thead>
+              <tr>
+                <th scope="col" class="product-remove"></th>
+                <th scope="col" class="product-thumbnail">Product</th>
+                <th scope="col" class="product-title"></th>
+                <th scope="col" class="product-price">Price</th>
+                <th scope="col" class="product-quantity">Quantity</th>
+                <th scope="col" class="product-subtotal">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of cartItems, let i = index">
+                <td class="product-remove"><a class="remove-wishlist" (click)="removeItem(item.id)"><i class="fal fa-times"></i></a></td>
+                <td class="product-thumbnail"><a ><img src="assets/images/product/electric/product-01.png" alt="Digital Product"></a></td>
+                <td class="product-title"><a href="single-product.html">{{item.productName}}</a></td>
+                <td class="product-price" data-title="Price"><span class="currency-symbol">$</span>{{item.productPrice}}</td>
+                <td class="product-quantity" data-title="Qty">
+                  <div class="pro-qty">
+                    <a class="dec qtybtn" (click)="editQuantity(i, item.quantity - 1)">-</a>
+
+                    <input type="number" class="quantity-input" [(ngModel)]="item.quantity" (change)="editQuantity(i, item.quantity)">
+
+                    <a class="inc qtybtn" (click)="editQuantity(i, item.quantity + 1)">+</a>
+                  </div>
+
+                </td>
+                <td class="product-subtotal" data-title="Subtotal"><span class="currency-symbol">$</span>{{Total[i]}}</td>
+              </tr>
+           
+            </tbody>
+          </table>
+        </div>
+        <div class="cart-update-btn-area">
+          <div class="input-group product-cupon">
+            <input placeholder="Enter coupon code" type="text" [(ngModel)]="VoucherUserInput" [disabled]="isVoucherInputDisabled">
+            <div class="product-cupon-btn">
+              <button type="submit" (click)="getVoucher()" class="axil-btn btn-outline" [disabled]="isVoucherInputDisabled">Apply</button>
+            </div>
+          </div>
+       
+        </div>
+        <div class="row">
+          <div class="col-xl-5 col-lg-7 offset-xl-7 offset-lg-5">
+            <div class="axil-order-summery mt--80">
+              <h5 class="title mb--20">Order Summary</h5>
+              <div class="summery-table-wrap">
+                <table class="table summery-table mb--30">
+                  <tbody>
+                    <tr class="order-subtotal">
+                      <td>Subtotal</td>
+                      <td><input [(ngModel)]="Totals"  disabled style="text-align:center;background-color:white"/></td>
+                    </tr>
+                    <!--<tr class="order-shipping">
+                      <td>Shipping</td>
+                      <td>
+                       
+                      </td>
+                    </tr>-->
+                    <tr class="order-tax">
+                      <td>Discount</td>
+                      <td><input [(ngModel)]="discount" disabled style="text-align:center;background-color:white" /></td>
+                    </tr>
+                    <tr class="order-total">
+                      <td>Total</td>
+                      <td class="order-total-amount" ><input [(ngModel)]="TotalAfterDiscount" disabled style="text-align:center;background-color:white" /></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <a href="checkout.html" class="axil-btn btn-bg-primary checkout-btn">Process to Checkout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Cart Area  -->
+
+</main>
+
+
+<div class="service-area">
+  <div class="container">
+    <div class="row row-cols-xl-4 row-cols-sm-2 row-cols-1 row--20">
+      <div class="col">
+        <div class="service-box service-style-2">
+          <div class="icon">
+            <img src="assets/images/icons/service1.png" alt="Service">
+          </div>
+          <div class="content">
+            <h6 class="title">Fast &amp; Secure Delivery</h6>
+            <p>Tell about your service.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="service-box service-style-2">
+          <div class="icon">
+            <img src="assets/images/icons/service2.png" alt="Service">
+          </div>
+          <div class="content">
+            <h6 class="title">Money Back Guarantee</h6>
+            <p>Within 10 days.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="service-box service-style-2">
+          <div class="icon">
+            <img src="assets/images/icons/service3.png" alt="Service">
+          </div>
+          <div class="content">
+            <h6 class="title">24 Hour Return Policy</h6>
+            <p>No question ask.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="service-box service-style-2">
+          <div class="icon">
+            <img src="assets/images/icons/service4.png" alt="Service">
+          </div>
+          <div class="content">
+            <h6 class="title">Pro Quality Support</h6>
+            <p>24/7 Live support.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

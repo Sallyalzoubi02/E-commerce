@@ -65,7 +65,7 @@ export class ShopComponent implements OnInit {
   createCart() {
     this.shopService.createCart(this.currentUser.id).subscribe(cart => {
       console.log(cart); 
-      this.cartId = cart.id; 
+      //this.cartId = cart.id; 
     });
   }
 

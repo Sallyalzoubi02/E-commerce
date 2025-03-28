@@ -1,8 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -60,20 +58,18 @@ import { NgChartsModule } from 'ng2-charts';
     UsersComponent,
     FeedbackComponent,
     AddVoucherUserComponent,
-    HomeDashboardComponent
-    EditCategoryComponent,
+    HomeDashboardComponent,
     VoucherComponent,
     GetAllVoucherComponent,
     EditVoucherComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
-    AppRoutingModule, FormsModule
-    AppRoutingModule, FormsModule  ,      
-    HttpClientModule, FormsModule, NgChartsModule,
-    AppRoutingModule
-    BrowserModule, HttpClientModule, FormsModule,
-    AppRoutingModule 
+    AppRoutingModule, FormsModule,
+    NgChartsModule,
+    
+ 
+     
   ],
   providers: [],
   bootstrap: [AppComponent]

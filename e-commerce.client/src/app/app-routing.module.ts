@@ -43,7 +43,9 @@ const routes: Routes = [
     path: "dashboard", component: DashboardComponent, children: [
       { path: "homeDash", component: HomeDashboardComponent },
       { path: '', pathMatch: 'full', redirectTo: '/dashboard/homeDash' },
-
+      { path: 'addVoucher', component: VoucherComponent },
+      { path: 'voucher', component: GetAllVoucherComponent },
+      { path: 'editVoucher/:id', component: EditVoucherComponent },
       { path: "category", component: CategoryComponent },
       { path: "addCategory", component: AddCategoryComponent },
       { path: "editCategory/:id", component: EditCategoryComponent },
@@ -62,11 +64,9 @@ const routes: Routes = [
   { path: 'productDetails/:id', component: ProductDetailsComponent },
   
    
-      { path: 'addVoucher', component: VoucherComponent },
-      { path: 'voucher', component: GetAllVoucherComponent },
-      { path: 'editVoucher/:id', component: EditVoucherComponent },
+     
 
-  ] }
+ 
 ];
 
 @NgModule({

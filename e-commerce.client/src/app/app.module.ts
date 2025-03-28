@@ -1,8 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { FormsModule } from '@angular/forms';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,7 +21,6 @@ import { EditProductComponent } from './Farah/product/edit-product/edit-product.
 import { CategoryComponent } from './Farah/category/category/category.component';
 import { AddCategoryComponent } from './Farah/category/add-category/add-category.component';
 import { EditCategoryComponent } from './Farah/category/edit-category/edit-category.component';
-import { FormsModule } from '@angular/forms';
 import { VoucherComponent } from './Firas/voucher/voucher.component';
 import { GetAllVoucherComponent } from './Firas/get-all-voucher/get-all-voucher.component';
 import { EditVoucherComponent } from './Firas/edit-voucher/edit-voucher.component';
@@ -68,11 +66,11 @@ import { ResetpasswordComponent } from './Sally/resetpassword/resetpassword.comp
     FeedbackComponent,
     AddVoucherUserComponent,
     HomeDashboardComponent
-    EditCategoryComponent,
+    ,
     VoucherComponent,
     GetAllVoucherComponent,
     EditVoucherComponent
-    EditCategoryComponent,
+    ,
     ContactUsComponent,
     LoginComponent,
     RegisterComponent,
@@ -81,12 +79,9 @@ import { ResetpasswordComponent } from './Sally/resetpassword/resetpassword.comp
   imports: [
     BrowserModule, HttpClientModule,
     AppRoutingModule, FormsModule
-    AppRoutingModule, FormsModule  ,      
-    HttpClientModule, FormsModule, NgChartsModule,
-    AppRoutingModule
-    BrowserModule, HttpClientModule, FormsModule,
-    AppRoutingModule 
-    AppRoutingModule, ReactiveFormsModule, NgbModule, FormsModule
+   , NgChartsModule,
+    AppRoutingModule,
+         ReactiveFormsModule, NgbModule, 
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -10,9 +10,11 @@ import { ContactComponent } from './Habeeb/contact/contact.component';
 import { HomeComponent } from './Hazem/home/home.component';
 import { ProductDetailsComponent } from './Jana/product-details/product-details.component';
 import { ProfileComponent } from './Sally/profile/profile.component';
-import { ShopComponent } from './Sondos/shop/shop.component';
+
 import { NavbarComponent } from './Sally/navbar/navbar.component';
 import { FooterComponent } from './Sally/footer/footer.component';
+import { FormsModule } from '@angular/forms';
+import { ShopComponent } from './Sondos/shop/shop.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,7 @@ import { FooterComponent } from './Sally/footer/footer.component';
   ],
   imports: [
     BrowserModule, HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule, FormsModule        
   ],
   providers: [],
   bootstrap: [AppComponent]

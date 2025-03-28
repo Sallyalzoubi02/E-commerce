@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ServiceService } from '../Service/service.service';
 import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
+import { MyServiceService } from '../../Sally/my-service.service';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class ProductDetailsComponent {
   cartId: any;
   userId: any;
 
-  constructor(private serv: ServiceService, private active: ActivatedRoute) { }
+  constructor(private serv: ServiceService, private active: ActivatedRoute, private _serv: MyServiceService) { }
 
   ngOnInit() {
     this.id = this.active.snapshot.paramMap.get('id')||'1';
@@ -94,29 +95,34 @@ export class ProductDetailsComponent {
   }
 
   getUserCartId() {
-    this.serv.getUserId().subscribe(userId => {
-      if (userId) {
-        this.userId = userId; // احفظ userId للاستخدام لاحقًا
-        this.serv.getCartIdByUser(userId).subscribe({
-          next: (cartData: any[]) => {
-            console.log("Cart Data:", cartData);
-            if (cartData.length > 0) {
-              this.cartId = cartData[0].id;
-            } else {
-              // إذا لم يكن للمستخدم سلة، قم بإنشائها
-              this.serv.createCart(userId).subscribe({
-                next: (newCart: any) => {
-                  this.cartId = newCart.id; // حفظ معرف السلة الجديدة
-                  console.log("New cart created with ID:", this.cartId);
-                },
-                error: (err) => console.error('Error creating cart:', err)
-              });
-            }
-          },
-          error: (err) => console.error('Error fetching cart data:', err)
-        });
+
+    this._serv.currentlogged.subscribe((id) => this.userId = id)
+    this.serv.getCartIdByUser(this.userId).subscribe({
+      next: (cartData: any[]) => {
+        console.log("Cart Data:", cartData);
+        if (cartData.length > 0) {
+          this.cartId = cartData[0].id;
+        } else {
+          // إذا لم يكن للمستخدم سلة، قم بإنشائها
+          this.serv.createCart(this.userId).subscribe({
+            next: (newCart: any) => {
+              this.cartId = newCart.id; // حفظ معرف السلة الجديدة
+              console.log("New cart created with ID:", this.cartId);
+            },
+            error: (err) => console.error('Error creating cart:', err)
+          });
+        }
       }
-    });
+    })
+
+    //this.serv.getUserId().subscribe(userId => {
+    //  if (userId) {
+    //    this.userId = userId; // احفظ userId للاستخدام لاحقًا
+    //    
+    //      error: (err) => console.error('Error fetching cart data:', err)
+    //    });
+    //  }
+    //});
   }
   increaseQuantity() {
     this.quantity++;

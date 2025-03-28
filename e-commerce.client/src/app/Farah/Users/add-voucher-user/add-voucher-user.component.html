@@ -1,0 +1,43 @@
+
+
+
+<div class="row justify-content-center">
+  <div class="col-md-6">
+
+    <form #voucher="ngForm" (ngSubmit)="addVoucherForUser(voucher.value)" class="bg-dark text-white p-4 rounded">
+      <h2 class="text-center mb-4" style="color:white">Add Voucher For User</h2><br />
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Name Of Voucher</label>
+        <input type="text" class="form-control" name="name" ngModel>
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Description</label>
+        <input type="text" class="form-control" name="description" ngModel>
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">States</label>
+        <select name="states" [(ngModel)]="selectedState" class="form-select">
+          <option value="Available" selected>Available</option>
+          <option value="Not Available">Not Available</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">User Id</label>
+        <input type="text" class="form-control" name="userId" ngModel [(ngModel)]="userId" readonly>
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Discount</label>
+        <input type="text" class="form-control" name="discount" ngModel>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+
+  </div>
+</div>

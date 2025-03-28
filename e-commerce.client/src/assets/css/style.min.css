@@ -234,8 +234,10 @@ img {
   -ms-interpolation-mode: bicubic;
   border: 0;
   vertical-align: middle;
-  max-width: 100%;
+
   height: auto;
+  max-width:101%;
+
 }
 
 svg:not(:root) {
@@ -1168,7 +1170,7 @@ ol li a {
 }
 
 .bg_image--5 {
-  background-image: url(../images/bg/bg-image-5.jpg);
+  background-image: url("https://cdn.discordapp.com/attachments/1316482533172580363/1354734878016409610/OIP_1.jpg?ex=67e65eac&is=67e50d2c&hm=3a41a3479c2174bb85b9e1313c133e643b72076f12c3a890ccd2e0e10a862936&");
 }
 
 .bg_image--6 {
@@ -2609,6 +2611,7 @@ input[type="submit"] {
 .axil-about-area .about-content .title {
   margin-bottom: 24px;
   line-height: 1.2;
+  font-size: 34px;
 }
 
 @media only screen and (max-width: 1199px) {

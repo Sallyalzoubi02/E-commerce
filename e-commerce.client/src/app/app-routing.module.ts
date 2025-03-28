@@ -66,7 +66,7 @@ const routes: Routes = [
 
   { path: '', pathMatch: 'full', redirectTo: '/home' },
   {path:"shop" , component:ShopComponent},
-  { path: 'productDetails/:id', component: ProductDetailsComponent },
+  { path: 'productDetails', component: ProductDetailsComponent },
   
    
      

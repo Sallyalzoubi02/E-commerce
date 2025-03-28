@@ -1,6 +1,7 @@
 import { Component, OnChanges } from '@angular/core';
 import { CartPaymentService } from '../CartPaymentServices/cart-payment.service';
 import { Immediate } from 'rxjs/internal/util/Immediate';
+import { MyServiceService } from '../../Sally/my-service.service';
 
 @Component({
   selector: 'app-cart',
@@ -11,7 +12,7 @@ export class CartComponent implements OnChanges {
 
   cartId: any;
   //userId = localStorage.getItem('userId');
-  userId = 3;
+  userId : any;
 
   cartItems: any[] = [];
   Total: number[] = [];
@@ -27,7 +28,9 @@ export class CartComponent implements OnChanges {
   TotalAfterDiscount: any = this.Totals;
 
   isVoucherInputDisabled: boolean = false;
-  constructor(private _ser: CartPaymentService) { }
+  constructor(private _ser: CartPaymentService, private _serv: MyServiceService) { }
+
+
 
   ngOnChanges() {
     this.getVoucher();
@@ -37,6 +40,9 @@ export class CartComponent implements OnChanges {
 
     this.getCartId();
     this.bill();
+
+    this._serv.currentlogged.subscribe((id) => this.userId = id)
+    
   }
 
 

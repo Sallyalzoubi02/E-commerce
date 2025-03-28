@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +21,13 @@ import { EditProductComponent } from './Farah/product/edit-product/edit-product.
 import { CategoryComponent } from './Farah/category/category/category.component';
 import { AddCategoryComponent } from './Farah/category/add-category/add-category.component';
 import { EditCategoryComponent } from './Farah/category/edit-category/edit-category.component';
+import { UsersComponent } from './Farah/Users/users/users.component';
+import { FeedbackComponent } from './Farah/Feedback/feedback/feedback.component';
+import { AddVoucherUserComponent } from './Farah/Users/add-voucher-user/add-voucher-user.component';
+import { HomeDashboardComponent } from './Farah/home-dashboard/home-dashboard.component';
+import { NgChartsModule } from 'ng2-charts';
+
+
 
 @NgModule({
   declarations: [
@@ -39,10 +47,14 @@ import { EditCategoryComponent } from './Farah/category/edit-category/edit-categ
     EditProductComponent,
     CategoryComponent,
     AddCategoryComponent,
-    EditCategoryComponent
+    EditCategoryComponent,
+    UsersComponent,
+    FeedbackComponent,
+    AddVoucherUserComponent,
+    HomeDashboardComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule,
+    BrowserModule, HttpClientModule, FormsModule, NgChartsModule,
     AppRoutingModule
   ],
   providers: [],

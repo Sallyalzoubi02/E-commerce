@@ -23,6 +23,7 @@ export class ShopComponent implements OnInit {
   cartId: any;
   userId: any;
   selectedproduct: any;
+  cartItemsCount: any;
 
   constructor(private shopService: ServService, private ngZone: NgZone, private _serv: MyServiceService) { }
 
@@ -35,6 +36,9 @@ export class ShopComponent implements OnInit {
     this.shopService.getProducts().subscribe(data => {
       this.products = data;
       this.filteredProducts = [...this.products];
+    });
+    this._serv.getCartItemsCount().subscribe(count => {
+      this.cartItemsCount = count;
     });
   }
 
@@ -162,7 +166,9 @@ export class ShopComponent implements OnInit {
           text: 'Failed to add product to cart!',
         });
       }
+      
     });
+    this._serv.updateCartCount(this.cartItemsCount + 1); // تحديث العدد
   }
 
   // ✅ تحديث الكمية إذا كان المنتج موجودًا في السلة

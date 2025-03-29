@@ -10,6 +10,24 @@ export class ServService {
 
   constructor(private http: HttpClient) { }
 
+  getCartIdByUser(userId: number) {
+    return this.http.get<any[]>(`https://67e2be6a97fc65f53537692b.mockapi.io/Artify/cart?userId=${userId}`);
+  }
+
+  getCartItemsByCartId(cartId: any) {
+    return this.http.get<any[]>(`https://67d3448f8bca322cc269b2a9.mockapi.io/Carditem?cartId=${cartId}`);
+  }
+  updateCartItem(itemId: number, updatedItem: any) {
+    return this.http.put(`https://67d3448f8bca322cc269b2a9.mockapi.io/Carditem/${itemId}`, updatedItem);
+  }
+
+
+  addProductToCart(cartItem: any) {
+    return this.http.post(`https://67d3448f8bca322cc269b2a9.mockapi.io/Carditem`, cartItem);
+  }
+
+
+
   getCategories() {
     return this.http.get<any[]>("https://67e2bee997fc65f535376bc7.mockapi.io/category");
   }
@@ -27,11 +45,8 @@ export class ServService {
   getCart() {
     return this.http.get<any[]>('https://67e2be6a97fc65f53537692b.mockapi.io/Artify/cart');
   }
-  createCart(userId: number) 
-  {
-    return this.http.post('https://67e2be6a97fc65f53537692b.mockapi.io/Artify/cart', {
-      userId: userId
-    });
+  createCart(userId: number) {
+    return this.http.post('https://67e2be6a97fc65f53537692b.mockapi.io/Artify/cart', { userId });
   }
   addToCart(cartId: number, product: any): Observable<any> {
     let cartItem = {

@@ -29,15 +29,14 @@ export class ServiceService {
   }
 
 
-  private userId$ = new BehaviorSubject<number | null>(55);
 
-  setUserId(userId: number) {
-    this.userId$.next(userId);
-  }
+  //setUserId(userId: number) {
+  //  this.userId$.next(userId);
+  //}
 
-  getUserId() {
-    return this.userId$.asObservable();
-  }
+  //getUserId() {
+  //  return this.userId$.asObservable();
+  //}
 
   getCartIdByUser(userId: number) {
     return this._http.get<any[]>(`https://67e2be6a97fc65f53537692b.mockapi.io/Artify/cart?userId=${userId}`);

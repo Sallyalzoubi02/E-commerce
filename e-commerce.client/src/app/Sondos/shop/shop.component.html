@@ -40,6 +40,11 @@
         <div class="col-lg-4 d-flex">
           <input type="text" class="form-control" placeholder="Search for products..."
                  [(ngModel)]="searchText" (input)="filterProducts()">
+          <input type="text" [(ngModel)]="searchQuery" placeholder="ابحث هنا..." />
+          <button (click)="startVoiceSearch()" class="mic-button btn-primary" >
+            <i class="fa fa-microphone"></i>
+          </button>
+
         </div>
 
         <div class="col-lg-3 d-flex">
@@ -60,8 +65,8 @@
         <div class="col-xl-3 col-lg-4 col-sm-6" *ngFor="let product of filteredProducts">
           <div class="axil-product product-style-one has-color-pick mt--40">
             <div class="thumbnail">
-              <a href="single-product.html">
-                <img [src]="product.img" alt="{{ product.name }}">
+              <a routerLink="/productDetails/{{ product.id }}">
+                <img [src]="product.img" style="height: 250px; " alt="{{ product.name }}">
               </a>
               <div class="label-block label-right" *ngIf="product.discount > 0 ">
                 <div class="product-badget">{{ product.discount }}% OFF</div>
@@ -70,9 +75,11 @@
                 <ul class="cart-action">
                   <li class="select-option">
                     <button (click)="addToCart(product)">Add to Cart</button>
+
+
                   </li>
                   <li class="quickview">
-                    <a routerLink="/Jana/productDetails/{{ product.id }}">
+                    <a routerLink="/productDetails/{{ product.id }}">
                       <i class="far fa-eye"></i>
                     </a>
                   </li>

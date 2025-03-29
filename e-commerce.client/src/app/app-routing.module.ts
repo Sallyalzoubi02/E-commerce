@@ -28,17 +28,13 @@ import { ResetpasswordComponent } from './Sally/resetpassword/resetpassword.comp
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'cart', component: CartComponent },
- 
   { path: 'profile', component: ProfileComponent },
   { path: 'contactUs', component: ContactUsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'resetPassword', component: ResetpasswordComponent },
-
   { path: '', pathMatch: 'full', redirectTo: '/home' },
-
   { path: "about", component: AboutComponent },
-
   {
     path: "dashboard", component: DashboardComponent, children: [
 
@@ -62,16 +58,9 @@ const routes: Routes = [
 
     ]
   },
-
-
   { path: '', pathMatch: 'full', redirectTo: '/home' },
   {path:"shop" , component:ShopComponent},
   { path: 'productDetails/:id', component: ProductDetailsComponent },
-  
-   
-     
-
- 
 ];
 
 @NgModule({

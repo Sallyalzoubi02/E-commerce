@@ -1,7 +1,7 @@
 
 
 
-<div class="row justify-content-center">
+<div class="d-flex justify-content-center align-items-center vh-100">
   <div class="col-md-6">
 
     <form #voucher="ngForm" (ngSubmit)="addVoucherForUser(voucher.value)" class="bg-dark text-white p-4 rounded">
@@ -35,7 +35,10 @@
         <input type="text" class="form-control" name="discount" ngModel>
       </div>
 
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-success">Submit</button>
+      <br /><br />
+      <a routerLink="/dashboard/users"><button class="btn btn-primary">Cancel</button> </a>
+
 
     </form>
 

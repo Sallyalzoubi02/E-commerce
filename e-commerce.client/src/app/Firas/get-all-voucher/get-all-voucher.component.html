@@ -1,36 +1,46 @@
-<p>get-all-voucher works!</p>
-<a routerLink="/dashboard/addVoucher" class="btn btn-primary">Add new Voucher</a>
-
-<table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">description</th>
-      <th scope="col">states</th>
-      <th scope="col">userId</th>
-      <th scope="col">discount %</th>
-      <th scope="col">Action</th>
 
 
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of allVoucher, let i = index">
-      <th scope="row">{{i+1}}</th>
-      <td>{{item.name}}</td>
-      <td>{{item.description}}</td>
-      <td>{{item.states}}</td>
-      <td>{{item.userId}}</td>
-      <td>{{item.discount}}%</td>
-      <td>
 
-        <button (click)="editVoucher(item.id)" class="btn btn-primary">Edit</button>
-        <button (click)="deleteVoucher(item.id)" class="btn btn-danger">Delete</button>
-      </td>
+<div class="card mb-3" style=" margin: 19px">
+  <div class="card-header">
+    <i class="fa fa-table" style="margin-right:10px;"> </i> <p>Our Voucher</p>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">description</th>
+            <th scope="col">states</th>
+            <th scope="col">userId</th>
+            <th scope="col">discount %</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of allVoucher, let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{item.name}}</td>
+            <td>{{item.description}}</td>
+            <td>{{item.states}}</td>
+            <td>{{item.userId}}</td>
+            <td>{{item.discount}}%</td>
+            <td>
+              <button (click)="editVoucher(item.id)" class="btn btn-primary">Edit</button>
+            </td>
+            <td>
+              <button (click)="deleteVoucher(item.id)" class="btn btn-danger">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card-footer small text-muted">
+    <a routerLink="/dashboard/addVoucher" class="btn btn-success">Add new Voucher</a>
 
-
-    </tr>
-
-  </tbody>
-</table>
+  </div>
+</div>

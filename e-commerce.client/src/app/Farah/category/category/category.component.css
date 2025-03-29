@@ -1,0 +1,6 @@
+.description-cell {
+  white-space: normal; /* يسمح بتفصيل النص في السطر التالي */
+  word-wrap: break-word; /* يكسّر الكلمات الكبيرة لتناسب العرض */
+  max-width: 300px; /* تحديد أقصى عرض للعمود لمنع التداخل */
+  overflow: hidden; /* إخفاء أي نص زائد عن الحد */
+}

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VoucherService } from '../CartPaymentServices/voucher.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-edit-voucher',
@@ -20,9 +21,23 @@ export class EditVoucherComponent implements OnInit {
     });
   }
 
+  //updateVoucher() {
+  //  this._ser.updateVoucher(this.voucher.id, this.voucher).subscribe(() => {
+  //    alert("Updated Successfilly")
+  //    this.router.navigate(['/dashboard/voucher']);
+  //  });
+  //}
+
   updateVoucher() {
     this._ser.updateVoucher(this.voucher.id, this.voucher).subscribe(() => {
-      this.router.navigate(['/dashboard/voucher']);
+      Swal.fire({
+        title: "Success!",
+        text: "Voucher updated successfully.",
+        icon: "success",
+        confirmButtonText: "OK"
+      }).then(() => {
+        this.router.navigate(['/dashboard/voucher']);
+      });
     });
   }
 }

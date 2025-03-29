@@ -70,40 +70,78 @@ export class ShopComponent implements OnInit {
     });
   }
 
+  // ✅ عند الضغط على "Add to Cart"
   addToCart(product: any) {
-    this.selectedproduct = product; // حفظ البرودكت الذي تم اختياره
+    this.selectedproduct = product; // حفظ المنتج المحدد
     if (!this.userId) {
       console.error("User ID is undefined. Ensure getUserCartId() is called before addToCart.");
       return;
     }
 
     if (!this.cartId) {
+      // إنشاء سلة جديدة إذا لم تكن موجودة
       this.shopService.createCart(this.userId).subscribe({
         next: (newCart: any) => {
           this.cartId = newCart.id;
           console.log("New cart created with ID:", this.cartId);
-          this.addNewProductToCart();  // إضافة المنتج بعد إنشاء السلة
+          this.checkAndAddProduct(); // بعد إنشاء السلة، التحقق من وجود المنتج ثم إضافته
         },
         error: (err) => {
           console.error('Error creating cart:', err);
         }
       });
     } else {
-      this.addNewProductToCart();  // إذا كانت السلة موجودة، أضف المنتج إليها
+      this.checkAndAddProduct(); // إذا كانت السلة موجودة، تحقق وأضف المنتج
     }
   }
+
+  // ✅ التأكد مما إذا كان المنتج موجودًا في السلة قبل الإضافة
+  checkAndAddProduct() {
+    if (!this.cartId || !this.selectedproduct) {
+      console.error("Cart ID or selected product is missing.");
+      return;
+    }
+
+    // جلب المنتجات الموجودة في السلة
+    this.shopService.getCartItemsByCartId(this.cartId).subscribe({
+      next: (cartItems: any[]) => {
+        // البحث عن المنتج داخل السلة
+        const existingItem = cartItems.find(item => item.ProductId === this.selectedproduct.id);
+
+        if (existingItem) {
+          // المنتج موجود مسبقًا، زيادة الكمية فقط
+          const updatedCartItem = {
+            ...existingItem,
+            quantity: existingItem.quantity + 1 // زيادة الكمية بواحد
+          };
+
+          this.updateCartItem(existingItem.id, updatedCartItem);
+        } else {
+          // المنتج غير موجود، أضفه للسلة
+          this.addNewProductToCart();
+        }
+      },
+      error: (err) => {
+        console.error("Failed to fetch cart items:", err);
+        // في حالة وجود خطأ، أضف المنتج مباشرةً
+        this.addNewProductToCart();
+      }
+    });
+  }
+
+  // ✅ إضافة منتج جديد للسلة
   addNewProductToCart() {
     if (!this.selectedproduct) {
       console.error("Selected product is undefined or null.");
-      return; // أوقف تنفيذ الكود إذا كانت selectedproduct غير معرفة
+      return;
     }
 
     const cartItem = {
       productName: this.selectedproduct.name,
       productPrice: this.selectedproduct.price,
-      quantity: this.quantity,
+      quantity: 1, // بدء الكمية من 1
       cartId: this.cartId,
-      ProductId: this.selectedproduct.id // استخدام الـ ID هنا
+      ProductId: this.selectedproduct.id
     };
 
     this.shopService.addProductToCart(cartItem).subscribe({
@@ -127,7 +165,7 @@ export class ShopComponent implements OnInit {
     });
   }
 
-
+  // ✅ تحديث الكمية إذا كان المنتج موجودًا في السلة
   updateCartItem(cartItemId: number, updatedCartItem: any) {
     this.shopService.updateCartItem(cartItemId, updatedCartItem).subscribe({
       next: (response) => {
@@ -149,9 +187,6 @@ export class ShopComponent implements OnInit {
       }
     });
   }
-
- 
-
 
   startVoiceSearch() {
     const recognition = new (window as any).webkitSpeechRecognition(); // التأكد من دعم المتصفح

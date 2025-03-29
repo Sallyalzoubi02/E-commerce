@@ -91,17 +91,24 @@ export class MyServiceService {
     );
   }
 
+
+
+  //---------------------------------cart count----------------------------------
+
+  private cartItemsCount = new BehaviorSubject<number>(0);
+  cartItemsCount$ = this.cartItemsCount.asObservable();
+
+
   getCartItemsCount(): Observable<number> {
     return this.currentlogged.pipe(
       switchMap(userID => {
-        if (userID === "-1") {
-          return of(0); // إذا كان لا يوجد مستخدم مسجل، يتم إرجاع عدد العناصر 0
-        }
+        
 
         // أولًا، نطلب الـ cartId بناءً على userID من الـ API الأول
         return this._url.get<any[]>(`https://67e2be6a97fc65f53537692b.mockapi.io/Artify/cart?userId=${userID}`).pipe(
           switchMap(cartItems => {
             if (cartItems.length === 0) {
+              this.cartItemsCount.next(0);
               return of(0); // إذا لم تكن هناك عناصر تتوافق مع الـ userID
             }
 
@@ -111,8 +118,9 @@ export class MyServiceService {
             return this._url.get<any[]>(`https://67d3448f8bca322cc269b2a9.mockapi.io/Carditem?cartId=${cartId}`).pipe(
               map(items => {
                 // فلترة العناصر بحيث نأخذ فقط العناصر التي تحمل cartId المطلوب
-                const filteredItems = items.filter(item => item.cartId == cartId);
-                return filteredItems.length; // إرجاع عدد العناصر التي تحمل cartId المطلوب
+                const itemCount = items.filter(item => item.cartId == cartId).length;
+                this.cartItemsCount.next(itemCount); // تحديث العدد في الـ BehaviorSubject
+                return itemCount; // إرجاع عدد العناصر التي تحمل cartId المطلوب
               }) // إرجاع عدد العناصر التي تحتوي على cartId معين
             );
           })
@@ -120,6 +128,4 @@ export class MyServiceService {
       })
     );
   }
-
-
 }

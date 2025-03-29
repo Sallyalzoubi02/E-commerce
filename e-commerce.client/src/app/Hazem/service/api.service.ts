@@ -17,7 +17,7 @@ export class ApiService {
     return this._url.get<any[]>('https://67d293bd90e0670699be292f.mockapi.io/product');
   }
 
-
+  
   
 
 }

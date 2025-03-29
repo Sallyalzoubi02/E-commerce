@@ -1,47 +1,78 @@
 <div>
-
-
   <div class="row">
     <div class="col-xl-4 col-lg-6">
-      <div class="axil-signin-banner bg_image bg_image--10">
-      </div>
+      <div class="axil-signin-banner bg_image bg_image--10"></div>
     </div>
     <div class="col-lg-6 offset-xl-2">
       <div class="d-flex p-5">
         <div class="axil-signin-form">
           <h3 class="title">I'm New Here</h3>
           <p class="b2 mb--55">Enter your details below</p>
+
           <form (ngSubmit)="registerUser(userForm.value)" #userForm="ngForm">
+            <!-- Name -->
             <div class="form-group">
               <label>User Name</label>
               <input type="text" class="form-control" name="name" ngModel required>
+              <small *ngIf="userForm.controls['name']?.invalid && userForm.controls['name']?.touched" class="text-danger">
+                Name is required.
+              </small>
             </div>
+
+            <!-- Email -->
             <div class="form-group">
               <label>Email</label>
               <input type="email" class="form-control" name="email" ngModel required>
+              <small *ngIf="userForm.controls['email']?.invalid && userForm.controls['email']?.touched" class="text-danger">
+                Please enter a valid email.
+              </small>
             </div>
+
+            <!-- Phone -->
             <div class="form-group">
               <label>Phone</label>
-              <input type="tel" class="form-control" name="phone" ngModel required>
+              <input type="tel" class="form-control" name="phone" ngModel required pattern="^[0-9]{10,15}$">
+              <small *ngIf="userForm.controls['phone']?.invalid && userForm.controls['phone']?.touched" class="text-danger">
+                Phone number should be between 10-15 digits.
+              </small>
             </div>
+
+            <!-- Password -->
             <div class="form-group">
               <label>Password</label>
               <input type="password" class="form-control" name="password" ngModel required minlength="6">
+              <small *ngIf="userForm.controls['password']?.invalid && userForm.controls['password']?.touched" class="text-danger">
+                Password must be at least 6 characters.
+              </small>
             </div>
+
+            <!-- Address -->
             <div class="form-group">
               <label>Address (Optional)</label>
               <input type="text" class="form-control" name="address" ngModel>
             </div>
+
+            <!-- Image Upload -->
             <div class="form-group">
-              <label>Image URL (Optional)</label>
-              <input type="text" class="form-control" name="image" ngModel>
+              <label>Image (Optional)</label>
+              <input type="file" class="form-control" (change)="onFileSelected($event)">
+              <img *ngIf="imagePreview" [src]="imagePreview" class="img-thumbnail mt-2" width="100">
             </div>
+
+            <!-- Payment Info -->
             <div class="form-group">
               <label>Payment Info (Optional)</label>
-              <input type="text" class="form-control" name="payment" ngModel>
+              <select class="form-control" name="payment" ngModel>
+                <option value="orangeMoney">Orange Money</option>
+                <option value="credit">Credit</option>
+              </select>
             </div>
+
+            <!-- Submit Button -->
             <div class="form-group">
-              <button type="submit" class="axil-btn btn-bg-primary submit-btn">Create Account</button>
+              <button type="submit" class="axil-btn btn-bg-primary submit-btn" [disabled]="userForm.invalid">
+                Create Account
+              </button>
             </div>
           </form>
         </div>

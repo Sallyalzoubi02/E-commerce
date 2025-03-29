@@ -41,7 +41,7 @@
           <input type="text" class="form-control" placeholder="Search for products..."
                  [(ngModel)]="searchText" (input)="filterProducts()">
           <input type="text" [(ngModel)]="searchQuery" placeholder="ابحث هنا..." />
-          <button (click)="startVoiceSearch()" class="mic-button">
+          <button (click)="startVoiceSearch()" class="mic-button btn-primary" >
             <i class="fa fa-microphone"></i>
           </button>
 
@@ -65,7 +65,7 @@
         <div class="col-xl-3 col-lg-4 col-sm-6" *ngFor="let product of filteredProducts">
           <div class="axil-product product-style-one has-color-pick mt--40">
             <div class="thumbnail">
-              <a href="single-product.html">
+              <a routerLink="/productDetails/{{ product.id }}">
                 <img [src]="product.img" alt="{{ product.name }}">
               </a>
               <div class="label-block label-right" *ngIf="product.discount > 0 ">

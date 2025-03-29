@@ -10203,6 +10203,7 @@ body.open .closeMask {
       border-radius: 6px;
       width: 100%;
       transition: 0.3s;
+      height:250px;
     }
 
     .axil-product > .thumbnail > a .hover-img {
@@ -14508,7 +14509,7 @@ p {
     }
 
   .axil-signin-form .form-control {
-    height: 60px;
+    height: 45px;
     border-color: var(--color-light);
     padding: 0 30px;
     color: var(--color-body);
@@ -14773,7 +14774,7 @@ p {
 }
 
 .axil-dashboard-account .form-group .form-control {
-  height: 60px;
+  height: 45px;
   padding: 10px 30px;
   border-color: var(--color-light);
   color: var(--color-body);
@@ -15414,12 +15415,16 @@ p {
 
 .form-group label {
   position: absolute;
-  top: -11px;
+  top: -15px;
   left: 20px;
   pointer-events: none;
   z-index: 4;
-  background: #fff;
+  background: #ffffff00;
   padding: 0 10px;
+}
+
+.form-control{
+    height: 45px !important;
 }
 
 @media only screen and (max-width: 991px) {

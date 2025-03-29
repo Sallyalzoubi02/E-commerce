@@ -3,6 +3,8 @@ import { MyServiceService } from '../../Sally/my-service.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
@@ -77,11 +79,7 @@ export class PaymentComponent {
       if (cart) {
         this.cartId = cart.id;
         this.getProducts();
-      } else {
-
-        alert("No cart found!");
-
-      }
+      } 
     });
 
   }
@@ -168,7 +166,12 @@ export class PaymentComponent {
 
     this._ser.peymenta(dataForm).subscribe(() => {
 
-      alert("Payment done successfully!");
+      Swal.fire({
+        title: 'Success!',
+        text: 'Payment done successfully!',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
 
     });
 
@@ -176,22 +179,32 @@ export class PaymentComponent {
 
 
   }
- 
-  deleteCartItems() {
 
-    alert("Are you sure you want to delete all cart items?");
-    this.cartItems.forEach(item => {
-      const itemId: number = item.id;
+deleteCartItems() {
+  Swal.fire({
+    title: 'Are you sure?',
+    text: 'Do you really want to delete all cart items?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes, delete!',
+    cancelButtonText: 'No, keep them'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      this.cartItems.forEach(item => {
+        const itemId: number = item.id;
 
-      this._ser.deleteCartItem(itemId).subscribe({
+        this._ser.deleteCartItem(itemId).subscribe(() => {
+          Swal.fire('Deleted!', `Cart item with ID ${itemId} has been removed.`, 'success');
+        });
 
       });
-      alert("Cart item deleted successfully! with id " + itemId);
 
-    });
-    this._router.navigate(['/home']);
+      // إعادة التوجيه بعد حذف جميع العناصر
+      this._router.navigate(['/home']);
+    }
+  });
+}
 
-  }
   async createOrder(data: any) {
   const now: Date = new Date();
   data.date = now;
@@ -214,10 +227,22 @@ export class PaymentComponent {
       this.createOrderItem(neworderItem);
     }
 
-    alert("Order done successfully!");
+    Swal.fire({
+      title: 'Success!',
+      text: 'oreder done successfully!',
+      icon: 'success',
+      confirmButtonText: 'OK'
+    });
   } catch (error) {
     console.error("Error creating order:", error);
-    alert("Failed to create order.");
+
+    Swal.fire({
+      title: 'Error!',
+      text: 'Failed to create order.',
+      icon: 'error',
+      confirmButtonText: 'OK'
+    });
+
   }
 }
   orderId: any;
@@ -267,7 +292,6 @@ export class PaymentComponent {
 
       this._ser.CreateOrderItem(data).subscribe(() => {
 
-      alert("OrderItem done successfully!")
     });
   }
 

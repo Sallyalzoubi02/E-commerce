@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { MyServiceService } from '../my-service.service';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-contact-us',
@@ -15,13 +17,24 @@ export class ContactUsComponent {
     this._ser.addFeedback(this.formData).subscribe(
       response => {
         console.log('Message sent successfully:', response);
-        alert('Your message has been sent!');
+        Swal.fire({
+          title: 'Success!',
+          text: 'Your message has been sent!',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
       },
       error => {
         console.error('Error sending message:', error);
-        alert('Failed to send message. Please try again.');
+        Swal.fire({
+          title: 'Error!',
+          text: 'Failed to send message. Please try again.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
       }
     );
   }
+
 
 }

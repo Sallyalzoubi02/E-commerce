@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../service/api.service';
+import { ServService } from '../../Sondos/api/serv.service';
 
 @Component({
   selector: 'app-home',
@@ -7,10 +8,11 @@ import { ApiService } from '../service/api.service';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  constructor(private _serv: ApiService) { }
+  constructor(private _serv: ApiService, private sondosSer: ServService) { }
 
   ngOnInit() {
     this.getcat()
+    this.getPro();
   }
   data: any
   getcat() {
@@ -18,7 +20,12 @@ export class HomeComponent {
       this.data = data
     })
   }
-
+  products: any;
+  getPro() {
+    this.sondosSer.getProducts().subscribe((data) => {
+      this.products = data
+    })
+  }
   filteredProducts: any[] = [];
 
   filterProducts(Id:any) {
@@ -31,5 +38,9 @@ export class HomeComponent {
     });
   }
 
+
+  getRatingArray(rating: number): number[] {
+    return Array(rating).fill(0);
+  }
 
 }

@@ -29,39 +29,51 @@
     <div class="container">
       <!-- Filters Row -->
       <div class="row align-items-center mb-4">
+        <!-- الفئة (اليسار) -->
         <div class="col-lg-3">
-          <label for="categoryFilter">Category:</label>
-          <select id="categoryFilter" class="form-select" [(ngModel)]="selectedCategory" (change)="filterProducts()">
+          <select id="categoryFilter" class="form-select" [(ngModel)]="selectedCategory"
+                  (change)="filterProducts()" style=" height: 40px!important; margin-right: 15px; font-size: medium; width: 233px;">
             <option value="All">All Categories</option>
             <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
           </select>
         </div>
 
-        <div class="col-lg-4 d-flex">
+        <!-- البحث (في المنتصف) -->
+        <div class="col-lg-5 d-flex justify-content-center">
           <input type="text" class="form-control" placeholder="Search for products..."
-                 [(ngModel)]="searchText" (input)="filterProducts()">
+                 [(ngModel)]="searchText" (input)="filterProducts()" style=" width: 194px; margin-left: 78px !important; border-radius: 17px;">
+          <button (click)="startVoiceSearch()" class="mic-button btn-primary"
+                  style="width: 42px; height: 40px; border-radius: 20px; margin-left: 10px;">
+            <i class="fa fa-microphone"></i>
+          </button>
         </div>
 
-        <div class="col-lg-3 d-flex">
-          <label for="minPrice">Price Range:</label>
-          <div class="d-flex">
-            <input type="number" id="minPrice" [(ngModel)]="minPrice" class="form-control me-2" placeholder="Min">
-            <input type="number" id="maxPrice" [(ngModel)]="maxPrice" class="form-control" placeholder="Max">
+        <!-- السعر + الفلتر (اليمين) -->
+        <div class="col-lg-4 d-flex justify-content-end">
+          <div style="margin-right: 10px;">
+            <label for="minPrice">Price Range:</label>
+            <div class="d-flex">
+              <input type="number" id="minPrice" [(ngModel)]="minPrice" class="form-control me-2"
+                     placeholder="Min" style="width: 80px; height: 36px;">
+              <input type="number" id="maxPrice" [(ngModel)]="maxPrice" class="form-control"
+                     placeholder="Max" style="width: 80px; padding: 0px; height: 36px;">
+            </div>
           </div>
-        </div>
-
-        <div class="col-lg-2">
-          <button class="btn btn-primary w-100" (click)="filterProducts()">Filter</button>
+          <button class="btn btn-primary" (click)="filterProducts()"
+                  style="width: 42px; height: 40px; border-radius: 20px; margin-top: 26px;">
+            Filter
+          </button>
         </div>
       </div>
+
 
       <!-- Products Grid -->
       <div class="row row--15">
         <div class="col-xl-3 col-lg-4 col-sm-6" *ngFor="let product of filteredProducts">
           <div class="axil-product product-style-one has-color-pick mt--40">
             <div class="thumbnail">
-              <a href="single-product.html">
-                <img [src]="product.img" alt="{{ product.name }}">
+              <a routerLink="/productDetails/{{ product.id }}">
+                <img [src]="product.img" style="height: 250px; " alt="{{ product.name }}">
               </a>
               <div class="label-block label-right" *ngIf="product.discount > 0 ">
                 <div class="product-badget">{{ product.discount }}% OFF</div>
@@ -70,9 +82,11 @@
                 <ul class="cart-action">
                   <li class="select-option">
                     <button (click)="addToCart(product)">Add to Cart</button>
+
+
                   </li>
                   <li class="quickview">
-                    <a routerLink="/Jana/productDetails/{{ product.id }}">
+                    <a routerLink="/productDetails/{{ product.id }}">
                       <i class="far fa-eye"></i>
                     </a>
                   </li>

@@ -1,5 +1,7 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { ServService } from '../api/serv.service';
+import { MyServiceService } from '../../Sally/my-service.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-shop',
@@ -15,25 +17,142 @@ export class ShopComponent implements OnInit {
   maxPrice: number = 1000;
   searchText: string = '';
   currentUser: any;
-  cartId: number | null = null;
+  quantity: number = 1;
+  productId!: string;
   searchQuery: string = '';
+  cartId: any;
+  userId: any;
+  selectedproduct: any;
 
-
-
-  constructor(private shopService: ServService , private ngZone: NgZone) { }
+  constructor(private shopService: ServService, private ngZone: NgZone, private _serv: MyServiceService) { }
 
   ngOnInit(): void {
     this.shopService.getCategories().subscribe(data => {
       this.categories = data;
     });
+    this.getUserCartId();
 
     this.shopService.getProducts().subscribe(data => {
       this.products = data;
       this.filteredProducts = [...this.products];
     });
-
-    this.fetchCurrentUser();
   }
+
+  getUserCartId() {
+    this._serv.currentlogged.subscribe((id) => {
+      this.userId = id;
+      if (this.userId) {
+        this.shopService.getCartIdByUser(this.userId).subscribe({
+          next: (cartData: any[]) => {
+            if (cartData.length > 0) {
+              this.cartId = cartData[0].id;
+            } else {
+              this.createCart();
+            }
+          },
+          error: (err) => console.error('Error fetching cart ID:', err)
+        });
+      }
+    });
+  }
+
+  createCart() {
+    if (!this.userId) {
+      console.error("User ID is not available");
+      return;
+    }
+    this.shopService.createCart(this.userId).subscribe({
+      next: (newCart: any) => {
+        this.cartId = newCart.id;
+        console.log("New cart created with ID:", this.cartId);
+      },
+      error: (err) => console.error('Error creating cart:', err)
+    });
+  }
+
+  addToCart(product: any) {
+    this.selectedproduct = product; // حفظ البرودكت الذي تم اختياره
+    if (!this.userId) {
+      console.error("User ID is undefined. Ensure getUserCartId() is called before addToCart.");
+      return;
+    }
+
+    if (!this.cartId) {
+      this.shopService.createCart(this.userId).subscribe({
+        next: (newCart: any) => {
+          this.cartId = newCart.id;
+          console.log("New cart created with ID:", this.cartId);
+          this.addNewProductToCart();  // إضافة المنتج بعد إنشاء السلة
+        },
+        error: (err) => {
+          console.error('Error creating cart:', err);
+        }
+      });
+    } else {
+      this.addNewProductToCart();  // إذا كانت السلة موجودة، أضف المنتج إليها
+    }
+  }
+  addNewProductToCart() {
+    if (!this.selectedproduct) {
+      console.error("Selected product is undefined or null.");
+      return; // أوقف تنفيذ الكود إذا كانت selectedproduct غير معرفة
+    }
+
+    const cartItem = {
+      productName: this.selectedproduct.name,
+      productPrice: this.selectedproduct.price,
+      quantity: this.quantity,
+      cartId: this.cartId,
+      ProductId: this.selectedproduct.id // استخدام الـ ID هنا
+    };
+
+    this.shopService.addProductToCart(cartItem).subscribe({
+      next: (response) => {
+        console.log("Product added to cart:", response);
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: 'Product added to cart successfully!',
+          showConfirmButton: false,
+          timer: 2000
+        });
+      },
+      error: () => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'Failed to add product to cart!',
+        });
+      }
+    });
+  }
+
+
+  updateCartItem(cartItemId: number, updatedCartItem: any) {
+    this.shopService.updateCartItem(cartItemId, updatedCartItem).subscribe({
+      next: (response) => {
+        console.log("Product quantity updated in cart:", response);
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: 'Product quantity updated successfully!',
+          showConfirmButton: false,
+          timer: 2000
+        });
+      },
+      error: () => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'Failed to update product quantity!',
+        });
+      }
+    });
+  }
+
+ 
+
+
   startVoiceSearch() {
     const recognition = new (window as any).webkitSpeechRecognition(); // التأكد من دعم المتصفح
     recognition.lang = 'ar-SA,en-US'; // تغيير اللغة إذا لزم الأمر
@@ -57,44 +176,6 @@ export class ShopComponent implements OnInit {
       const matchesPrice = product.price >= this.minPrice && product.price <= this.maxPrice;
       const matchesSearch = product.name.toLowerCase().includes(this.searchText.toLowerCase());
       return matchesCategory && matchesPrice && matchesSearch;
-    });
-  }
-
-  fetchCurrentUser() {
-    this.shopService.getUsers().subscribe(users => {
-      this.currentUser = users[0];
-      this.fetchUserCart();
-    });
-  }
-
-  fetchUserCart() {
-    this.shopService.getCart().subscribe(carts => {
-      let userCart = carts.find(cart => cart.userId == this.currentUser.id);
-      if (userCart) {
-        this.cartId = userCart.id;
-      } else {
-        this.createCart();
-      }
-    });
-  }
-
-  createCart() {
-    this.shopService.createCart(this.currentUser.id).subscribe(cart => {
-      console.log(cart); 
-      //this.cartId = cart.id; 
-    });
-  }
-
-
-  addToCart(product: any) {
-    if (!this.cartId) {
-      console.error("No cart found for the user!");
-      return;
-    }
-
-    this.shopService.addToCart(this.cartId, product).subscribe(response => {
-      console.log("Product added to cart:", response);
-      alert("Product added to cart successfully!");
     });
   }
 }

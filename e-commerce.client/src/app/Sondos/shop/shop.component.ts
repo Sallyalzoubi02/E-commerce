@@ -189,21 +189,73 @@ export class ShopComponent implements OnInit {
   }
 
   startVoiceSearch() {
-    const recognition = new (window as any).webkitSpeechRecognition(); // التأكد من دعم المتصفح
-    recognition.lang = 'ar-SA,en-US'; // تغيير اللغة إذا لزم الأمر
+    if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: 'Voice recognition is not supported in this browser!',
+      });
+      return;
+    }
+
+    const recognition = new (window as any).webkitSpeechRecognition() || new (window as any).SpeechRecognition();
+    recognition.lang = 'en-US'; // أو '' حسب الحاجة
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
     recognition.start();
+
+    recognition.onstart = () => {
+      console.log('🎤 Voice recognition started...');
+    };
 
     recognition.onresult = (event: any) => {
       this.ngZone.run(() => {
-        this.searchQuery = event.results[0][0].transcript; // استخراج النص المحوّل
-        console.log('تم التعرف على: ', this.searchQuery);
+        this.searchText = event.results[0][0].transcript.trim(); // البحث الصوتي يدخل في نفس `searchText`
+        console.log('تم التعرف على: ', this.searchText);
+        this.filterProducts(); // تحديث البحث تلقائيًا بعد التعرف على الصوت
       });
     };
 
     recognition.onerror = (event: any) => {
-      console.error('خطأ في التعرف على الصوت:', event.error);
+      console.error('Speech Recognition Error:', event.error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: `Voice recognition failed: ${event.error}`,
+      });
     };
   }
+
+
+  // 🔍 البحث عن المنتجات باستخدام API بعد التعرف على الصوت
+  searchProductsByVoice(query: string) {
+    this.shopService.getProducts().subscribe({
+      next: (products: any[]) => {
+        this.filteredProducts = products.filter(product =>
+          product.name.toLowerCase().includes(query.toLowerCase())
+        );
+
+        if (this.filteredProducts.length === 0) {
+          Swal.fire({
+            icon: 'info',
+            title: 'No Results!',
+            text: 'No matching products found.',
+          });
+        } else {
+          console.log('🔍 المنتجات المطابقة:', this.filteredProducts);
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching products:', err);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'Failed to fetch products.',
+        });
+      }
+    });
+  }
+
 
   filterProducts() {
     this.filteredProducts = this.products.filter(product => {

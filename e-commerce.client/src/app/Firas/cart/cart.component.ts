@@ -38,11 +38,11 @@ export class CartComponent implements OnChanges {
 
   ngOnInit() {
 
-    this.getCartId();
-    this.bill();
+    
 
     this._serv.currentlogged.subscribe((id) => this.userId = id)
-    
+    this.getCartId();
+    this.bill();
   }
 
 

@@ -91,7 +91,9 @@ export class MyServiceService {
     );
   }
 
-
+  updateCartCount(count: number) {
+    this.cartItemsCount.next(count);
+  }
 
   //---------------------------------cart count----------------------------------
 

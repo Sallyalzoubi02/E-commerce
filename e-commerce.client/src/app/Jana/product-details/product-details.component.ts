@@ -23,7 +23,7 @@ export class ProductDetailsComponent {
   productUrl: string = "";
   cartId: any;
   userId: any;
-
+  cartItemsCount: any;
   constructor(private serv: ServiceService, private active: ActivatedRoute, private _serv: MyServiceService) { }
 
   ngOnInit() {
@@ -35,7 +35,9 @@ export class ProductDetailsComponent {
 
     this.getUserCartId();
 
-
+    this._serv.getCartItemsCount().subscribe(count => {
+      this.cartItemsCount = count;
+    });
      }
    
   viewProductDetails() {
@@ -250,6 +252,7 @@ export class ProductDetailsComponent {
         });
       }
     });
+    this._serv.updateCartCount(this.cartItemsCount + 1); 
   }
   //addProductToCart() {
   //  const cartItem = {

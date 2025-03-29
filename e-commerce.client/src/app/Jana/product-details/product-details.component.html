@@ -10,7 +10,7 @@
                 <div class="single-product-thumbnail product-large-thumbnail-3 axil-product">
                   <div class="thumbnail">
                     <a href="assets/images/product/product-big-01.png" class="popup-zoom">
-                      <img [src]="selectedproduct.img" alt="Product Images">
+                      <img [src]="selectedproduct.img" alt="Product Images" style="height:80vh">
                     </a>
                   </div>
                   
@@ -25,15 +25,16 @@
           <div class="single-product-content">
             <div class="inner">
               <h2 class="product-title">{{selectedproduct.name}}</h2>
-              <span class="price-amount">{{selectedproduct.price}} JD </span>
+              <!--<span class="price-amount">{{selectedproduct.price}} JD </span>-->
+              <h3 class="price current-price" 
+                  [ngClass]="{'text-danger': selectedproduct.discount > 0, 'text-dark': selectedproduct.discount <= 0}">
+                {{ selectedproduct.price - (selectedproduct.price * (+selectedproduct.discount) / 100) | number:'1.2-2' }} JD
+              </h3>
+              <h3 class="price old-price" *ngIf="selectedproduct.discount > 0" style="text-decoration:line-through;color:darkgrey">
+                {{ selectedproduct.price | number:'1.2-2' }} JD
+              </h3>
               <div class="product-rating">
-                <!--<div class="star-rating">
-      <i class="fas fa-star"></i>
-      <i class="fas fa-star"></i>
-      <i class="fas fa-star"></i>
-      <i class="fas fa-star"></i>
-      <i class="far fa-star"></i>
-    </div>-->
+       
                 <div class="star-rating">
                   <ng-container *ngFor="let star of getStarsArray(selectedproduct.rating)">
                     <i class="{{ star }}"></i>
@@ -49,17 +50,19 @@
               <div class="product-action-wrapper d-flex-center">
                 <!-- Start Quentity Action  -->
                 <!--<div class="pro-qty"><input type="text" value="1"></div>-->
-                <div class="quantity-controls" style="display:flex;">
+                <div class="quantity-controls col-md-2" style="display:flex; ">
                   <button (click)="decreaseQuantity()">-</button>
                   <span>{{ quantity }}</span>
                   <button (click)="increaseQuantity()">+</button>
                 </div>
                 <!-- End Quentity Action  -->
                 <!-- Start Product Action  -->
-                <ul class="product-action d-flex-center mb--0">
-                  <button (click)="addToCart()" class="btn btn-primary" style="height:100%;width:100%">Add to Cart</button>
-                 
-                </ul>
+                <div class="col-md-6">
+                  <ul class="product-action d-flex-center mb--0">
+                    <button (click)="addToCart()" class="btn btn-primary">Add to Cart</button>
+
+                  </ul>
+                </div>
                 <!-- End Product Action  -->
 
               </div>

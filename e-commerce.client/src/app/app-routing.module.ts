@@ -36,11 +36,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'resetPassword', component: ResetpasswordComponent },
-
   { path: '', pathMatch: 'full', redirectTo: '/home' },
-
   { path: "about", component: AboutComponent },
-
   {
     path: "dashboard", component: DashboardComponent, children: [
 
@@ -55,8 +52,8 @@ const routes: Routes = [
       { path: "editCategory/:id", component: EditCategoryComponent },
 
       { path: "product/:id", component: ProductComponent },
-      { path: "addProduct", component: AddProductComponent },
-      { path: "editProduct/:id", component: EditProductComponent },
+      { path: "addProduct/:id", component: AddProductComponent },
+      { path: "editProduct/:id/:categoryId", component: EditProductComponent },
 
       { path: "users", component: UsersComponent },
       { path: "feedback", component: FeedbackComponent },
@@ -64,16 +61,9 @@ const routes: Routes = [
 
     ]
   },
-
-
   { path: '', pathMatch: 'full', redirectTo: '/home' },
   {path:"shop" , component:ShopComponent},
-  { path: 'productDetails', component: ProductDetailsComponent },
-  
-   
-     
-
- 
+  { path: 'productDetails/:id', component: ProductDetailsComponent },
 ];
 
 @NgModule({

@@ -16,9 +16,13 @@ export class NavbarComponent {
     this._serv.currentlogged.subscribe(userID => {
       this.isLoggedIn = userID !== "-1";
 
-      this._serv.getCartItemsCount().subscribe(count => {
-        this.cartItemsCount = count;
-      });
+      // استدعاء تحديث الكارت فورًا بعد تسجيل الدخول
+      this._serv.getCartItemsCount().subscribe();
+    });
+
+    // اشتراك مباشر في `cartItemsCount$` لتحديث العدد تلقائيًا
+    this._serv.cartItemsCount$.subscribe(count => {
+      this.cartItemsCount = count;
     });
 
     this._serv.currentUserRole.subscribe(role => {

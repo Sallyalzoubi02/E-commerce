@@ -11,6 +11,8 @@ import Swal from 'sweetalert2';
 export class EditCategoryComponent {
   constructor(private _myser: FServiceService, private _active: ActivatedRoute, private _route: Router) { }
 
+  categoryData = { name: '', description: '', img: '' }; // بيانات التصنيف
+
   categoryId: any
   Category: any
   ngOnInit() {
@@ -32,7 +34,7 @@ export class EditCategoryComponent {
 
   editCategory(data: any) {
     this.categoryId = this._active.snapshot.paramMap.get("id");
-
+    data.img = this.Category.img;
     this._myser.updateCategory(this.categoryId, data).subscribe(() => {
       // Show success message using SweetAlert2
       Swal.fire({
@@ -54,4 +56,28 @@ export class EditCategoryComponent {
       });
     });
   }
+
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append('image', file);
+
+      const uploadUrl = "https://api.imgbb.com/1/upload?key=91efc811ffbbb4d425bbc5160541b07e";
+
+      fetch(uploadUrl, {
+        method: 'POST',
+        body: formData
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data && data.data && data.data.url) {
+            this.Category.img = data.data.url;  // تحديث رابط الصورة في Category
+          }
+        })
+        .catch(error => console.error('Error uploading image:', error));
+    }
+  }
+
 }

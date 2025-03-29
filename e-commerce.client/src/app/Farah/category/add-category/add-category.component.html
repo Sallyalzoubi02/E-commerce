@@ -1,27 +1,27 @@
-
-<div class="row justify-content-center">
+<div class="d-flex justify-content-center align-items-center vh-100">
   <div class="col-md-6">
- 
     <form #Category="ngForm" (ngSubmit)="addCategory(Category.value)" class="bg-dark text-white p-4 rounded">
       <h2 class="text-center mb-4" style="color:white">Add Category</h2><br />
+
       <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Name Of Category</label>
-        <input type="text" class="form-control" name="name" ngModel>
+        <label class="form-label">Name Of Category</label>
+        <input type="text" class="form-control" name="name" [(ngModel)]="categoryData.name" required>
       </div>
 
       <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Description Of Category</label>
-        <input type="text" class="form-control" name="description" ngModel>
+        <label class="form-label">Description Of Category</label>
+        <input type="text" class="form-control" name="description" [(ngModel)]="categoryData.description" required>
       </div>
 
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Image Of Category</label>
-        <input type="text" class="form-control" name="img" ngModel>
+        <label class="form-label">Image Of Category</label>
+        <input type="file" class="form-control" id="image" (change)="onFileSelected($event)" required>
+        <img *ngIf="categoryData.img" [src]="categoryData.img" class="img-thumbnail mt-2" width="100">
       </div>
 
-      <button type="submit" class="btn btn-primary">Submit</button>
-
+      <button type="submit" class="btn btn-success" [disabled]="!categoryData.img">Submit</button>
+      <br /><br />
+      <button class="btn btn-primary" type="button" (click)="cancel()">Cancel</button>
     </form>
-
   </div>
 </div>

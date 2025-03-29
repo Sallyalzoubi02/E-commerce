@@ -8,7 +8,31 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
+  imagePreview: string | null = null;
+
   constructor(private _serv: MyServiceService, private _route: Router) { }
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append('image', file);
+
+      const uploadUrl = `https://api.imgbb.com/1/upload?key=91efc811ffbbb4d425bbc5160541b07e`;
+
+      fetch(uploadUrl, {
+        method: 'POST',
+        body: formData
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data && data.data && data.data.url) {
+            this.imagePreview = data.data.url;
+          }
+        })
+        .catch(error => console.error('Error uploading image:', error));
+    }
+  }
 
   registerUser(user: any) {
     if (!user.name || !user.password || !user.email || !user.phone) {
@@ -21,7 +45,6 @@ export class RegisterComponent {
       return;
     }
 
-    // التحقق مما إذا كان البريد الإلكتروني موجودًا بالفعل
     this._serv.getUser().subscribe((data: any) => {
       let exists = data.find((x: any) => x.email == user.email);
 
@@ -30,10 +53,9 @@ export class RegisterComponent {
         return;
       }
 
-      // تعيين القيم الافتراضية إذا لم يتم إدخالها
-      user.address = user.address || "not determine";
-      user.image = user.image || "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png";
-      user.payment = user.payment || "not determine";
+      user.address = user.address || "Not specified";
+      user.image = this.imagePreview || "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png";
+      user.payment = user.payment || "Not specified";
 
       this._serv.registerUser(user).subscribe(() => {
         alert("User added successfully");

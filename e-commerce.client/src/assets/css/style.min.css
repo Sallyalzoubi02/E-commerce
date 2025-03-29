@@ -1178,7 +1178,7 @@ ol li a {
 }
 
 .bg_image--5 {
-  background-image: url("https://cdn.discordapp.com/attachments/1316482533172580363/1354734878016409610/OIP_1.jpg?ex=67e65eac&is=67e50d2c&hm=3a41a3479c2174bb85b9e1313c133e643b72076f12c3a890ccd2e0e10a862936&");
+  background-image: url("../images/bg/farah.jpg");
 }
 
 .bg_image--6 {
@@ -4229,20 +4229,20 @@ textarea {
   }
 
   .title-highlighter.highlighter-primary {
-    color: var(--light-primary);
+    color: var(--color-secondary);
   }
 
     .title-highlighter.highlighter-primary i {
-      background-color: var(--light-primary);
+      background-color: var(--color-secondary);
       color: var(--color-white);
     }
 
   .title-highlighter.highlighter-primary2 {
-    color: var(--color-primary);
+    color: var(--color-secondary);
   }
 
     .title-highlighter.highlighter-primary2 i {
-      background-color: var(--color-primary);
+      background-color: var(--color-secondary);
       color: var(--color-white);
     }
 
@@ -14508,7 +14508,7 @@ p {
     }
 
   .axil-signin-form .form-control {
-    height: 60px;
+    height: 45px;
     border-color: var(--color-light);
     padding: 0 30px;
     color: var(--color-body);
@@ -14773,7 +14773,7 @@ p {
 }
 
 .axil-dashboard-account .form-group .form-control {
-  height: 60px;
+  height: 45px;
   padding: 10px 30px;
   border-color: var(--color-light);
   color: var(--color-body);
@@ -15414,12 +15414,16 @@ p {
 
 .form-group label {
   position: absolute;
-  top: -11px;
+  top: -15px;
   left: 20px;
   pointer-events: none;
   z-index: 4;
-  background: #fff;
+  background: #ffffff00;
   padding: 0 10px;
+}
+
+.form-control{
+    height: 45px !important;
 }
 
 @media only screen and (max-width: 991px) {

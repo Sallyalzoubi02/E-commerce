@@ -1,20 +1,26 @@
 
-<div class="card-footer small text-muted"><a routerLink="/dashboard/addProduct" class="btn btn-success">Add Product</a></div>
+<div class="card-footer small text-muted"><a routerLink="/dashboard/addProduct/{{categoryID}}" class="btn btn-success" style="margin: 20px">Add Product</a></div>
+<div  >
+  <div class="product"  >
+    <div *ngFor="let product of Product">
+      <div class="card text-dark bg-light mb-3" style=" width: 250px; height: 550px;">
+        <img src="{{product.img}}" class="card-img-top" alt="img">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <h5 class="card-title">{{ product.rating }}</h5>
+          <p class="card-text">{{ product.price }}</p>
+          <p class="card-text">{{ product.discount }}</p>
+          <p class="card-text">
+            {{ product.description | slice:0:100 }}{{ product.description.length > 100 && !product.showFull ? '...' : '' }}
+          </p>
+          <button class="btn btn-link p-0" (click)="toggleDescription(product)">
+            {{ product.showFull ? 'Show Less' : 'Show More' }}
+          </button>
 
-<div class="product">
-  <div *ngFor="let product of Product">
-    <div class="card text-dark bg-light mb-3" style="width: 18rem;">
-      <img src="{{product.img}}" class="card-img-top" alt="img">
-      <div class="card-body">
-        <h5 class="card-title">{{ product.name }}</h5>
-        <h5 class="card-title">{{ product.rating }}</h5>
-        <p class="card-text">{{ product.price }}</p>
-        <p class="card-text">{{ product.description }}</p>
-        <p class="card-text">{{ product.discount }}</p>
+          <td><a routerLink="/dashboard/editProduct/{{product.id}}/{{categoryID}}" class="btn btn-primary">Edit Product</a></td>
+          <td><button class="btn btn-danger " (click)="DeletedProduct(product.id)">delete</button></td>
 
-        <td><a routerLink="/dashboard/editProduct/{{product.id}}" class="btn btn-primary">Edit Product</a></td>
-        <td><button class="btn btn-danger btn-sm" (click)="DeletedProduct(product.id)">delete</button></td>
-
+        </div>
       </div>
     </div>
   </div>

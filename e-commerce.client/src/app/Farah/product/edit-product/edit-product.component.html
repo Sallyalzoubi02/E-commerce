@@ -1,6 +1,6 @@
 
 
-<div class="row justify-content-center">
+<div  class="d-flex justify-content-center align-items-center vh-100" style=" margin-bottom: 79px; margin-top: 79px;">
   <div class="col-md-6">
 
     <form #edit="ngForm" (ngSubmit)="editProduct(edit.value)" class="bg-dark text-white p-4 rounded">
@@ -8,16 +8,16 @@
 
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Name Of Product</label>
-        <input type="text" class="form-control" name="name" ngModel [(ngModel)]="dataProduct.name">
+        <input type="text" style="font-size:10px;" class="form-control" name="name" ngModel [(ngModel)]="dataProduct.name">
       </div>
 
       <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Name Of Product</label>
+        <label for="exampleInputEmail1" class="form-label">Price Of Product</label>
         <input type="text" class="form-control" name="price" ngModel [(ngModel)]="dataProduct.price">
       </div>
 
       <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Name Of Product</label>
+        <label for="exampleInputEmail1" class="form-label">Rating Of Product</label>
         <input type="text" class="form-control" name="rating" ngModel [(ngModel)]="dataProduct.rating">
       </div>
 
@@ -35,8 +35,9 @@
       </div>
 
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Image Of Product</label>
-        <input type="text" class="form-control" name="img" ngModel [(ngModel)]="dataProduct.img">
+        <label class="form-label">Image Of Category</label>
+        <input type="file" class="form-control" id="image" (change)="onFileSelected($event)" required>
+        <img *ngIf="productData.img" [src]="productData.img" class="img-thumbnail mt-2" width="100">
       </div>
 
       <div class="mb-3">
@@ -44,8 +45,9 @@
         <input type="number" class="form-control" name="discount" ngModel ngModel [(ngModel)]="dataProduct.discount">
       </div>
 
-      <button type="submit" class="btn btn-primary">Submit</button>
-
+      <button type="submit" class="btn btn-success">Submit</button>
+      <br /><br />
+      <button class="btn btn-primary" (click)="goToProducts()">Cancel</button>
     </form>
 
   </div>

@@ -1,21 +1,30 @@
-<p>edit-voucher works!</p>
-<div class="container">
-  <h2>Edit Voucher</h2>
-  <form (ngSubmit)="updateVoucher()">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" [(ngModel)]="voucher.name" required>
 
-    <label for="description">Description:</label>
-    <input type="text" id="description" name="description" [(ngModel)]="voucher.description" required>
 
-    <label for="states">States:</label>
-    <select id="states" name="states" [(ngModel)]="voucher.states" required>
-      <option *ngFor="let state of states" [value]="state">{{ state }}</option>
-    </select>
-
-    <label for="discount">Discount:</label>
-    <input type="text" id="discount" name="discount" [(ngModel)]="voucher.discount" required>
-
-    <button type="submit">Update</button>
-  </form>
-</div>
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="col-md-6">
+    <form (ngSubmit)="updateVoucher()" class="bg-dark text-white p-4 rounded">
+      <h2 class="text-center mb-4" style="color:white">Edit Voucher</h2><br />
+      <div class="mb-3">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" [(ngModel)]="voucher.name" required>
+      </div>
+      <div class="mb-3">
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" [(ngModel)]="voucher.description" required>
+      </div>
+      <div class="mb-3">
+        <label for="states">States:</label>
+        <select id="states" name="states" [(ngModel)]="voucher.states" required class="form-select">
+          <option *ngFor="let state of states" [value]="state">{{ state }}</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="discount">Discount:</label>
+        <input type="text" id="discount" name="discount" [(ngModel)]="voucher.discount" required>
+      </div>
+      <button type="submit" class="btn btn-success">Update</button>
+      <br /><br />
+      <a routerLink="/dashboard/voucher"><button class="btn btn-primary">Cancel</button> </a>
+    </form>
+  </div>
+  </div>

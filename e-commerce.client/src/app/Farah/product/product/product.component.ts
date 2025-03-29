@@ -12,6 +12,8 @@ export class ProductComponent {
   constructor(private _myser: FServiceService, private _active: ActivatedRoute) { }
 
   ngOnInit() {
+
+    this.categoryID = this._active.snapshot.paramMap.get("id");
     this.getDataProduct()
   }
 
@@ -22,7 +24,8 @@ export class ProductComponent {
   getDataProduct() {
     this.categoryID = this._active.snapshot.paramMap.get("id");
     this._myser.getProduct().subscribe((data) => {
-      this.Product = data.filter((p: any) => p.categoryID == this.categoryID ) 
+      this.Product = data.filter((p: any) => p.categoryID == this.categoryID)
+        .map((p: any) => ({ ...p, showFull: false })); // إضافة متغير تحكم لكل منتج
     })
   }
 
@@ -55,5 +58,9 @@ export class ProductComponent {
         });
       }
     });
+  }
+
+  toggleDescription(product: any) {
+    product.showFull = !product.showFull;
   }
 }

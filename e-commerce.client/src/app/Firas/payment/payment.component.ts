@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { StoreDataService } from '../CartPaymentServices/store-data.service';
 import Swal from 'sweetalert2';
 
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
@@ -266,14 +268,18 @@ export class PaymentComponent {
     this.cartItems.forEach(item => {
       const itemId: number = item.id;
 
-      this._ser.deleteCartItem(itemId).subscribe({
+        this._ser.deleteCartItem(itemId).subscribe(() => {
+          Swal.fire('Deleted!', `Cart item with ID ${itemId} has been removed.`, 'success');
+        });
 
       });
 
-    });
-    this._router.navigate(['/home']);
+      // إعادة التوجيه بعد حذف جميع العناصر
+      this._router.navigate(['/home']);
+    }
+  });
+}
 
-  }
   async createOrder(data: any) {
     Swal.fire({
       title: 'Payment done successfully! from createOrder()',

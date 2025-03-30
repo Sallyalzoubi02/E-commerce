@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MyServiceService } from '../my-service.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -28,20 +29,45 @@ export class RegisterComponent {
         .then(data => {
           if (data && data.data && data.data.url) {
             this.imagePreview = data.data.url;
+          } else {
+            Swal.fire({
+              title: 'Error!',
+              text: 'Failed to upload image. Please try again.',
+              icon: 'error',
+              confirmButtonText: 'OK'
+            });
           }
         })
-        .catch(error => console.error('Error uploading image:', error));
+        .catch(error => {
+          console.error('Error uploading image:', error);
+          Swal.fire({
+            title: 'Error!',
+            text: 'An error occurred while uploading the image.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
+        });
     }
   }
 
   registerUser(user: any) {
     if (!user.name || !user.password || !user.email || !user.phone) {
-      alert("Please fill in all required fields.");
+      Swal.fire({
+        title: 'Error!',
+        text: 'Please fill in all required fields.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
       return;
     }
 
     if (user.password.length < 6) {
-      alert("Password must be at least 6 characters.");
+      Swal.fire({
+        title: 'Error!',
+        text: 'Password must be at least 6 characters.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
       return;
     }
 
@@ -49,7 +75,12 @@ export class RegisterComponent {
       let exists = data.find((x: any) => x.email == user.email);
 
       if (exists) {
-        alert("Email already exists. Please use a different email.");
+        Swal.fire({
+          title: 'Error!',
+          text: 'Email already exists. Please use a different email.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
         return;
       }
 
@@ -58,13 +89,29 @@ export class RegisterComponent {
       user.payment = user.payment || "Not specified";
 
       this._serv.registerUser(user).subscribe(() => {
-        alert("User added successfully");
-        this._route.navigate(['/login']);
+        Swal.fire({
+          title: 'Success!',
+          text: 'User added successfully.',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        }).then(() => {
+          this._route.navigate(['/login']);
+        });
       }, error => {
-        alert("Error registering user: " + error.message);
+        Swal.fire({
+          title: 'Error!',
+          text: 'Error registering user: ' + error.message,
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
       });
     }, error => {
-      alert("Error checking email: " + error.message);
+      Swal.fire({
+        title: 'Error!',
+        text: 'Error checking email: ' + error.message,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
     });
   }
 }

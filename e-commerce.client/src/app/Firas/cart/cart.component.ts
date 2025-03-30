@@ -168,9 +168,23 @@ export class CartComponent implements OnChanges {
 
     if (Number(this.userId) >= 1 && this.userId != null) {
 
+      this._router.navigate(['/payment']);
 
 
-
+    }
+    else {
+      Swal.fire({
+        title: 'Please Login First',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Login'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this._router.navigate(['/login']);
+        }
+      });
     }
   }
 

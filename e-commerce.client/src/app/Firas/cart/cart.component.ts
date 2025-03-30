@@ -118,14 +118,8 @@ export class CartComponent implements OnChanges {
       }
     });
 
-    if (confirm("Are you sure you want to Delete This Item From Cart ?")) {
-      this._ser.removeItem(cartItemId).subscribe(() => {
-        this.ngOnInit();
-        this.getVoucher();
-      });
-    } else {
-
-    }
+    
+    
   }
 
   getVoucher() {
@@ -182,7 +176,8 @@ export class CartComponent implements OnChanges {
         confirmButtonText: 'Login'
       }).then((result) => {
         if (result.isConfirmed) {
-          this._router.navigate(['/login']);
+          sessionStorage.setItem('payment','true')
+          this._router.navigate(['/register']);
         }
       });
     }

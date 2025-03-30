@@ -253,7 +253,6 @@ export class PaymentComponent {
       const itemId: number = item.id;
 
         this._ser.deleteCartItem(itemId).subscribe(() => {
-          Swal.fire('Deleted!', `Cart item with ID ${itemId} has been removed.`, 'success');
         });
 
       });
@@ -266,7 +265,7 @@ export class PaymentComponent {
 
 
   async createOrder(data: any) {
-  
+    
   const now: Date = new Date();
   data.date = now;
 

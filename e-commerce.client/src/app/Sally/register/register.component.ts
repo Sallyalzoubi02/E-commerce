@@ -10,6 +10,8 @@ import Swal from 'sweetalert2';
 })
 export class RegisterComponent {
   imagePreview: string | null = null;
+  userFound: any
+  newUserCart:any
 
   constructor(private _serv: MyServiceService, private _route: Router) { }
 
@@ -72,7 +74,7 @@ export class RegisterComponent {
     }
 
     this._serv.getUser().subscribe((data: any) => {
-      let exists = data.find((x: any) => x.email == user.email);
+      let exists = data.find((x: any) => x.email === user.email);
 
       if (exists) {
         Swal.fire({
@@ -88,6 +90,67 @@ export class RegisterComponent {
       user.image = this.imagePreview || "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png";
       user.payment = user.payment || "Not specified";
 
+      if (sessionStorage.getItem('payment') === 'true') {
+        this._serv.registerUser(user).subscribe((registeredUser: any) => {
+          // ✅ نحصل على ID المستخدم الجديد مباشرة من الرد
+          const newUserId = registeredUser.id;
+          console.log("✅ User Registered - ID:", newUserId);
+
+          // ✅ البحث عن العربة الخاصة بالمستخدم الذي لم يتم تسجيله بعد
+          this._serv.getCartIdSer().subscribe((carts: any) => {
+            this.newUserCart = carts.find((c: any) => c.userId === "-1");
+
+            if (this.newUserCart) {
+              console.log("🛒 Cart Found Before Update:", this.newUserCart);
+
+              // ✅ تحويل userId إلى رقم لتجنب الأخطاء
+              this.newUserCart.userId = Number(newUserId);
+
+              this._serv.editCartIdSer(this.newUserCart.id, this.newUserCart).subscribe(
+                (updatedCart: any) => {
+                  console.log("✅ Cart Updated Successfully:", updatedCart);
+
+                  // ✅ بعد التحديث، نظهر رسالة النجاح ونوجه المستخدم للـ Login
+                  Swal.fire({
+                    title: 'Success!',
+                    text: 'User added successfully.',
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                  }).then(() => {
+                    this._route.navigate(['/login']);
+                  });
+                },
+                (error) => {
+                  console.error("❌ Error updating cart:", error);
+                  Swal.fire({
+                    title: 'Error!',
+                    text: 'Error updating cart: ' + error.message,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                  });
+                }
+              );
+            } else {
+              console.warn("⚠️ No cart found with userId = -1");
+            }
+          });
+        }, error => {
+          console.error("❌ Error registering user:", error);
+          Swal.fire({
+            title: 'Error!',
+            text: 'Error registering user: ' + error.message,
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
+        });
+
+        return;
+      }
+
+      
+
+
+      // تسجيل المستخدم بشكل عادي إذا لم يكن قادمًا من صفحة الدفع
       this._serv.registerUser(user).subscribe(() => {
         Swal.fire({
           title: 'Success!',
@@ -114,4 +177,5 @@ export class RegisterComponent {
       });
     });
   }
+
 }

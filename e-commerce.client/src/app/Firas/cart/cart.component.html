@@ -25,7 +25,7 @@
             <tbody>
               <tr *ngFor="let item of cartItems, let i = index" style="text-align:center">
                 <td style="display:flex;justify-content:center;align-items:center;margin-left:4vh;margin-top:2vh" class="product-remove"><a class="remove-wishlist" (click)="removeItem(item.id)"><i class="fal fa-times"></i></a></td>
-                <td class="product-thumbnail"><a ><img src="assets/images/product/electric/product-01.png" alt="Digital Product"></a></td>
+                <td class="product-thumbnail"><a ><img src="{{item.productImg}}" alt="Digital Product"></a></td>
                 <td class="product-title"><a href="single-product.html">{{item.productName}}</a></td>
                 <td class="product-price" data-title="Price"><span class="currency-symbol">$</span>{{item.productPrice}}</td>
                 <td class="product-quantity" data-title="Qty">

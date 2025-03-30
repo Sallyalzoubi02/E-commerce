@@ -1,0 +1,311 @@
+<main class="main-wrapper">
+  <div class="axil-checkout-area axil-section-gap">
+    <div class="container">
+      <form #checkOutForm="ngForm" (ngSubmit)="checkOut(checkOutForm.value)">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="axil-checkout-notice">
+              <!--<div class="axil-toggle-box">
+                <div class="toggle-bar">
+                  <i class="fas fa-user"></i> Returning customer? <a href="javascript:void(0)" class="toggle-btn">Click here to login <i class="fas fa-angle-down"></i></a>
+                </div>-->
+                <!--<div class="axil-checkout-login toggle-open">
+                  <p>If you didn't Logged in, Please Log in first.</p>
+                  <div class="signin-box">
+                    <div class="form-group">
+                      <label>Email</label>
+                      <input type="email" class="form-control" ngModel name="loginEmail">
+                    </div>
+                    <div class="form-group">
+                      <label>Password</label>
+                      <input type="password" class="form-control" ngModel name="loginPassword">
+                    </div>
+                    <div class="form-group mb--0">
+                      <button type="submit" class="axil-btn btn-bg-primary submit-btn">Sign In</button>
+                    </div>
+                  </div>
+                </div>-->
+              <!--</div>-->
+              <!--<div class="axil-toggle-box">
+    <div class="toggle-bar">
+      <i class="fas fa-pencil"></i> Have a coupon? <a href="javascript:void(1)" class="toggle-btn">Click here to enter your code <i class="fas fa-angle-down"></i></a>
+    </div>
+    <div class="axil-checkout-coupon toggle-open">
+      <p>If you have a coupon code, please apply it below.</p>
+      <div class="input-group">
+        <input placeholder="Enter coupon code" ngModel name="coupon" type="text" #VoucherUserInput>
+        <div class="apply-btn">
+          <button type="button" (click)="getVoucher(VoucherUserInput.value)" [disabled]="isVoucherInputDisabled" class="axil-btn btn-bg-primary">Apply</button>
+        </div>
+      </div>
+    </div>
+  </div>-->
+
+              <div class="axil-toggle-box">
+                <div class="toggle-bar">
+                  <i class="fas fa-pencil"></i> Have a coupon?
+                </div>
+                <div class="axil-checkout-coupon">
+                  <p>If you have a coupon code, please apply it below.</p>
+                  <div class="input-group">
+                    <input placeholder="Enter coupon code" ngModel name="coupon" type="text" #VoucherUserInput>
+                    <div class="apply-btn">
+                      <button type="button" (click)="getVoucher(VoucherUserInput.value)" [disabled]="isVoucherInputDisabled" class="axil-btn btn-bg-primary">Apply</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="axil-checkout-billing">
+              <h4 class="title mb--40">Billing details</h4>
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label>First Name <span>*</span></label>
+                    <input type="text" id="firstName" ngModel name="firstName" placeholder="Adam" (ngModelChange)="onInputChange(checkOutForm.value)">
+                    <span class="error-message" *ngIf="firstNameError">First name is required.</span>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-group">
+                    <label>Last Name <span>*</span></label>
+                    <input type="text" id="lastName" ngModel name="lastName" placeholder="John" (ngModelChange)="onInputChange(checkOutForm.value)">
+                    <span class="error-message" *ngIf="lastNameError">Last name is required.</span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Country/ Region <span>*</span></label>
+                <select id="Region" [(ngModel)]="selectedRegion" name="region" (ngModelChange)="onInputChange(checkOutForm.value)">
+                  <option value="Amman">Amman</option>
+                  <option value="Irbid">Irbid</option>
+                  <option value="Zarqa">Zarqa</option>
+                  <option value="Madaba">Madaba</option>
+                  <option value="Balqa">Balqa</option>
+                  <option value="Karak">Karak</option>
+                  <option value="Tafilah">Tafilah</option>
+                  <option value="Maan">Maan</option>
+                  <option value="Aqaba">Aqaba</option>
+                  <option value="Jerash">Jerash</option>
+                  <option value="Ajloun">Ajloun</option>
+                  <option value="Mafraq">Mafraq</option>
+                </select>
+                <span class="error-message" *ngIf="regionError">Region is required.</span>
+              </div>
+              <div class="form-group">
+                <label>Street Address <span>*</span></label>
+                <input name="address1" ngModel type="text" id="address1" class="mb--15" placeholder="House number and street name" (ngModelChange)="onInputChange(checkOutForm.value)">
+                <span class="error-message" *ngIf="address1Error">Address is required.</span>
+                <input name="address2" ngModel type="text" id="address2" placeholder="Apartment, suite, unit, etc. (optional)">
+              </div>
+              <div class="form-group">
+                <label>Town/ City <span>*</span></label>
+                <input type="text" id="town" name="town" ngModel (ngModelChange)="onInputChange(checkOutForm.value)">
+                <span class="error-message" *ngIf="townError">Town is required.</span>
+              </div>
+              <div class="form-group">
+                <label>Phone <span>*</span></label>
+                <input type="tel" id="phone" name="phone" ngModel (ngModelChange)="onInputChange(checkOutForm.value)">
+                <span class="error-message" *ngIf="phoneError">Phone is required.</span>
+              </div>
+              <div class="form-group">
+                <label>Email Address <span>*</span></label>
+                <input type="email" id="email" name="email" ngModel (ngModelChange)="onInputChange(checkOutForm.value)">
+                <span class="error-message" *ngIf="emailError">Email is required.</span>
+              </div>
+
+              <!--<div class="form-group different-shippng">
+                <div class="toggle-bar">
+                  <a href="javascript:void(0)" class="toggle-btn" (click)="toggleShipping()">
+                    <input type="checkbox" id="checkbox2" name="diffrentShip" [(ngModel)]="showDifferentShipping">
+                    <label for="checkbox2">Ship to a different address?</label>
+                  </a>
+                </div>
+                <div class="toggle-open" *ngIf="showDifferentShipping">
+                  <div class="form-group">
+                    <label>Different Country/ Region <span>*</span></label>
+                    <select id="differentRegion" [(ngModel)]="differentRegion" name="differentRegion" (ngModelChange)="onInputChange(checkOutForm.value)">
+                      <option value="Amman">Amman</option>
+                      <option value="Irbid">Irbid</option>
+                      <option value="Zarqa">Zarqa</option>
+                      <option value="Madaba">Madaba</option>
+                      <option value="Balqa">Balqa</option>
+                      <option value="Karak">Karak</option>
+                      <option value="Tafilah">Tafilah</option>
+                      <option value="Maan">Maan</option>
+                      <option value="Aqaba">Aqaba</option>
+                      <option value="Jerash">Jerash</option>
+                      <option value="Ajloun">Ajloun</option>
+                      <option value="Mafraq">Mafraq</option>
+                    </select>
+                    <span class="error-message" *ngIf="differentRegionError">Different region is required.</span>
+                  </div>
+                  <div class="form-group">
+                    <label>Different Street Address <span>*</span></label>
+                    <input name="differentAddress1" ngModel type="text" id="differentAddress1" class="mb--15" placeholder="House number and street name" (ngModelChange)="onInputChange(checkOutForm.value)">
+                    <span class="error-message" *ngIf="differentAddress1Error">Different address is required.</span>
+                    <input name="differentAddress2" ngModel type="text" id="differentAddress2" placeholder="Apartment, suite, unit, etc. (optional)">
+                  </div>
+                  <div class="form-group">
+                    <label>Different Town/ City <span>*</span></label>
+                    <input type="text" name="differentTown" ngModel id="differentTown" (ngModelChange)="onInputChange(checkOutForm.value)">
+                    <span class="error-message" *ngIf="differentTownError">Different town is required.</span>
+                  </div>
+                  <div class="form-group">
+                    <label>Different Phone <span>*</span></label>
+                    <input type="tel" name="differentPhone" ngModel id="differentPhone" (ngModelChange)="onInputChange(checkOutForm.value)">
+                    <span class="error-message" *ngIf="differentPhoneError">Different phone is required.</span>
+                  </div>
+                  <div class="form-group">
+                    <label>Different Email Address <span>*</span></label>
+                    <input type="email" name="differentEmail" ngModel id="differentEmail" (ngModelChange)="onInputChange(checkOutForm.value)">
+                    <span class="error-message" *ngIf="differentEmailError">Different email is required.</span>
+                  </div>
+                </div>
+              </div>-->
+              <div class="form-group">
+                <label>Other Notes (optional)</label>
+                <textarea id="notes" name="notes" ngModel rows="2" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="axil-order-summery order-checkout-summery">
+              <h5 class="title mb--20">Your Order</h5>
+              <div class="summery-table-wrap">
+                <table class="table summery-table">
+                  <thead>
+                    <tr>
+                      <th>Product</th>
+                      <th>Subtotal</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of cartItems; let i = index">
+                      <td>{{ item?.productName }}  <span class="quantity">x{{ item?.quantity }}</span></td>
+                      <td>{{ Total[i] }}</td>
+                    </tr>
+                    <tr class="order-subtotal">
+                      <td>Subtotal</td>
+                      <td>
+                        <input value="{{Totals}}" disabled style="text-align:center;background-color:white; text-align:end; font-weight:900" />
+                      </td>
+
+                    </tr>
+                    <tr class="order-discount">
+                      <td>Discount</td>
+                      <td>
+                        <input value="{{discount}}" disabled style="text-align:center;background-color:white; text-align:end; font-weight:400" />
+                      </td>
+
+                    </tr>
+                    <tr class="order-shipping">
+                      <td colspan="2">
+                        <div class="shipping-amount">
+                          <span class="title">Shipping Method</span>
+                          <span class="amount">{{shippingCost}}</span>
+                        </div>
+                        <div class="input-group">
+                          <input type="radio" id="radio1" name="shipping" value="free" checked [(ngModel)]="selectedShippingMethod" (ngModelChange)="onInputChange(checkOutForm.value)">
+                          <label for="radio1">Free Shipping</label>
+                        </div>
+                        <div class="input-group">
+                          <input type="radio" id="radio2" name="shipping" value="urgent" [(ngModel)]="selectedShippingMethod" (ngModelChange)="onInputChange(checkOutForm.value)">
+                          <label for="radio2">Urgent (Extra Charge)</label>
+                        </div>
+                        <!--<div class="input-group">
+        <input type="radio" id="radio3" name="shipping" value="flat" [(ngModel)]="selectedShippingMethod">
+        <label for="radio3">Flat rate</label>
+      </div>-->
+                      </td>
+                    </tr>
+                    <tr class="order-total">
+                      <td>Total</td>
+                      <td>
+                        <input [(ngModel)]="TotalAfterDiscount" disabled style="text-align:center;background-color:white;text-align:end; font-weight:900" name="FinalTotal" />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="order-payment-method">
+                <div class="single-payment">
+                  <div class="input-group">
+                    <input type="radio" id="radio5" name="payment" value="cash" [(ngModel)]="selectedPaymentMethod" >
+                    <label for="radio5">Cash on delivery</label>
+                  </div>
+                  <p>Pay with cash upon delivery.</p>
+                </div>
+                <div class="single-payment">
+                  <div class="input-group">
+                    <input type="radio" id="radio4" name="payment" value="orangeMoney" [(ngModel)]="selectedPaymentMethod">
+                    <label for="radio4">Orange Money</label>
+                  </div>
+                  <p>Make your payment directly into our Orange Money account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.</p>
+                </div>
+                <div class="single-payment">
+                  <div class="input-group justify-content-between align-items-center">
+                    <input type="radio" id="radio6" name="payment" value="creditCard" [(ngModel)]="selectedPaymentMethod" checked>
+                    <label for="radio6">Credit Card</label>
+                    <img src="assets/images/others/payment.png" alt="Orange Money payment">
+                  </div>
+                  <p>Pay via Credit card; you can pay with your Paypal if you don’t have a Credit card.</p>
+                </div>
+              </div>
+              <button type="submit" class="axil-btn btn-bg-primary checkout-btn" [disabled]="isCheckoutDisabled" [ngStyle]="{'background-color': isCheckoutDisabled ? '#cccccc' : '#007bff'}">Process to Checkout</button>            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+<div class="service-area">
+  <div class="container">
+    <div class="row row-cols-xl-4 row-cols-sm-2 row-cols-1 row--20">
+      <div class="col">
+        <div class="service-box service-style-2">
+          <div class="icon">
+            <img src="assets/images/icons/service1.png" alt="Service">
+          </div>
+          <div class="content">
+            <h6 class="title">Fast &amp; Secure Delivery</h6>
+            <p>Tell about your service.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="service-box service-style-2">
+          <div class="icon">
+            <img src="assets/images/icons/service2.png" alt="Service">
+          </div>
+          <div class="content">
+            <h6 class="title">Money Back Guarantee</h6>
+            <p>Within 10 days.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="service-box service-style-2">
+          <div class="icon">
+            <img src="assets/images/icons/service3.png" alt="Service">
+          </div>
+          <div class="content">
+            <h6 class="title">24 Hour Return Policy</h6>
+            <p>No question ask.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="service-box service-style-2">
+          <div class="icon">
+            <img src="assets/images/icons/service4.png" alt="Service">
+          </div>
+          <div class="content">
+            <h6 class="title">Pro Quality Support</h6>
+            <p>24/7 Live support.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

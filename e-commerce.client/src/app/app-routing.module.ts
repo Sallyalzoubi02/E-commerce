@@ -24,10 +24,13 @@ import { ContactUsComponent } from './Sally/contact-us/contact-us.component';
 import { LoginComponent } from './Sally/login/login.component';
 import { RegisterComponent } from './Sally/register/register.component';
 import { ResetpasswordComponent } from './Sally/resetpassword/resetpassword.component';
+import { PaymentComponent } from './Firas/payment/payment.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'payment', component: PaymentComponent },
+
   { path: 'profile', component: ProfileComponent },
   { path: 'contactUs', component: ContactUsComponent },
   { path: 'login', component: LoginComponent },

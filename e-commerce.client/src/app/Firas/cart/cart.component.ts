@@ -2,6 +2,7 @@ import { Component, OnChanges } from '@angular/core';
 import { CartPaymentService } from '../CartPaymentServices/cart-payment.service';
 import { Immediate } from 'rxjs/internal/util/Immediate';
 import { MyServiceService } from '../../Sally/my-service.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cart',
@@ -38,11 +39,11 @@ export class CartComponent implements OnChanges {
 
   ngOnInit() {
 
-    this.getCartId();
-    this.bill();
+    
 
     this._serv.currentlogged.subscribe((id) => this.userId = id)
-    
+    this.getCartId();
+    this.bill();
   }
 
 
@@ -57,7 +58,6 @@ export class CartComponent implements OnChanges {
         this.getProducts();
       } else {
         console.warn("No cart found for userId:", this.userId);
-        alert("No cart found!");
       }
     });
     
@@ -97,16 +97,25 @@ export class CartComponent implements OnChanges {
 
 
   removeItem(cartItemId: any) {
-    
-    if (confirm("Are you sure you want to Delete This Item From Cart ?")) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to delete this item from the cart?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
         this._ser.removeItem(cartItemId).subscribe(() => {
           this.ngOnInit();
           this.getVoucher();
+          Swal.fire('Deleted!', 'Your item has been removed.', 'success');
         });
-      } else {
-
       }
+    });
   }
+
   getVoucher() {
   
     if (this.VoucherUserInput != "") {

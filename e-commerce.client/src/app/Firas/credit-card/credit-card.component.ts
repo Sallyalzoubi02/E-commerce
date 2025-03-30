@@ -7,8 +7,6 @@ import { Router } from '@angular/router';
   styleUrl: './credit-card.component.css'
 })
 export class CreditCardComponent {
-
-
   constructor(private _router: Router) { }
 
   completePayment() {

@@ -57,29 +57,27 @@ export class PaymentComponent {
   differentTownError: boolean = false;
   differentPhoneError: boolean = false;
   differentEmailError: boolean = false;
-
-  constructor(private _ser: CartPaymentService, private _serv: MyServiceService,
-    private _router: Router, private _route: ActivatedRoute, private _storeData: StoreDataService) { }
-
+  constructor(
+    private _ser: CartPaymentService,
+    private _serv: MyServiceService,
+    private _router: Router,
+    private _route: ActivatedRoute,
+    private _storeData: StoreDataService
+  ) { }
 
   ngOnInit() {
-
-    this._serv.currentlogged.subscribe((id) => this.userId = id)
+    this._serv.currentlogged.subscribe((id) => this.userId = id);
     this.getCartId();
     this.bill();
     this.calculateDiscount();
 
-
-    // الاستماع إلى queryParams لمعرفة ما إذا كان الدفع قد اكتمل
     this._route.queryParams.subscribe(params => {
       if (params['paymentComplete']) {
-        this.onPaymentComplete(); // استدعاء دالة اكمال الدفع
+        this.onPaymentComplete();
+        // إعادة التوجيه لإزالة queryParams['paymentComplete']
+        this._router.navigate(['/payment'], { queryParams: {} });
       }
     });
-  
-
-
-
   }
 
   getCartId() {
@@ -98,6 +96,7 @@ export class PaymentComponent {
           icon: 'warning',
           confirmButtonText: 'OK'
         });
+        this._router.navigate(["/shop"])
       }
     });
 
@@ -176,50 +175,31 @@ export class PaymentComponent {
 
 
   checkOut(dataForm: any) {
-
     this._storeData.setDataForm(dataForm);
 
-    if (this.selectedPaymentMethod == 'cash') {
-      dataForm.status = 'pending'
-      dataForm.amount = this.TotalAfterDiscount;
-      dataForm.userid = this.userId;
-    } else if (this.selectedPaymentMethod == 'orangeMoney') {
-      dataForm.status = 'paid by orangeMoney'
-      dataForm.amount = this.TotalAfterDiscount;
-      dataForm.userid = this.userId;
-    } else {
-      dataForm.status = 'paid by creditCard'
-      dataForm.amount = this.TotalAfterDiscount;
-      dataForm.userid = this.userId;
-    }
-
+    dataForm.amount = this.TotalAfterDiscount;
+    dataForm.userid = this.userId;
 
     this._ser.peymenta(dataForm).subscribe(() => {
-
-
+      // يمكنك إضافة معالجة للنجاح هنا إذا لزم الأمر
     });
 
-    alert(dataForm.status)
-    if (this.selectedPaymentMethod == 'cash') {
-       Swal.fire({
-         title: 'Payment done successfully',
-         icon: 'success',
-        timer: 1000, 
-        showConfirmButton: false, 
-        color: '#155724' 
-       });
-      this.createOrder(this._storeData.getDataForm());
+    if (this.selectedPaymentMethod === 'cash') {
+      dataForm.status = 'pending';
 
+      Swal.fire({
+        title: 'Payment done successfully',
+        icon: 'success',
+        timer: 1000,
+        showConfirmButton: false,
+        color: '#155724'
+      });
+
+      this.createOrder(this._storeData.getDataForm());
       this._router.navigate(['/home'], { state: { dataForm: dataForm } });
 
-    }
-    else if (this.selectedPaymentMethod == 'creditCard') {
-      this.createOrder(this._storeData.getDataForm());
-
-      this._router.navigate(['/creditCard'], { state: { dataForm: dataForm } });
-
-    }
-    else if (this.selectedPaymentMethod == 'orangeMoney') {
+    } else if (this.selectedPaymentMethod === 'orangeMoney') {
+      dataForm.status = 'paid by orangeMoney';
 
       Swal.fire({
         title: 'Did you pay to the Orange Money account?',
@@ -231,7 +211,6 @@ export class PaymentComponent {
         color: '#155724'
       }).then((result) => {
         if (result.isConfirmed) {
-
           Swal.fire({
             title: 'Payment done successfully',
             icon: 'success',
@@ -239,10 +218,11 @@ export class PaymentComponent {
             showConfirmButton: false,
             color: '#155724'
           });
+
           this.createOrder(this._storeData.getDataForm());
           this._router.navigate(['/home'], { state: { dataForm: dataForm } });
-        } else if (result.dismiss === Swal.DismissReason.cancel) {
 
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
           Swal.fire(
             'Cancelled',
             'Payment not completed',
@@ -250,10 +230,14 @@ export class PaymentComponent {
           );
         }
       });
-    }
 
+    } else if (this.selectedPaymentMethod === 'creditCard') {
+      dataForm.status = 'paid by creditCard';
 
+      this.createOrder(this._storeData.getDataForm());
+      this._router.navigate(['/creditCard'], { state: { dataForm: dataForm } });
     }
+  }
 
 
   onPaymentComplete() {
@@ -282,11 +266,7 @@ export class PaymentComponent {
 
 
   async createOrder(data: any) {
-    Swal.fire({
-      title: 'Payment done successfully! from createOrder()',
-      icon: 'success',
-      confirmButtonText: 'OK'
-    });
+  
   const now: Date = new Date();
   data.date = now;
 

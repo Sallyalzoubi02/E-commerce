@@ -3,9 +3,9 @@ import { MyServiceService } from '../../Sally/my-service.service';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StoreDataService } from '../CartPaymentServices/store-data.service';
-import Swal from 'sweetalert2';
 
 import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-payment',
@@ -277,8 +277,9 @@ export class PaymentComponent {
       // إعادة التوجيه بعد حذف جميع العناصر
       this._router.navigate(['/home']);
     }
-  });
-}
+  
+
+
 
   async createOrder(data: any) {
     Swal.fire({

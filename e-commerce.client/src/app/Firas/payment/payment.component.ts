@@ -1,7 +1,9 @@
 import { CartPaymentService } from '../CartPaymentServices/cart-payment.service';
 import { MyServiceService } from '../../Sally/my-service.service';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { StoreDataService } from '../CartPaymentServices/store-data.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-payment',
@@ -35,7 +37,7 @@ export class PaymentComponent {
   differentRegion: string = '';
 
   selectedShippingMethod: string = 'free';
-  selectedPaymentMethod: string = 'creditCard';
+  selectedPaymentMethod: string = 'cash';
 
   shippingCost: number = 0;
 
@@ -54,7 +56,8 @@ export class PaymentComponent {
   differentPhoneError: boolean = false;
   differentEmailError: boolean = false;
 
-  constructor(private _ser: CartPaymentService, private _serv: MyServiceService, private _router: Router) { }
+  constructor(private _ser: CartPaymentService, private _serv: MyServiceService,
+    private _router: Router, private _route: ActivatedRoute, private _storeData: StoreDataService) { }
 
 
   ngOnInit() {
@@ -63,6 +66,15 @@ export class PaymentComponent {
     this.getCartId();
     this.bill();
     this.calculateDiscount();
+
+
+    // الاستماع إلى queryParams لمعرفة ما إذا كان الدفع قد اكتمل
+    this._route.queryParams.subscribe(params => {
+      if (params['paymentComplete']) {
+        this.onPaymentComplete(); // استدعاء دالة اكمال الدفع
+      }
+    });
+  
 
 
 
@@ -79,8 +91,11 @@ export class PaymentComponent {
         this.getProducts();
       } else {
 
-        alert("No cart found!");
-
+        Swal.fire({
+          title: 'No cart found!',
+          icon: 'warning',
+          confirmButtonText: 'OK'
+        });
       }
     });
 
@@ -160,50 +175,122 @@ export class PaymentComponent {
 
   checkOut(dataForm: any) {
 
+    this._storeData.setDataForm(dataForm);
 
-    dataForm.amount = this.TotalAfterDiscount;
-    dataForm.userid = this.userId;
-
+    if (this.selectedPaymentMethod == 'cash') {
+      dataForm.status = 'pending'
+      dataForm.amount = this.TotalAfterDiscount;
+      dataForm.userid = this.userId;
+    } else if (this.selectedPaymentMethod == 'orangeMoney') {
+      dataForm.status = 'paid by orangeMoney'
+      dataForm.amount = this.TotalAfterDiscount;
+      dataForm.userid = this.userId;
+    } else {
+      dataForm.status = 'paid by creditCard'
+      dataForm.amount = this.TotalAfterDiscount;
+      dataForm.userid = this.userId;
+    }
 
 
     this._ser.peymenta(dataForm).subscribe(() => {
 
-      alert("Payment done successfully!");
 
     });
 
-    this.createOrder(dataForm);
+    alert(dataForm.status)
+    if (this.selectedPaymentMethod == 'cash') {
+       Swal.fire({
+         title: 'Payment done successfully',
+         icon: 'success',
+        timer: 1000, 
+        showConfirmButton: false, 
+        color: '#155724' 
+       });
+      this.createOrder(this._storeData.getDataForm());
+
+      this._router.navigate(['/home'], { state: { dataForm: dataForm } });
+
+    }
+    else if (this.selectedPaymentMethod == 'creditCard') {
+      this.createOrder(this._storeData.getDataForm());
+
+      this._router.navigate(['/creditCard'], { state: { dataForm: dataForm } });
+
+    }
+    else if (this.selectedPaymentMethod == 'orangeMoney') {
+
+      Swal.fire({
+        title: 'Did you pay to the Orange Money account?',
+        text: 'Account Number: 0799258206\nAccount Name: ArtiFy',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, I paid',
+        cancelButtonText: 'No, cancel',
+        color: '#155724'
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+          Swal.fire({
+            title: 'Payment done successfully',
+            icon: 'success',
+            timer: 1000,
+            showConfirmButton: false,
+            color: '#155724'
+          });
+          this.createOrder(this._storeData.getDataForm());
+          this._router.navigate(['/home'], { state: { dataForm: dataForm } });
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+
+          Swal.fire(
+            'Cancelled',
+            'Payment not completed',
+            'error'
+          );
+        }
+      });
+    }
 
 
+    }
+
+
+  onPaymentComplete() {
+
+    this.createOrder(this._storeData.getDataForm());
+
+   
   }
  
   deleteCartItems() {
 
-    alert("Are you sure you want to delete all cart items?");
     this.cartItems.forEach(item => {
       const itemId: number = item.id;
 
       this._ser.deleteCartItem(itemId).subscribe({
 
       });
-      alert("Cart item deleted successfully! with id " + itemId);
 
     });
     this._router.navigate(['/home']);
 
   }
   async createOrder(data: any) {
+    Swal.fire({
+      title: 'Payment done successfully! from createOrder()',
+      icon: 'success',
+      confirmButtonText: 'OK'
+    });
   const now: Date = new Date();
   data.date = now;
 
   try {
     await this._ser.createOrder(data).toPromise();
     await this.generateOrderId();
-
+    
     for (let i = 0; i < this.cartItems.length; i++) {
       await this.generateOrderItemId();
 
-      let neworderItem: OrderItem = {
+       let neworderItem: OrderItem = {
         product_id: this.cartItems[i].productId,
         product_name: this.cartItems[i].productName,
         product_price: this.cartItems[i].productPrice,
@@ -214,9 +301,9 @@ export class PaymentComponent {
       this.createOrderItem(neworderItem);
     }
 
-    alert("Order done successfully!");
   } catch (error) {
     console.error("Error creating order:", error);
+
     alert("Failed to create order.");
   }
 }
@@ -250,6 +337,7 @@ export class PaymentComponent {
   }
 
   async generateOrderId() {
+   
     try {
       const orders: any[] | undefined = await this._ser.getLastOrderId().toPromise();
 
@@ -267,7 +355,6 @@ export class PaymentComponent {
 
       this._ser.CreateOrderItem(data).subscribe(() => {
 
-      alert("OrderItem done successfully!")
     });
   }
 

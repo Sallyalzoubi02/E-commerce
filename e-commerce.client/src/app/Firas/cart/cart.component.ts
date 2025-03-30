@@ -2,6 +2,7 @@ import { Component, OnChanges } from '@angular/core';
 import { CartPaymentService } from '../CartPaymentServices/cart-payment.service';
 import { Immediate } from 'rxjs/internal/util/Immediate';
 import { MyServiceService } from '../../Sally/my-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -12,23 +13,25 @@ export class CartComponent implements OnChanges {
 
   cartId: any;
   //userId = localStorage.getItem('userId');
-  userId : any;
+  userId: any;
 
   cartItems: any[] = [];
   Total: number[] = [];
   quantity: number = 0;
   newQuantity: any;
 
-  Totals: any=0;
+  Totals: any = 0;
 
-  discount: any=0;
-  voucher: any=0;
+  discount: any = 0;
+  voucher: any = 0;
   allVoucher: any;
   VoucherUserInput: any = "";
   TotalAfterDiscount: any = this.Totals;
 
   isVoucherInputDisabled: boolean = false;
-  constructor(private _ser: CartPaymentService, private _serv: MyServiceService) { }
+  constructor(private _ser: CartPaymentService,
+    private _serv: MyServiceService,
+    private _router: Router) { }
 
 
 
@@ -38,7 +41,7 @@ export class CartComponent implements OnChanges {
 
   ngOnInit() {
 
-    
+
 
     this._serv.currentlogged.subscribe((id) => this.userId = id)
     this.getCartId();
@@ -60,7 +63,7 @@ export class CartComponent implements OnChanges {
         alert("No cart found!");
       }
     });
-    
+
 
   }
   getProducts() {
@@ -68,7 +71,7 @@ export class CartComponent implements OnChanges {
       this.cartItems = data.filter((item: any) => item.cartId == this.cartId);
 
       this.Total = this.cartItems.map(item => {
-        
+
         return Number(item.productPrice) * Number(item.quantity);
       });
 
@@ -85,30 +88,30 @@ export class CartComponent implements OnChanges {
 
     this._ser.updatecartItem(this.cartItems[index].id, this.cartItems[index]).subscribe(() => {
       this.ngOnInit();
-     
-      this.calculateDiscount(); 
+
+      this.calculateDiscount();
     });
   }
 
   bill() {
     this.Totals = this.Total.reduce((acc, val) => acc + val, 0);
-    this.calculateDiscount(); 
+    this.calculateDiscount();
   }
 
 
   removeItem(cartItemId: any) {
-    
-    if (confirm("Are you sure you want to Delete This Item From Cart ?")) {
-        this._ser.removeItem(cartItemId).subscribe(() => {
-          this.ngOnInit();
-          this.getVoucher();
-        });
-      } else {
 
-      }
+    if (confirm("Are you sure you want to Delete This Item From Cart ?")) {
+      this._ser.removeItem(cartItemId).subscribe(() => {
+        this.ngOnInit();
+        this.getVoucher();
+      });
+    } else {
+
+    }
   }
   getVoucher() {
-  
+
     if (this.VoucherUserInput != "") {
 
       this._ser.getVoucher().subscribe((data) => {
@@ -134,10 +137,25 @@ export class CartComponent implements OnChanges {
     if (this.voucher && this.Totals) {
       this.discount = Number(this.voucher) * (Number(this.Totals) / 100);
       this.TotalAfterDiscount = this.Totals - this.discount;
-    //  localStorage.setItem("TotalAfterDiscount", this.TotalAfterDiscount.toString()); 
+      //  localStorage.setItem("TotalAfterDiscount", this.TotalAfterDiscount.toString()); 
     } else {
       this.discount = 0;
       this.TotalAfterDiscount = this.Totals;
     }
   }
+
+
+
+  goToPayment() {
+
+    if (Number(this.userId) >= 1 && this.userId != null) {
+
+
+
+
+    }
+  }
+
+
+
 }

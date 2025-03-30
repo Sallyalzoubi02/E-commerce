@@ -143,6 +143,7 @@ export class ShopComponent implements OnInit {
     const cartItem = {
       productName: this.selectedproduct.name,
       productPrice: this.selectedproduct.price,
+      productImg: this.selectedproduct.img,
       quantity: 1, // بدء الكمية من 1
       cartId: this.cartId,
       ProductId: this.selectedproduct.id

@@ -60,7 +60,7 @@ export class MyServiceService {
   }
 
   changePassword(id: number, data: any): Observable<any> {
-    return this._url.put(`$https://67e45d142ae442db76d42a1d.mockapi.io/user/${id}`, data);
+    return this._url.put(`https://67e45d142ae442db76d42a1d.mockapi.io/user/${id}`, data);
   }
 
   addFeedback(data: any): Observable<any>{
@@ -75,7 +75,7 @@ export class MyServiceService {
 
   }
   editCartIdSer(id:any, data:any): Observable<any> {
-    return this._url.put(`$https://67e2be6a97fc65f53537692b.mockapi.io/Artify/cart/${id}`,data);
+    return this._url.put(`https://67e2be6a97fc65f53537692b.mockapi.io/Artify/cart/${id}`,data);
 
   }
   sendEmail(email: string, resetCode: string, id: any) {

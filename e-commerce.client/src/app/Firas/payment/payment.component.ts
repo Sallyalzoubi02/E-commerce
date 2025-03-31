@@ -186,7 +186,6 @@ export class PaymentComponent {
     dataForm.userid = this.userId;
 
     this._ser.peymenta(dataForm).subscribe(() => {
-      // يمكنك إضافة معالجة للنجاح هنا إذا لزم الأمر
     });
 
     if (this.selectedPaymentMethod === 'cash') {
@@ -245,7 +244,12 @@ export class PaymentComponent {
 
 
   onPaymentComplete() {
-
+    Swal.fire({
+      title: 'Payment Completed!',
+      text: 'Your payment has been successfully processed. Thank you!',
+      icon: 'success',
+      color: '#155724',
+    })
     this.createOrder(this._storeData.getDataForm());
 
 

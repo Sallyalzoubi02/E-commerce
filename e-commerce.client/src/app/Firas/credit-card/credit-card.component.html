@@ -4,6 +4,7 @@
   <div class="row">
     <div class="col-75">
       <div class="container">
+
         <form action="/action_page.php">
           <div class="row">
             <div class="col-50">
@@ -36,8 +37,9 @@
           <label>
             <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
           </label>
-          <input type="submit" value="Continue to checkout" class="btn" (click)="completePayment()">
+          <input type="button" value="Continue to checkout" class="btn" (click)="completePayment($event)">
         </form>
+
       </div>
     </div>
   </div>

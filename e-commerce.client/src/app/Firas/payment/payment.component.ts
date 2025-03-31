@@ -71,14 +71,18 @@ export class PaymentComponent {
     this.bill();
     this.calculateDiscount();
 
+    // تحقق من queryParams فقط عندما تكون paymentComplete موجودة
     this._route.queryParams.subscribe(params => {
       if (params['paymentComplete']) {
+        console.log('Payment complete detected');
         this.onPaymentComplete();
-        // إعادة التوجيه لإزالة queryParams['paymentComplete']
+
+        // إعادة التوجيه لإزالة queryParams['paymentComplete'] من الرابط
         this._router.navigate(['/payment'], { queryParams: {} });
       }
     });
   }
+
 
   getCartId() {
 
@@ -175,6 +179,7 @@ export class PaymentComponent {
 
 
   checkOut(dataForm: any) {
+
     this._storeData.setDataForm(dataForm);
 
     dataForm.amount = this.TotalAfterDiscount;
@@ -234,7 +239,6 @@ export class PaymentComponent {
     } else if (this.selectedPaymentMethod === 'creditCard') {
       dataForm.status = 'paid by creditCard';
 
-      this.createOrder(this._storeData.getDataForm());
       this._router.navigate(['/creditCard'], { state: { dataForm: dataForm } });
     }
   }
@@ -243,6 +247,7 @@ export class PaymentComponent {
   onPaymentComplete() {
 
     this.createOrder(this._storeData.getDataForm());
+
 
    
   }

@@ -7,12 +7,17 @@ import { Router } from '@angular/router';
   styleUrl: './credit-card.component.css'
 })
 export class CreditCardComponent {
-
-
   constructor(private _router: Router) { }
 
-  completePayment() {
-    // العودة إلى مكون payment مع تمرير queryParams
+
+
+
+  completePayment(event: Event) {
+    event.preventDefault(); // منع إرسال النموذج
+
+   
     this._router.navigate(['/payment'], { queryParams: { paymentComplete: true } });
   }
+
+
 }

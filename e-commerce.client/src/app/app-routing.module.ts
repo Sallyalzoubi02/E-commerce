@@ -24,10 +24,15 @@ import { ContactUsComponent } from './Sally/contact-us/contact-us.component';
 import { LoginComponent } from './Sally/login/login.component';
 import { RegisterComponent } from './Sally/register/register.component';
 import { ResetpasswordComponent } from './Sally/resetpassword/resetpassword.component';
+import { PaymentComponent } from './Firas/payment/payment.component';
+import { CreditCardComponent } from './Firas/credit-card/credit-card.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'payment', component: PaymentComponent },
+  { path: 'creditCard', component: CreditCardComponent },
+
   { path: 'profile', component: ProfileComponent },
   { path: 'contactUs', component: ContactUsComponent },
   { path: 'login', component: LoginComponent },
@@ -49,8 +54,8 @@ const routes: Routes = [
       { path: "editCategory/:id", component: EditCategoryComponent },
 
       { path: "product/:id", component: ProductComponent },
-      { path: "addProduct", component: AddProductComponent },
-      { path: "editProduct/:id", component: EditProductComponent },
+      { path: "addProduct/:id", component: AddProductComponent },
+      { path: "editProduct/:id/:categoryId", component: EditProductComponent },
 
       { path: "users", component: UsersComponent },
       { path: "feedback", component: FeedbackComponent },

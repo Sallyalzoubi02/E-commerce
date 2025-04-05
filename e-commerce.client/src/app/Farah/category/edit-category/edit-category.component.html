@@ -1,6 +1,6 @@
 
 
-<div class="row justify-content-center">
+<div  class="d-flex justify-content-center align-items-center vh-100">
   <div class="col-md-6">
 
     <form #edit="ngForm" (ngSubmit)="editCategory(edit.value)" class="bg-dark text-white p-4 rounded">
@@ -16,12 +16,14 @@
       </div>
 
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Image Of Category</label>
-        <input type="text" class="form-control" name="img" ngModel [(ngModel)]="Category.img">
+        <label class="form-label">Image Of Category</label>
+        <input type="file" class="form-control" id="image"  (change)="onFileSelected($event)" >
+        <img *ngIf="Category.img" [src]="Category.img" class="img-thumbnail mt-2" width="100">
       </div>
 
-      <button type="submit" class="btn btn-primary">Submit</button>
-
+      <button type="submit" class="btn btn-success">Submit</button>
+      <br /><br />
+      <a routerLink="/dashboard/category"><button class="btn btn-primary">Cancel</button> </a>
     </form>
 
   </div>

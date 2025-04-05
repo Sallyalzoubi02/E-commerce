@@ -3,7 +3,19 @@
 <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
   <div class="app-header header-shadow">
     <div class="app-header__logo">
-      <div class="logo-src"></div>
+      <div>
+        <p style="
+  font-family: 'Arial', sans-serif;
+  font-size: 3rem;
+  font-weight: 800;
+  margin: 0;
+  background: linear-gradient(90deg, #e33330, #fec94b, #59aedd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline;
+  letter-spacing: -0.5px;
+">Artify</p>
+      </div>
       <div class="header__pane ml-auto">
         <div>
           <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
@@ -36,7 +48,7 @@
         <div class="search-wrapper">
           <div class="input-holder">
             <input type="text" class="search-input" placeholder="Type to search">
-            <button class="search-icon"><span></span></button>
+            <!--<button class="search-icon"><span></span></button>-->
           </div>
           <button class="close"></button>
         </div>
@@ -87,7 +99,7 @@
               </div>
               <div class="widget-content-left  ml-3 header-user-info">
                 <div class="widget-heading">
-                  Alina Mclourd
+                  Admin Dashboard
                 </div>
                 <!--<div class="widget-subheading">
                   VP People Manager
@@ -104,9 +116,9 @@
       </div>
     </div>
   </div>        <div class="ui-theme-settings">
-                  <button type="button" id="TooltipDemo" class="btn-open-options btn btn-warning"  style=" margin-bottom: -48px; border: none; color: white; background-color: #000000;">
-                    <i class="fa fa-cog fa-w-16 fa-spin fa-2x"></i>
-                  </button>
+    <!--<button type="button" id="TooltipDemo" class="btn-open-options btn btn-warning" style=" margin-bottom: -48px; border: none; color: white; background-color: #000000;">
+      <i class="fa fa-cog fa-w-16 fa-spin fa-2x"></i>
+    </button>-->
     <div class="theme-settings__inner">
       <div class="scrollbar-container">
         <div class="theme-settings__options-wrapper">
@@ -426,9 +438,16 @@
       </div>    <div class="scrollbar-sidebar">
         <div class="app-sidebar__inner">
           <ul class="vertical-nav-menu">
-      
+
             <li>
-              <a routerLink="/dashboard/category" class="mm-active">
+              <a routerLink="/dashboard/homeDash" class="mm-active">
+                <i class="fa-solid  fa-house pe-7s-rocket" style="margin-right: 10px;"></i>
+                Home
+              </a>
+            </li>
+
+            <li>
+              <a routerLink="/dashboard/category">
                 <i class="fa-solid fa-list pe-7s-rocket" style="margin-right: 10px;"></i>
                 Category
               </a>
@@ -442,7 +461,7 @@
               </a>
             </li>
 
-            
+
             <li>
               <a routerLink="/dashboard/feedback">
                 <i class="fa-solid fa-comments" style="margin-right: 10px;"></i>
@@ -458,7 +477,7 @@
               </a>
             </li>
 
-         
+
 
 
 

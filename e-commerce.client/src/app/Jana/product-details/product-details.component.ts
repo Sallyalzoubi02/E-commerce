@@ -230,6 +230,7 @@ export class ProductDetailsComponent {
     const cartItem = {
       productName: this.selectedproduct.name,
       productPrice: this.selectedproduct.price,
+      productImg: this.selectedproduct.img,
       quantity: this.quantity,
       cartId: this.cartId,
       ProductId: this.productId

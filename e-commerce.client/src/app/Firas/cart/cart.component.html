@@ -2,7 +2,6 @@
 
 
 <main class="main-wrapper">
-  <a routerLink="/Voucher">vbnm,./.</a>
   <!-- Start Cart Area  -->
   <div class="axil-product-cart-area axil-section-gap">
     <div class="container">
@@ -24,13 +23,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of cartItems, let i = index">
-                <td class="product-remove"><a class="remove-wishlist" (click)="removeItem(item.id)"><i class="fal fa-times"></i></a></td>
-                <td class="product-thumbnail"><a ><img src="assets/images/product/electric/product-01.png" alt="Digital Product"></a></td>
+              <tr *ngFor="let item of cartItems, let i = index" style="text-align:center">
+                <td style="display:flex;justify-content:center;align-items:center;margin-left:4vh;margin-top:2vh" class="product-remove"><a class="remove-wishlist" (click)="removeItem(item.id)"><i class="fal fa-times"></i></a></td>
+                <td class="product-thumbnail"><a ><img src="{{item.productImg}}" alt="Digital Product"></a></td>
                 <td class="product-title"><a href="single-product.html">{{item.productName}}</a></td>
                 <td class="product-price" data-title="Price"><span class="currency-symbol">$</span>{{item.productPrice}}</td>
                 <td class="product-quantity" data-title="Qty">
-                  <div class="pro-qty">
+                  <div class="pro-qty" style="display:flex;justify-content:center;align-items:center;margin-left:4vh;margin-top:2vh">
                     <a class="dec qtybtn" (click)="editQuantity(i, item.quantity - 1)">-</a>
 
                     <input type="number" class="quantity-input" [(ngModel)]="item.quantity" (change)="editQuantity(i, item.quantity)">
@@ -45,25 +44,25 @@
             </tbody>
           </table>
         </div>
-        <div class="cart-update-btn-area">
-          <div class="input-group product-cupon">
-            <input placeholder="Enter coupon code" type="text" [(ngModel)]="VoucherUserInput" [disabled]="isVoucherInputDisabled">
+        <!--<div class="cart-update-btn-area" style="display:flex;justify-content:center;align-items:center;width:100%">
+          <div class="input-group product-cupon"  style="display:flex;justify-content:center;align-items:center">
+            <input placeholder="Enter coupon code" type="text" [(ngModel)]="VoucherUserInput" [disabled]="isVoucherInputDisabled" style="width:70vh; padding-left:2vh">
             <div class="product-cupon-btn">
               <button type="submit" (click)="getVoucher()" class="axil-btn btn-outline" [disabled]="isVoucherInputDisabled">Apply</button>
             </div>
           </div>
        
-        </div>
+        </div>-->
         <div class="row">
-          <div class="col-xl-5 col-lg-7 offset-xl-7 offset-lg-5">
-            <div class="axil-order-summery mt--80">
+          <div class="col-xl-5 col-lg-7 offset-xl-7 offset-lg-5" style="width:90%;margin-left:7vh;">
+            <div class="axil-order-summery">
               <h5 class="title mb--20">Order Summary</h5>
               <div class="summery-table-wrap">
                 <table class="table summery-table mb--30">
                   <tbody>
                     <tr class="order-subtotal">
                       <td>Subtotal</td>
-                      <td><input [(ngModel)]="Totals"  disabled style="text-align:center;background-color:white"/></td>
+                      <td><input [(ngModel)]="Totals" disabled style="text-align:center;background-color:white" /></td>
                     </tr>
                     <!--<tr class="order-shipping">
                       <td>Shipping</td>
@@ -82,7 +81,7 @@
                   </tbody>
                 </table>
               </div>
-              <a href="checkout.html" class="axil-btn btn-bg-primary checkout-btn">Process to Checkout</a>
+              <a (click)="goToPayment()" class="axil-btn btn-bg-primary checkout-btn">Process to Checkout</a>
             </div>
           </div>
         </div>

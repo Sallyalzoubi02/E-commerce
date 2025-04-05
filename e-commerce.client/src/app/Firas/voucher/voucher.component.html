@@ -1,24 +1,33 @@
-<div class="body">
-  <div class="container">
-    <form #Voucher="ngForm" (ngSubmit)="addVoucher(Voucher.value)">
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" ngModel required>
+<div class="d-flex justify-content-center align-items-center vh-100" >
+  <div class="col-md-6">
+    <form #Voucher="ngForm" (ngSubmit)="addVoucher(Voucher.value)" class="bg-dark text-white p-4 rounded">
+      <h2 class="text-center mb-4" style="color:white">Add New Voucher</h2><br />
+      <div class="mb-3">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" ngModel required>
+      </div>
 
-      <label for="description">Description:</label>
-      <input type="text" id="description" name="description" ngModel required>
+      <div class="mb-3">
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" ngModel required>
+      </div>
 
-      <label for="states">States:</label>
-      <select id="states" name="states" [(ngModel)]="selectedState" required>
-        <option value="Availabel" selected>Availabel</option>
-        <option value="not Availabel">not Availabel</option>
-      </select>
+      <div class="mb-3">
+        <label for="states">States:</label>
+        <select id="states" name="states" [(ngModel)]="selectedState" required class="form-select">
+          <option value="Availabel" selected>Availabel</option>
+          <option value="not Availabel">not Availabel</option>
+        </select>
+      </div>
 
       <input type="text" id="userId" name="userId" ngModel value="0" hidden>
-
-      <label for="discount">Discount:</label>
-      <input type="text" id="discount" name="discount" ngModel required>
-
-      <button type="submit">Submit</button>
+      <div class="mb-3">
+        <label for="discount">Discount:</label>
+        <input type="text" id="discount" name="discount" ngModel required>
+      </div>
+      <button type="submit" class="btn btn-success">Submit</button>
+      <br /><br />
+      <a routerLink="/dashboard/voucher"><button class="btn btn-primary">Cancel</button> </a>
     </form>
   </div>
 </div>

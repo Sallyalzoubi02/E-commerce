@@ -39,7 +39,9 @@ import { ContactUsComponent } from './Sally/contact-us/contact-us.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './Sally/login/login.component';
 import { RegisterComponent } from './Sally/register/register.component';
-import { ResetpasswordComponent } from './Sally/resetpassword/resetpassword.component'; 
+import { ResetpasswordComponent } from './Sally/resetpassword/resetpassword.component';
+import { PaymentComponent } from './Firas/payment/payment.component';
+import { CreditCardComponent } from './Firas/credit-card/credit-card.component'; 
 
 
 
@@ -74,7 +76,9 @@ import { ResetpasswordComponent } from './Sally/resetpassword/resetpassword.comp
     ContactUsComponent,
     LoginComponent,
     RegisterComponent,
-    ResetpasswordComponent
+    ResetpasswordComponent,
+    PaymentComponent,
+    CreditCardComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

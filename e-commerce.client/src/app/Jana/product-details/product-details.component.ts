@@ -38,6 +38,8 @@ export class ProductDetailsComponent {
     this._serv.getCartItemsCount().subscribe(count => {
       this.cartItemsCount = count;
     });
+
+
      }
    
   viewProductDetails() {

@@ -14443,7 +14443,7 @@ p {
 .axil-signin-banner {
   height: 60vh !important;
   padding: 200px 50px 0 100px;
-  margin: 140px 20px;
+  margin: 140px 0px 140px 60px;
   border-radius: 20px;
 }
 

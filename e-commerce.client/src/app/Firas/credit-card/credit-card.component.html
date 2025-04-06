@@ -1,20 +1,20 @@
 <div class="body">
   <h2> Checkout Form</h2>
-  <div class="row">
-    <div class="col-75">
+  <div class="row d-flex justify-content-center align-items-center my-5">
+    <div class="col-6">
       <div class="container">
 
-        <form action="/action_page.php">
+        <form action="/action_page.php" >
           <div class="row">
             <div class="col-50">
-              <h3>Payment</h3>
-              <label for="fname">Accepted Cards</label>
+              <h3>Card Information</h3>
+              <!--<label for="fname">Accepted Cards</label>
               <div class="icon-container">
                 <i class="fa fa-cc-visa" style="color:navy;"></i>
                 <i class="fa fa-cc-amex" style="color:blue;"></i>
                 <i class="fa fa-cc-mastercard" style="color:red;"></i>
                 <i class="fa fa-cc-discover" style="color:orange;"></i>
-              </div>
+              </div>-->
               <label for="cname">Name on Card</label>
               <input type="text" id="cname" name="cardname" placeholder="John More Doe">
               <label for="ccnum">Credit card number</label>
@@ -36,7 +36,9 @@
           <label>
             <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
           </label>
-          <input type="button" value="Continue to checkout" class="btn" (click)="completePayment($event)">
+          <div class="text-center w-100">
+            <input type="button" value="Continue to checkout" class="btn w-50" (click)="completePayment($event)">
+          </div>
         </form>
 
       </div>

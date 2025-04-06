@@ -200,7 +200,7 @@ export class PaymentComponent {
       });
 
       this.createOrder(this._storeData.getDataForm());
-      this._router.navigate(['/home'], { state: { dataForm: dataForm } });
+      this._router.navigate(['/shop'], { state: { dataForm: dataForm } });
 
     } else if (this.selectedPaymentMethod === 'orangeMoney') {
       dataForm.status = 'paid by orangeMoney';
@@ -224,7 +224,7 @@ export class PaymentComponent {
           });
 
           this.createOrder(this._storeData.getDataForm());
-          this._router.navigate(['/home'], { state: { dataForm: dataForm } });
+          this._router.navigate(['/shop'], { state: { dataForm: dataForm } });
 
         } else if (result.dismiss === Swal.DismissReason.cancel) {
           Swal.fire(
@@ -267,7 +267,7 @@ export class PaymentComponent {
       });
 
       // إعادة التوجيه بعد حذف جميع العناصر
-      this._router.navigate(['/home']);
+      this._router.navigate(['/shop']);
     }
   
 
@@ -363,7 +363,7 @@ export class PaymentComponent {
       this.shippingCost = 0;
     }
     else if (this.selectedShippingMethod == 'urgent') {
-      this.shippingCost = 35;
+      this.shippingCost = 3;
 
     }
 
@@ -408,7 +408,7 @@ export class PaymentComponent {
       this.shippingCost = 0;
     } else if (this.selectedShippingMethod === 'urgent') {
 
-      this.shippingCost = 35;
+      this.shippingCost = 3;
 
     }
     this.calculateDiscount();

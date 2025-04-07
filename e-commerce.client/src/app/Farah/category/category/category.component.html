@@ -1,5 +1,5 @@
 
-<div class="card mb-3"  style=" margin: 19px">
+<div class="card mb-3"  style="font-size:16px; margin: 19px">
   <div class="card-header">
     <i class="fa fa-table" style="margin-right:10px;"> </i> <p> Data Of Category</p>
   </div>
@@ -21,14 +21,14 @@
             <td>{{item.name}}</td>
             <td class="description-cell">{{item.description}}</td>
             <td><img src="{{item.img}}" style="width:100px; height:100px;"/></td>
-            <td><a routerLink="/dashboard/editCategory/{{item.id}}" class="btn btn-primary" >Edit Category</a></td>
-            <td><button class="btn btn-danger btn-sm" (click)="DeletedCategory(item.id)">delete</button></td>
-            <td><a routerLink="/dashboard/product/{{item.id}}" class="btn btn-info">See The Products</a></td>
+            <td class="text-center" ><a routerLink="/dashboard/editCategory/{{item.id}}" class="btn btn-primary" style="font-size:16px;">Edit Category</a></td>
+            <td class="text-center" ><button class="btn btn-danger btn-sm" (click)="DeletedCategory(item.id)" style="font-size:16px;">delete</button></td>
+            <td class="text-center" ><a routerLink="/dashboard/product/{{item.id}}" class="btn btn-info" style="font-size:16px;">See The Products</a></td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-  <div class="card-footer small text-muted"><a routerLink="/dashboard/addCategory" class="btn btn-success">Add Category</a></div>
+  <div class="card-footer small text-muted"><a routerLink="/dashboard/addCategory" class="btn btn-success"  style="font-size:16px;">Add Category</a></div>
 </div>
    

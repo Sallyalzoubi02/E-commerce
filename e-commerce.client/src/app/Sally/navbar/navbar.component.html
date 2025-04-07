@@ -20,8 +20,8 @@
         <div class="col-sm-6">
           <div class="header-top-link">
             <ul class="quick-link" *ngIf="!isLoggedIn">
-              <li><a routerLink="/register">Register</a></li>
-              <li><a routerLink="/login">Login</a></li>
+              <li><a routerLink="/register">Sign Up</a></li>
+              <!--<li><a routerLink="/login">Login</a></li>-->
             </ul>
             <ul class="quick-link" *ngIf="isLoggedIn">
               <li><a (click)="logout()">Logout</a></li>

@@ -23,7 +23,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let item of cartItems, let i = index" style="text-align:center">
-                <td style="display:flex;justify-content:center;align-items:center;margin-left:4vh;margin-top:2vh" class="product-remove"><a class="remove-wishlist" (click)="removeItem(item.id)"><i class="fal fa-times"></i></a></td>
+                <td style="display: flex; justify-content: center; align-items: center; padding-top: 6vh; padding-bottom:6vh; padding-left:2vh;" class="product-remove"><a class="remove-wishlist" (click)="removeItem(item.id)"><i class="fal fa-times"></i></a></td>
                 <td class="product-thumbnail"><a ><img src="{{item.productImg}}" alt="Digital Product"></a></td>
                 <td class="product-title"><a href="single-product.html">{{item.productName}}</a></td>
                 <td class="product-price" data-title="Price"><span class="currency-symbol">$</span>{{item.productPrice}}</td>
@@ -43,7 +43,7 @@
             </tbody>
           </table>
         </div>
-        <!--<div class="cart-update-btn-area" style="display:flex;justify-content:center;align-items:center;width:100%">
+        <div class="cart-update-btn-area my-5" style="display:flex;justify-content:center;align-items:center;width:100%">
           <div class="input-group product-cupon"  style="display:flex;justify-content:center;align-items:center">
             <input placeholder="Enter coupon code" type="text" [(ngModel)]="VoucherUserInput" [disabled]="isVoucherInputDisabled" style="width:70vh; padding-left:2vh">
             <div class="product-cupon-btn">
@@ -51,7 +51,7 @@
             </div>
           </div>
        
-        </div>-->
+        </div>
         <div class="row">
           <div class="col-xl-5 col-lg-7 offset-xl-7 offset-lg-5" style="width:90%;margin-left:7vh;">
             <div class="axil-order-summery">

@@ -28,6 +28,7 @@ export class CartComponent implements OnChanges {
   allVoucher: any;
   VoucherUserInput: any = "";
   TotalAfterDiscount: any = this.Totals;
+  cartItemsCount: any;
 
   isVoucherInputDisabled: boolean = false;
   constructor(private _ser: CartPaymentService,
@@ -47,6 +48,9 @@ export class CartComponent implements OnChanges {
     this._serv.currentlogged.subscribe((id) => this.userId = id)
     this.getCartId();
     this.bill();
+    this._serv.getCartItemsCount().subscribe(count => {
+      this.cartItemsCount = count;
+    });
   }
 
 
@@ -118,7 +122,7 @@ export class CartComponent implements OnChanges {
       }
     });
 
-    
+    this._serv.updateCartCount(this.cartItemsCount - 1); 
     
   }
 

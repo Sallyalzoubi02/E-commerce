@@ -1,6 +1,6 @@
 
 
-<div class="card mb-3" style=" margin: 19px">
+<div class="card mb-3" style="font-size:16px; margin: 19px">
   <div class="card-header">
     <i class="fa fa-table" style="margin-right:10px;"></i><p>Data Of Users</p>
   </div>
@@ -23,8 +23,8 @@
             <td>{{item.email}}</td>
             <td>{{item.address}}</td>
             <td>{{item.payment}}</td>
-            <td>{{item.image}}</td>
-            <td><a routerLink="/dashboard/userVoucher/{{item.id}}" class="btn btn-primary" style="display:flex; justify-content:center">Add Voucher For This User</a></td>
+            <td><img src="{{item.image}}" style="width:100px; height:100px;" /></td>
+            <td><a routerLink="/dashboard/userVoucher/{{item.id}}" class="btn btn-primary" style="display:flex; font-size:16px; justify-content:center" >Add Voucher</a></td>
 
 
           </tr>

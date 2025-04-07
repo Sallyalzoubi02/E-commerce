@@ -41,7 +41,8 @@ import { LoginComponent } from './Sally/login/login.component';
 import { RegisterComponent } from './Sally/register/register.component';
 import { ResetpasswordComponent } from './Sally/resetpassword/resetpassword.component';
 import { PaymentComponent } from './Firas/payment/payment.component';
-import { CreditCardComponent } from './Firas/credit-card/credit-card.component'; 
+import { CreditCardComponent } from './Firas/credit-card/credit-card.component';
+import { OrdersComponent } from './Farah/orders/orders.component'; 
 
 
 
@@ -78,7 +79,8 @@ import { CreditCardComponent } from './Firas/credit-card/credit-card.component';
     RegisterComponent,
     ResetpasswordComponent,
     PaymentComponent,
-    CreditCardComponent
+    CreditCardComponent,
+    OrdersComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

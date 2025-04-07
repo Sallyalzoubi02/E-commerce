@@ -320,10 +320,10 @@
                     <div class="product-price-variant" *ngIf="product.discount > 0">
                       <span class="price current-price"
                             [ngClass]="{'text-danger': product.discount > 0, 'text-dark': product.discount <= 0}">
-                        ${{ product.price - (product.price * (+product.discount) / 100) | number:'1.2-2' }}
+                        {{ product.price - (product.price * (+product.discount) / 100) | number:'1.2-2' }} JD
                       </span>
                       <span class="price old-price">
-                        ${{ product.price | number:'1.2-2' }}
+                        {{ product.price | number:'1.2-2' }} JD
                       </span>
                     </div>
                     <div class="product-price-variant" *ngIf="product.discount == 0">
@@ -380,10 +380,10 @@
                     <div class="product-price-variant" *ngIf="product.discount > 0">
                       <span class="price current-price"
                             [ngClass]="{'text-danger': product.discount > 0, 'text-dark': product.discount <= 0}">
-                        ${{ product.price - (product.price * (+product.discount) / 100) | number:'1.2-2' }}
+                        {{ product.price - (product.price * (+product.discount) / 100) | number:'1.2-2' }} JD
                       </span>
                       <span class="price old-price">
-                        ${{ product.price | number:'1.2-2' }}
+                        {{ product.price | number:'1.2-2' }} JD
                       </span>
                     </div>
                     <div class="product-price-variant" *ngIf="product.discount == 0">

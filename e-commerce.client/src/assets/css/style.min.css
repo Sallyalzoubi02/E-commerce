@@ -15415,8 +15415,8 @@ p {
 
 .form-group label {
   position: absolute;
-  top: -15px;
-  left: 20px;
+  top: -30px;
+  left: 0px;
   pointer-events: none;
   z-index: 4;
   background: #ffffff00;

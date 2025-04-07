@@ -65,8 +65,14 @@ export class FServiceService {
     return this._http.post(`https://67cea6ee125cd5af757b6514.mockapi.io/voucher`,data)
   }
 
+  //Order
+  getOrdes(): Observable<any> {
+    return this._http.get(`https://67e2784597fc65f535363bfe.mockapi.io/Order`)
+  }
 
-
+  updateOrderStatus(order: any) {
+    return this._http.put(`https://67e2784597fc65f535363bfe.mockapi.io/Order/${order.id}`, order);
+  }
   // feedback
 
   getFeedback() {

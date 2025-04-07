@@ -26,6 +26,7 @@ import { RegisterComponent } from './Sally/register/register.component';
 import { ResetpasswordComponent } from './Sally/resetpassword/resetpassword.component';
 import { PaymentComponent } from './Firas/payment/payment.component';
 import { CreditCardComponent } from './Firas/credit-card/credit-card.component';
+import { OrdersComponent } from './Farah/orders/orders.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -58,6 +59,7 @@ const routes: Routes = [
       { path: "editProduct/:id/:categoryId", component: EditProductComponent },
 
       { path: "users", component: UsersComponent },
+      { path: "orders", component: OrdersComponent },
       { path: "feedback", component: FeedbackComponent },
       { path: "userVoucher/:id", component: AddVoucherUserComponent },
 

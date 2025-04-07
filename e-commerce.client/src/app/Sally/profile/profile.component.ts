@@ -105,33 +105,57 @@ export class ProfileComponent implements OnInit {
   }
 
   changePassword() {
+    // تحقق من صحة الفورم
     if (this.changePasswordForm.invalid) {
       this.errorMessage = "Please fill all fields correctly.";
-      this.successMessage = ''; // Clear success message
-      return;
+      this.successMessage = '';
+      return; // اخرج من الدالة إذا كان الفورم غير صالح
     }
 
+    // إذا كان الفورم صالحاً، تابع عملية تغيير كلمة المرور
     const { currentPassword, newPassword, confirmNewPassword } = this.changePasswordForm.value;
 
-    // تحقق من أن كلمة المرور القديمة صحيحة
+    // التحقق من كلمة المرور الحالية
     if (this.user.password !== currentPassword) {
       this.errorMessage = "Current password is incorrect.";
-      this.successMessage = ''; // Clear success message
+      this.successMessage = '';
       return;
     }
 
+    // التحقق من تطابق كلمتي المرور الجديدتين
     if (newPassword !== confirmNewPassword) {
       this.errorMessage = "New passwords do not match.";
-      this.successMessage = ''; // Clear success message
+      this.successMessage = '';
       return;
     }
 
-    
+    // التحقق من قوة كلمة المرور
+    const minLength = 6;
+    const hasUpperCase = /[A-Z]/.test(newPassword);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(newPassword);
 
-    // تحديث بيانات المستخدم مع كلمة المرور الجديدة
+    if (newPassword.length < minLength) {
+      this.errorMessage = `Password must be at least ${minLength} characters long.`;
+      this.successMessage = '';
+      return;
+    }
+
+    if (!hasUpperCase) {
+      this.errorMessage = "Password must contain at least one uppercase letter.";
+      this.successMessage = '';
+      return;
+    }
+
+    if (!hasSpecialChar) {
+      this.errorMessage = "Password must contain at least one special character.";
+      this.successMessage = '';
+      return;
+    }
+
+    // إذا نجحت جميع التحققات، قم بتحديث كلمة المرور
     const updatedUser = {
       ...this.user,
-      password: newPassword,  // تحديث كلمة المرور
+      password: newPassword,
     };
 
     this._ser.editUser(this.user.id, updatedUser).subscribe({
@@ -139,7 +163,7 @@ export class ProfileComponent implements OnInit {
         this.successMessage = "Password updated successfully!";
         this.errorMessage = '';
         this.changePasswordForm.reset();
-        this.user.password = newPassword;  // تحديث كلمة المرور في الواجهة
+        this.user.password = newPassword;
       },
       error: (error) => {
         this.errorMessage = "Failed to update password. Please try again.";

@@ -115,6 +115,7 @@ export class RegisterComponent {
                       icon: 'success',
                       confirmButtonText: 'OK',
                     }).then(() => {
+                      sessionStorage.setItem('payment','false')
                       this._route.navigate(['/login']);
                     });
                   },

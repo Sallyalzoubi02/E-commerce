@@ -12,9 +12,85 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- Favicon -->
   <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
-
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
   <!-- CSS
   ============================================ -->
+  <style>
+    #google_translate_element {
+      position: relative;
+      display: inline-block;
+      width: 45px;
+      height: 45px;
+    }
+
+      #google_translate_element::before {
+        content: "\f0ac";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        font-size: 32px;
+        color: #C14600;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        transition: color 0.3s ease, transform 0.3s ease;
+      }
+
+      #google_translate_element:hover::before {
+        color: #C14600;
+        transform: translate(-50%, -50%) scale(1.1);
+      }
+
+      #google_translate_element select {
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        z-index: 2;
+      }
+
+    .goog-logo-link,
+    .goog-te-gadget span {
+      display: none !important;
+    }
+
+    .goog-te-banner-frame.skiptranslate {
+      display: none !important;
+    }
+
+    body {
+      top: 0 !important;
+    }
+
+    /* توسيع عرض القائمة المنبثقة */
+    .goog-te-menu-frame {
+      width: 350px !important;
+      height: auto !important;
+      top: 60px !important;
+      right: 20px !important;
+      border: none !important;
+      z-index: 9999;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+
+    .goog-te-banner-frame.skiptranslate {
+      display: none !important;
+      visibility: hidden !important;
+    }
+
+    body {
+      top: 0px !important;
+    }
+
+      body > .skiptranslate {
+        display: none !important;
+      }
+  </style>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/vendor/font-awesome.css">
@@ -65,28 +141,10 @@
   <script src="assets/js/main.js"></script>
   <script type="text/javascript">
     function googleTranslateElementInit() {
-      // إنشاء TranslateElement في البداية
-      new google.translate.TranslateElement({
-        pageLanguage: 'en',
-        includedLanguages: 'en,ar',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-      }, 'google_translate_element');
-    }
-
-    // وظيفة لتغيير اللغة
-    function changeLanguage(lang) {
-      var element = document.getElementById('google_translate_element');
-      var googleTranslate = new google.translate.TranslateElement(
-        { pageLanguage: 'en', includedLanguages: 'en,ar' },
-        'google_translate_element'
-      );
-
-      // تغيير اللغة عند الضغط على الخيار في الـ dropdown
-      var selectLang = lang === 'ar' ? 'ar' : 'en';
-      googleTranslate.setLanguage(selectLang);  // تغيير اللغة
+      new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
     }
   </script>
-
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 
   <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>

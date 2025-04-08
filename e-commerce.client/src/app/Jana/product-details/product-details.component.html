@@ -147,7 +147,7 @@
                   <form (submit)="submitComment($event)">
                     <div class="rating-wrapper">
                       Your Rating
-                      <div class="reating-inner">
+                      <div class="reating-inner mb-5">
                         <span *ngFor="let i of [1, 2, 3, 4, 5]" (click)="setRating(i)">
                           <i [ngClass]="{'fas': rating >= i, 'far': rating < i}" class="fa-star"
                              [style.color]="rating >= i ? 'orange' : 'black'"></i>

@@ -49,9 +49,12 @@ export class HomeDashboardComponent implements OnInit {
       {
         data: [],
         label: 'Users Registered',
-        borderColor: '#42A5F5',
-        backgroundColor: 'rgba(66, 165, 245, 0.2)',
-        fill: true
+        borderColor: '#f5f5dc',
+        backgroundColor: 'rgb(206, 170, 157, 50%)',
+        fill: true,
+        tension: 0.4, // يجعل الخط منحني أكثر
+        pointBackgroundColor: '#f5f5dc',
+        pointBorderColor: '#f5f5dc',
       }
     ]
   };
@@ -78,9 +81,12 @@ export class HomeDashboardComponent implements OnInit {
             {
               data: Object.values(monthlyData),
               label: 'Users Registered',
-              borderColor: '#42A5F5',
-              backgroundColor: 'rgba(66, 165, 245, 0.2)',
-              fill: true
+              borderColor: '#f5f5dc',
+              backgroundColor: 'rgb(206, 170, 157, 50%)',
+              fill: true,
+              tension: 0.4, // يجعل الخط منحني أكثر
+              pointBackgroundColor: '#f5f5dc',
+              pointBorderColor: '#f5f5dc',
             }
           ]
         };

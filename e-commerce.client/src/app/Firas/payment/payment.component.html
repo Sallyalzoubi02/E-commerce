@@ -59,7 +59,7 @@
             <div class="axil-checkout-billing">
               <h4 class="title mb--40">Billing details</h4>
               <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-6 mb-5">
                   <div class="form-group">
                     <label>First Name <span>*</span></label>
                     <input type="text" id="firstName" ngModel name="firstName" placeholder="Adam" (ngModelChange)="onInputChange(checkOutForm.value)">
@@ -74,7 +74,7 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group">
+              <div class="form-group  mb-5">
                 <label>Country/ Region <span>*</span></label>
                 <select id="Region" [(ngModel)]="selectedRegion" name="region" (ngModelChange)="onInputChange(checkOutForm.value)">
                   <option value="Amman">Amman</option>
@@ -92,78 +92,89 @@
                 </select>
                 <span class="error-message" *ngIf="regionError">Region is required.</span>
               </div>
-              <div class="form-group">
+              <br />
+              <div class="form-group  mb-5">
                 <label>Street Address <span>*</span></label>
                 <input name="address1" ngModel type="text" id="address1" class="mb--15" placeholder="House number and street name" (ngModelChange)="onInputChange(checkOutForm.value)">
                 <span class="error-message" *ngIf="address1Error">Address is required.</span>
+
+              </div>
+
+              <div class="form-group  mb-5">
+                <label>Street Address 2<span>*</span></label>
+
                 <input name="address2" ngModel type="text" id="address2" placeholder="Apartment, suite, unit, etc. (optional)">
               </div>
-              <div class="form-group">
+              <br />
+              <div class="form-group   mb-5">
                 <label>Town/ City <span>*</span></label>
                 <input type="text" id="town" name="town" ngModel (ngModelChange)="onInputChange(checkOutForm.value)">
                 <span class="error-message" *ngIf="townError">Town is required.</span>
               </div>
-              <div class="form-group">
+              <br />
+              <div class="form-group  mb-5">
                 <label>Phone <span>*</span></label>
                 <input type="tel" id="phone" name="phone" ngModel (ngModelChange)="onInputChange(checkOutForm.value)">
                 <span class="error-message" *ngIf="phoneError">Phone is required.</span>
               </div>
-              <div class="form-group">
+              <br />
+              <div class="form-group  mb-5">
                 <label>Email Address <span>*</span></label>
                 <input type="email" id="email" name="email" ngModel (ngModelChange)="onInputChange(checkOutForm.value)">
                 <span class="error-message" *ngIf="emailError">Email is required.</span>
               </div>
 
               <!--<div class="form-group different-shippng">
-                <div class="toggle-bar">
-                  <a href="javascript:void(0)" class="toggle-btn" (click)="toggleShipping()">
-                    <input type="checkbox" id="checkbox2" name="diffrentShip" [(ngModel)]="showDifferentShipping">
-                    <label for="checkbox2">Ship to a different address?</label>
-                  </a>
-                </div>
-                <div class="toggle-open" *ngIf="showDifferentShipping">
-                  <div class="form-group">
-                    <label>Different Country/ Region <span>*</span></label>
-                    <select id="differentRegion" [(ngModel)]="differentRegion" name="differentRegion" (ngModelChange)="onInputChange(checkOutForm.value)">
-                      <option value="Amman">Amman</option>
-                      <option value="Irbid">Irbid</option>
-                      <option value="Zarqa">Zarqa</option>
-                      <option value="Madaba">Madaba</option>
-                      <option value="Balqa">Balqa</option>
-                      <option value="Karak">Karak</option>
-                      <option value="Tafilah">Tafilah</option>
-                      <option value="Maan">Maan</option>
-                      <option value="Aqaba">Aqaba</option>
-                      <option value="Jerash">Jerash</option>
-                      <option value="Ajloun">Ajloun</option>
-                      <option value="Mafraq">Mafraq</option>
-                    </select>
-                    <span class="error-message" *ngIf="differentRegionError">Different region is required.</span>
-                  </div>
-                  <div class="form-group">
-                    <label>Different Street Address <span>*</span></label>
-                    <input name="differentAddress1" ngModel type="text" id="differentAddress1" class="mb--15" placeholder="House number and street name" (ngModelChange)="onInputChange(checkOutForm.value)">
-                    <span class="error-message" *ngIf="differentAddress1Error">Different address is required.</span>
-                    <input name="differentAddress2" ngModel type="text" id="differentAddress2" placeholder="Apartment, suite, unit, etc. (optional)">
-                  </div>
-                  <div class="form-group">
-                    <label>Different Town/ City <span>*</span></label>
-                    <input type="text" name="differentTown" ngModel id="differentTown" (ngModelChange)="onInputChange(checkOutForm.value)">
-                    <span class="error-message" *ngIf="differentTownError">Different town is required.</span>
-                  </div>
-                  <div class="form-group">
-                    <label>Different Phone <span>*</span></label>
-                    <input type="tel" name="differentPhone" ngModel id="differentPhone" (ngModelChange)="onInputChange(checkOutForm.value)">
-                    <span class="error-message" *ngIf="differentPhoneError">Different phone is required.</span>
-                  </div>
-                  <div class="form-group">
-                    <label>Different Email Address <span>*</span></label>
-                    <input type="email" name="differentEmail" ngModel id="differentEmail" (ngModelChange)="onInputChange(checkOutForm.value)">
-                    <span class="error-message" *ngIf="differentEmailError">Different email is required.</span>
-                  </div>
-                </div>
-              </div>-->
-              <div class="form-group">
+    <div class="toggle-bar">
+      <a href="javascript:void(0)" class="toggle-btn" (click)="toggleShipping()">
+        <input type="checkbox" id="checkbox2" name="diffrentShip" [(ngModel)]="showDifferentShipping">
+        <label for="checkbox2">Ship to a different address?</label>
+      </a>
+    </div>
+    <div class="toggle-open" *ngIf="showDifferentShipping">
+      <div class="form-group">
+        <label>Different Country/ Region <span>*</span></label>
+        <select id="differentRegion" [(ngModel)]="differentRegion" name="differentRegion" (ngModelChange)="onInputChange(checkOutForm.value)">
+          <option value="Amman">Amman</option>
+          <option value="Irbid">Irbid</option>
+          <option value="Zarqa">Zarqa</option>
+          <option value="Madaba">Madaba</option>
+          <option value="Balqa">Balqa</option>
+          <option value="Karak">Karak</option>
+          <option value="Tafilah">Tafilah</option>
+          <option value="Maan">Maan</option>
+          <option value="Aqaba">Aqaba</option>
+          <option value="Jerash">Jerash</option>
+          <option value="Ajloun">Ajloun</option>
+          <option value="Mafraq">Mafraq</option>
+        </select>
+        <span class="error-message" *ngIf="differentRegionError">Different region is required.</span>
+      </div>
+      <div class="form-group">
+        <label>Different Street Address <span>*</span></label>
+        <input name="differentAddress1" ngModel type="text" id="differentAddress1" class="mb--15" placeholder="House number and street name" (ngModelChange)="onInputChange(checkOutForm.value)">
+        <span class="error-message" *ngIf="differentAddress1Error">Different address is required.</span>
+        <input name="differentAddress2" ngModel type="text" id="differentAddress2" placeholder="Apartment, suite, unit, etc. (optional)">
+      </div>
+      <div class="form-group">
+        <label>Different Town/ City <span>*</span></label>
+        <input type="text" name="differentTown" ngModel id="differentTown" (ngModelChange)="onInputChange(checkOutForm.value)">
+        <span class="error-message" *ngIf="differentTownError">Different town is required.</span>
+      </div>
+      <div class="form-group">
+        <label>Different Phone <span>*</span></label>
+        <input type="tel" name="differentPhone" ngModel id="differentPhone" (ngModelChange)="onInputChange(checkOutForm.value)">
+        <span class="error-message" *ngIf="differentPhoneError">Different phone is required.</span>
+      </div>
+      <div class="form-group">
+        <label>Different Email Address <span>*</span></label>
+        <input type="email" name="differentEmail" ngModel id="differentEmail" (ngModelChange)="onInputChange(checkOutForm.value)">
+        <span class="error-message" *ngIf="differentEmailError">Different email is required.</span>
+      </div>
+    </div>
+  </div>-->
+              <br />
+              <div class="form-group mb-5">
                 <label>Other Notes (optional)</label>
                 <textarea id="notes" name="notes" ngModel rows="2" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
               </div>

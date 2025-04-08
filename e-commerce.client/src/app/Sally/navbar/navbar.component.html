@@ -5,22 +5,12 @@
     <div class="container">
       <div class="row align-items-center">
         <div class="col-sm-6">
-          <div class="header-top-dropdown" id="google_translate_element">
-            <!--<div class="dropdown">
-              <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Select Language
-              </button>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" onclick="changeLanguage('en')">English</a></li>
-                <li><a class="dropdown-item" onclick="changeLanguage('ar')">Arabic</a></li>
-              </ul>
-            </div>-->
-          </div>
+          <div id="google_translate_element" class="p-2"></div>
         </div>
         <div class="col-sm-6">
           <div class="header-top-link">
             <ul class="quick-link" *ngIf="!isLoggedIn">
-              <li><a routerLink="/register">Sign Up</a></li>
+              <li><a routerLink="/login">Sign In</a></li>
               <!--<li><a routerLink="/login">Login</a></li>-->
             </ul>
             <ul class="quick-link" *ngIf="isLoggedIn">
